@@ -12,7 +12,7 @@
 	<br>
 	<form action="signupuser">
 
-		<label>Email</label> <input type="text" name="email"><br>
+		<label>UserName</label> <input type="text" name="username"><br>
 		<br> <label>password</label> <input type="text" name="password"><br>
 		<br> <label>firstName</label> <input type="text" name="firstname"><br>
 		<br> <label>LastName</label> <input type="text" name="lastname"><br>

@@ -8,7 +8,7 @@
 </head>
 <body>
  <form action=loginuser>
-<label>Email</label>
+<label>UserName</label>
 <input type ="text" name="Email"><br><br>
 <label>password</label>
 <input type ="text" name="password"><br><br>
