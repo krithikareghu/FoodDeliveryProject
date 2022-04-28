@@ -8,7 +8,7 @@ import { LoginComponent } from './profile/login/login.component';
 import { IndexComponent } from './profile/index/index.component';
 import { SignupComponent } from './profile/signup/signup.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { UserserviceService } from './services/userservice.service';
+// import { UserserviceService } from './services/userservice.service';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { UserserviceService } from './services/userservice.service';
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [UserserviceService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
