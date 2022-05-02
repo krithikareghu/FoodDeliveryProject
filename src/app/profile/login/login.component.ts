@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Userlogin } from 'src/app/model/userlogin';
+import { UserloginService } from './../../services/userlogin.service';
+
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +12,79 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  userlogin: Userlogin = new Userlogin();
+  
 
-  ngOnInit(): void {
+  // loginForm!: FormGroup;
+  // loading = false;
+  // submitted = false;
+  // returnUrl!: string;
+
+  
+  constructor(
+    private userloginservice:UserloginService,
+      // private formBuilder: FormBuilder,
+      // private route: ActivatedRoute,
+       private router: Router,
+    //   private authenticationService: AuthenticationService,
+    //   private alertService: AlertService
+  ) {
+    //   // redirect to home if already logged in
+    //   if (this.authenticationService.currentUserValue) { 
+    //       this.router.navigate(['/']);
+    //   }
   }
+
+  ngOnInit() {
+    //   this.loginForm = this.formBuilder.group({
+    //       username: ['', Validators.required],
+    //       password: ['', Validators.required]
   
 }
+
+observer = {
+  next:()  => this.router.navigate(['/home']),
+  error: (error: any) =>alert("please enter proper credentials to login"),
+
+};
+
+login() {
+  console.log(this.userlogin)
+  this.userloginservice.login(this.userlogin)
+      .subscribe(this.observer);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // function setFormMessage(formElement:any, type, message) {
 //   const messageElement = formElement.querySelector(".form__message");
 //   messageElement.textContent = message;

@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Odia:wght@100&family=Montserrat:wght@100&family=Open+Sans:wght@300&family=Poppins:ital,wght@0,100;0,200;0,400;1,100;1,400&family=Roboto:wght@100&display=swap');
-/* :root{
-    /* --main-color:#ffb411; */
-    /* --text-color:#1e1c2a; */
-    /* --bg-color:#fff; */
-    /* --big-font:4rem; */
-    /* --h2-font:2.24rem; */
-    /* --p-font:0.9rem; */
+body{
+     --main-color:#ffb411; 
+     --text-color:#1e1c2a; 
+     --bg-color:#fff; 
+     --big-font:4rem; 
+     --h2-font:2.24rem; 
+     --p-font:0.9rem;
+}
 *{
     margin: 0;
     padding: 0;
@@ -28,7 +29,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff;
+    background:var(--bg-color);
     padding: 18px 70px;
     box-shadow: 0 0.5rem 50rem rgba(0, 0, 0, 0.1);
     height: 10%;
@@ -39,8 +40,8 @@ section{
     padding: 50px 10%;
 }
 body{
-    color: #1e1c2a;
-    background: #fff;
+    color: var(--text-color);
+    background: var(--bg-color);
     
 }
 /* ::selection{
@@ -49,16 +50,23 @@ body{
 } */
 
  .logo img{
-    color: #ffb411;
+    color: var(--main-color);
     width: 50px;
     height: 40px;
    
+}
+.address{
+    color: black;
+}
+.address:hover{
+    color:var(--main-color);
+
 }
 .navbar a{
     /* font-size: 1rem; */
      /* padding: 10px 20px;  */
      padding:  20px;
-    color: #1e1c2a;
+    color:  var(--text-color);
     font-weight: 500;
 }
 
@@ -66,8 +74,8 @@ body{
     display: flex;
 }
 
-.navbar a:hover{
-    color: #ffb411;
+.navbar a:hover {
+    color: var(--main-color);
 }
 .home{
     width: 100%;
@@ -82,12 +90,12 @@ body{
 }
 
 .home-text h1{
-    font-size: 4rem;
-    color: #ffb411;
+    font-size: var(--big-font);
+    color: var(--main-color);
 }
 
 .home-text h2{
-    font-size: 2.24rem;
+    font-size: var(--h2-font);
     /* margin: 1rem 0 1rem; */
     margin: 1rem 0 ;
 }
@@ -98,10 +106,10 @@ body{
 } */
 .btn{
     display: inline-block;
-    background:#ffb411;
+    background:var(--main-color);
     padding: 10px 20px;
     border-radius: 0.7rem;
-    color: #fff;
+    color:var(--bg-color);
 }
 .btn:hover{
     background: #ffa410;

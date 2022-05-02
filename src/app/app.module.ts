@@ -8,7 +8,13 @@ import { LoginComponent } from './profile/login/login.component';
 import { IndexComponent } from './profile/index/index.component';
 import { SignupComponent } from './profile/signup/signup.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { FormsModule } from '@angular/forms';
 // import { UserserviceService } from './services/userservice.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
+import { AddaddressComponent } from './profile/addaddress/addaddress.component';
+import { SharedModule } from './shared/shared.module';
+//import {  authInterceptorProviders } from './helpers/authinterceptor.interceptor';
 
 
 @NgModule({
@@ -17,13 +23,19 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     LoginComponent,
     IndexComponent,
     SignupComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    AddaddressComponent,
+  
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
+    FormsModule, HttpClientModule,
+    SharedModule,
+    CoreModule,
+   // AuthinterceptorInterceptor
   ],
-  providers: [],
+//  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
