@@ -9,13 +9,33 @@ public class AuthenticationRequest implements Serializable
 	
 	private String username;
 	private String password;
+//	private String email;
+//	private String phonenumber;
 	
 	public AuthenticationRequest() {}
 
 	public AuthenticationRequest(String username, String password) {
 		this.setUsername(username);
 		this.setPassword(password);
+//		this.setEmail(email);
+//		this.setPhonenumber(phonenumber);
 	}
+
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
+//
+//	public String getPhonenumber() {
+//		return phonenumber;
+//	}
+//
+//	public void setPhonenumber(String phonenumber) {
+//		this.phonenumber = phonenumber;
+//	}
 
 	public String getUsername() {
 		return this.username;

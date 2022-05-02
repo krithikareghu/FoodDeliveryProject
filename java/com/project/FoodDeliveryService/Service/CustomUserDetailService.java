@@ -8,9 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.Model.UserDto;
+import com.project.FoodDeliveryService.Model.UserDataDto;
 import com.project.FoodDeliveryService.repository.UserRepository;
  @Component
 public class CustomUserDetailService implements UserDetailsService {
@@ -31,10 +30,14 @@ public class CustomUserDetailService implements UserDetailsService {
         return  new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				new ArrayList<>());
     }
-    public UserData save(UserDto user) {
+    public UserData save(UserDataDto user) {
+    	
     	UserData newuser=new UserData();
     	newuser.setUsername(user.getUsername());
     	newuser.setPassword(brcyptEncoder.encode(user.getPassword()));
+    	newuser.setEmail(user.getEmail());
+    	newuser.setPhonenumber(user.getPhonenumber());
+    	newuser.setAddress(user.getAddress());
 		return  userRepo.save(newuser);
 	}
 }

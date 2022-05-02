@@ -9,12 +9,14 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
+@Table(name = "users")
 public class UserData {
+
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long ID;
 //	@Column(nullable = false)
 //	private String email;
 	@Column(nullable = false)
@@ -24,27 +26,41 @@ public class UserData {
 	private String password;
 
 	@Column()
-	private String firstname;
+	private String email;
 
 	@Column()
-	private String lastname;
+	private String phonenumber;
+	
+	@Column()
+	private String address;
 
 	public UserData() {}
 
-	public UserData(String username, String password, String firstname, String lastname) {
+	public UserData( String username, String password, String email, String phonenumber, String address) {
+
 		this.username = username;
 		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.email = email;
+		this.phonenumber = phonenumber;
+		this.address = address;
 	}
-	
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Long getID() {
+		return ID;
+	}
+
+	public void setID(Long ID) {
+		this.ID = ID;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -61,20 +77,20 @@ public class UserData {
 		this.password = password;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
-
 }
+	

@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,24 +30,23 @@ public class FoodAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder()); //spring userdetailsservice  
 	}
-	
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
     @Override
     @Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
-		// TODO Auto-generated method stub
 		return super.authenticationManager();
 	}
     @Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable()
-				.authorizeRequests().antMatchers("/authenticate", "/register").permitAll().
-				anyRequest().authenticated()
-				.and().
-				exceptionHandling().authenticationEntryPoint(entryPoint)
+				.authorizeRequests().antMatchers("/authenticate", "/register","/addaddress","/getuserdetails"
+						,"/allusers","/additem","/allitems","/updateuser","/{restaurantid}/iteminrestaurant/{itemid}","/allitems","/addrestaurant","/allrestaurants")
+				//.permitAll().antMatchers(HttpMethod.OPTIONS,"/**")
+				.permitAll(). anyRequest().authenticated()
+				.and(). exceptionHandling().authenticationEntryPoint(entryPoint)
 				.and()
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);

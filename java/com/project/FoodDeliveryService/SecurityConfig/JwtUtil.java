@@ -13,9 +13,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtil implements Serializable{
 	private String Secret_key="secret";
 	private static final long serialVersionUID = -2550185165626007488L;
-	//public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-//	@Value("${jwt.secret}")
-//	private String secret;
 
 	public String generateToken(UserDetails userDetails)
 	{
@@ -27,11 +24,13 @@ public class JwtUtil implements Serializable{
 	{
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date (System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis()+1000*60*60*10))
-				.signWith(SignatureAlgorithm.HS512,Secret_key).compact();	
+				.signWith(SignatureAlgorithm.HS256,Secret_key).compact();	
 	}
 	
 	public boolean validateToken(String token,UserDetails userDetails) {
 		final String username=getUsernameFromToken(token);
+//		System.out.println("hi");
+//		System.out.println(username);
 		return(username.equals(userDetails.getUsername())&&!isTokenExpired(token));
 	}
 	private boolean isTokenExpired(String token) {
@@ -56,6 +55,17 @@ public class JwtUtil implements Serializable{
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
