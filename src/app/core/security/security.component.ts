@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { JwtClientService } from 'src/app/services/jwt-client.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-security',
@@ -9,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class SecurityComponent implements OnInit {
 
-  constructor(private jwtservice:JwtClientService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

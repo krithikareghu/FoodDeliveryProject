@@ -75,15 +75,21 @@ body {
     border-color: var(--color-primary);
     background: #ffffff;
 }
-/* .has-error{
+ .has-error{
     color: var(--color-error);
     border-color: var(--color-error);
-} */
+} 
 
 .has-error{
     margin-top: 0.5rem;
     font-size: 0.85rem;
     color: var(--color-error);
+}
+
+input.ng-touched.ng-invalid{
+    border-color: var(--color-error);
+    color: var(--color-error);
+
 }
 .form__button{
     width: 100%;

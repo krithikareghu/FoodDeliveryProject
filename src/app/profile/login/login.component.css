@@ -59,6 +59,12 @@ body {
   
 }
 
+input.ng-touched.ng-invalid{
+    border-color: var(--color-error);
+    color: var(--color-error);
+
+}
+
 .form__message__success {
     color: var(--color-success);
   

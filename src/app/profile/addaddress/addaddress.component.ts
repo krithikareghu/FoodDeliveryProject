@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserregisterService } from 'src/app/services/userregister.service';
-import { Useraddress } from './../../model/useraddress';
-import { UseraddressService } from './../../services/useraddress.service';
+import { UserregisterService } from 'src/app/services/register/userregister.service';
+import { Useraddress } from 'src/app/shared/model/useraddress';
+import { UseraddressService } from '../../services/address/useraddress.service';
 
 @Component({
   selector: 'app-addaddress',
