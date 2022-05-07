@@ -1,4 +1,5 @@
 export class Category {
-    categoryname!:string;
-    
+//     categoryname!:string;
+//     categorypicture!:any;
+// }
 }

@@ -13,7 +13,7 @@ export class HttpclientService {
     return this.http.get<Userregister>('http://localhost:8080/allusers');
   }
   getallcategories(){
-    return this.http.get<Category>('http://localhost:8080/findAllcategories');
+    return this.http.get('http://localhost:8080/findAllcategories');
   }
   
 }

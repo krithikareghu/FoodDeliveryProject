@@ -16,8 +16,10 @@ import { UserComponent } from './profile/user/user.component';
 import { HttpinterceptorService } from './services/auth/httpinterceptor.service';
 import { MenuComponent } from './public/menu/menu.component';
 import { CategoryComponent } from './public/category/category.component';
-import { AddcategoriesComponent } from './private/owner/addcategories/addcategories.component';
-import { AddfooditemsComponent } from './private/owner/addfooditems/addfooditems.component';
+import { OwnerModule } from './private/owner/owner.module';
+import { OwnerRoutingModule } from './private/owner/owner-routing.module';
+import { AdminRoutingModule } from './private/admin/admin-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,15 +31,15 @@ import { AddfooditemsComponent } from './private/owner/addfooditems/addfooditems
     UserComponent,
     MenuComponent,
     CategoryComponent,
-    AddcategoriesComponent,
-    AddfooditemsComponent
+
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,OwnerRoutingModule,
+    AdminRoutingModule,
     AppRoutingModule,
     FormsModule, HttpClientModule,
     SharedModule,
-    CoreModule
+    CoreModule,OwnerModule
   ],
   providers: [UserloginService,{ provide:HTTP_INTERCEPTORS, useClass:HttpinterceptorService, multi:true}],
   bootstrap: [AppComponent]

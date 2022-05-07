@@ -1,75 +1,125 @@
-@import url('https://fonts.googleapis.com/css2?family=Anek+Odia:wght@100&family=Montserrat:wght@100&family=Open+Sans:wght@300&family=Poppins:ital,wght@0,100;0,200;0,400;1,100;1,400&family=Roboto:wght@100&display=swap');
-body{
-     --main-color:#ffb411; 
-     --text-color:#1e1c2a; 
-     --bg-color:#fff; 
-     --big-font:4rem; 
-     --h2-font:2.24rem; 
-     --p-font:0.9rem;
-}
-*{
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins",sans-serif;
-    list-style: none;
-    text-decoration: none;
-     box-sizing: border-box;
+body {
+    --color-primary: #1b708d;
+    --color-primary-dark: #184065;
+    --color-secondary: #252c6a;
+    --color-error: #cc3333;
+    --color-success: hsl(116, 45%, 49%);
+    --border-radius: 4px;
     
-     /* scroll-behavior: smooth;
-    scroll-padding-top: 4rem; */
-   
-
-}
-header{
-    position: fixed;
-    width:100% ;
-    top: 0;
-     right: 0;
-    /* z-index: 1000; */
+    margin: 0;
+    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background:var(--bg-color);
-    padding: 18px 70px;
-    box-shadow: 0 0.5rem 50rem rgba(0, 0, 0, 0.1);
-    height: 10%;
-    
-
+    justify-content: center;
+    font-size: 18px;
+    background: #f5f4f2f2;
 }
-section{
-    padding: 50px 10%;
-}
-body{
-    color: var(--text-color);
-    background: var(--bg-color);
-    
+.container {
+    width: 400px;
+    max-width: 400px;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(244, 239, 239, 0.2);
+    border-radius: var(--border-radius);
+    background: #ffffff;
 }
 
- .logo img{
-    color: var(--main-color);
-    width: 50px;
-    height: 40px;
+.container,
+.form-control,
+.form__button {
+    font:500 1rem;   
+}
+.form >*:first-child {
+    margin-top: 0;
+}
+
+.form >*:last-child {
+    margin-bottom: 0;
+}
+
+.form__title {
+    margin-bottom: 2rem;
+    text-align: center;
+ 
+}
+/* .has-error {
    
-}
-.address{
-    color: black;
-}
-.address:hover{
-    color:var(--main-color);
-
-}
-.navbar a{
-    /* font-size: 1rem; */
-     /* padding: 10px 20px;  */
-     padding:  20px;
-    color:  var(--text-color);
-    font-weight: 500;
+    margin-bottom: 1rem;
+  
+} */
+.has-success {
+    color: var(--color-success);
+  
 }
 
-.navbar{
-    display: flex;
+.form-group {
+    margin-bottom: 1.8rem;
+    /* display: inline-block; */
+    /* width:50%; */
 }
 
-.navbar a:hover {
-    color: var(--main-color);
+.form-control {
+    display:block;
+     width: 100%; 
+    padding: 0.75rem;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+   
+}  
+.form-control:focus{
+    border-color: var(--color-primary);
+    background: #ffffff;
+}
+ .has-error{
+    color: var(--color-error);
+    border-color: var(--color-error);
+} 
+
+.has-error{
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-error);
+}
+
+input.ng-touched.ng-invalid{
+    border-color: var(--color-error);
+    color: var(--color-error);
+
+}
+.form__button{
+    width: 100%;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: var(--color-primary);
+    border-radius: var(--border-radius);
+    
+}
+.form__button:hover{
+    background: var(--color-primary-dark);
+}
+.form__button:active{
+    transform: scale(0.98);
+}
+.form__text{
+    text-align: center;
+}
+.form__link{
+    color:var(--color-secondary);
+    cursor: pointer;
+    text-decoration: none;
+}
+.form__link:hover{
+    text-decoration: underline;
+
+}
+.form-groupsubmit{
+    width: 100%;
 }

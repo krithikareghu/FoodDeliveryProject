@@ -1,0 +1,21 @@
+<table border=1>
+  <tr>
+    <th style="width:5%">Id</th>
+    <th>categoryname</th>
+    <th style="width:30%">picture</th>
+
+  </tr>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <td>{{category.id}}</td>
+      <td>{{category.categoryname}}</td>
+      <td>{{category.itemname}}</td>
+    </tr>
+    <tr *ngFor="let items of categories">
+      <td>{{items.category_ItemsDatas.itemname"}}</td>
+    </tr>
+
+
+    
+  </tbody>
+</table>

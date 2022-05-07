@@ -5,10 +5,10 @@ import { IndexComponent } from './profile/index/index.component';
 import { LoginComponent } from './profile/login/login.component';
 import { SignupComponent } from './profile/signup/signup.component';
 import { AddaddressComponent } from './profile/addaddress/addaddress.component';
-import { AddrestaurantComponent } from './private/owner/addrestaurant/addrestaurant.component';
 import { NgModule } from '@angular/core';
 import { AdminComponent } from './private/admin/admin.component';
 import { CategoryComponent } from './public/category/category.component';
+import { AddrestaurantComponent } from './private/owner/addrestaurant/addrestaurant.component';
 
 const routes: Routes = [
 
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'home/login', component: LoginComponent },
   { path: 'home/signup', component: SignupComponent },
   { path: "home/addaddress", component: AddaddressComponent },
-  // ]{ path: "home/addrestaurant", component: AddrestaurantComponent },
+   { path: "home/addrestaurant", component: AddrestaurantComponent },
   { path: "admin/allusers", component: AdminComponent },
   { path: "home/allcategories", component: CategoryComponent },
   { path: "admin", loadChildren: () => (import('./private/admin/admin.module')).then(mod => mod.AdminModule) },

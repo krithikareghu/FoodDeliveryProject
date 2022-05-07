@@ -8,17 +8,15 @@ import { HttpclientService } from 'src/app/services/httpclient.service';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private http: HttpclientService) { }
+  constructor(private client: HttpclientService) { }
   customers!: any[];
  
   ngOnInit() {
-    this.http.getcustomerdetails().subscribe(
+    this.client.getcustomerdetails().subscribe(
       response => this.handlecustomerResponse(response),
     );
    
   }
-
-
   handlecustomerResponse(response: any) {
     this.customers = response;
   }
