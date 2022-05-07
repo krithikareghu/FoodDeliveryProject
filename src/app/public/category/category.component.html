@@ -1,0 +1,15 @@
+<table  border="1">
+    <tr>
+      <th style="width:10vw"  >Id</th>
+      
+      <th style="width:20vw">categoryname</th>
+      <th style="width:20vw">categorypicture</th>
+      </tr>
+      <tbody style="text-align: center;" >
+        <tr *ngFor="let category of categories">
+          <td>{{category.id}}</td>
+            <td>{{category.categoryname}}</td>
+            <td>{{category.categorypicture}}</td>
+            </tr>
+    </tbody>
+  </table>

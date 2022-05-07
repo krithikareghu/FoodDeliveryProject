@@ -1,15 +1,19 @@
  import { NgModule } from '@angular/core';
  import { RouterModule, Routes } from '@angular/router';
 import { AddrestaurantComponent } from '../core/restaurant/addrestaurant/addrestaurant.component';
+import { LoginnavComponent } from './navigation/loginnav/loginnav.component';
 
  const routes: Routes = [
      {
-         path:"addrestaurants",component:AddrestaurantComponent
-     }]
+         path:"home/addrestaurants",component:AddrestaurantComponent,
+     },
+    {
+      path:"home/addaddress",component:LoginnavComponent
+    }]
 
 
-@NgModule({
-     imports: [RouterModule.forChild(routes)],
-     exports: [RouterModule]
-   })
+ @NgModule({
+      imports: [RouterModule.forChild(routes)],
+      exports: [RouterModule]
+    })
       export class SharedRoutingModule { }

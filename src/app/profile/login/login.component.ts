@@ -4,6 +4,7 @@ import { UserloginService } from '../../services/login/userlogin.service';
 
 import {  Router } from '@angular/router';
 import { Userlogin } from 'src/app/shared/model/userlogin';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -15,40 +16,28 @@ export class LoginComponent implements OnInit {
   userlogin: Userlogin = new Userlogin();
   
 
-  // loginForm!: FormGroup;
-  // loading = false;
-  // submitted = false;
-  // returnUrl!: string;
-
   
   constructor(
     private userloginservice:UserloginService,
-      // private formBuilder: FormBuilder,
-      // private route: ActivatedRoute,
        private router: Router,
-    //   private authenticationService: AuthenticationService,
-    //   private alertService: AlertService
+       private auth:AuthenticationService
+    
   ) {
-    //   // redirect to home if already logged in
-    //   if (this.authenticationService.currentUserValue) { 
-    //       this.router.navigate(['/']);
-    //   }
   }
 
   ngOnInit() {
-    //   this.loginForm = this.formBuilder.group({
-    //       username: ['', Validators.required],
-    //       password: ['', Validators.required]
   
 }
 
 observer = {
-  next:()  => this.router.navigate(['/home']),
-  error: (error: any) =>alert("please enter proper credentials to login"),
+  next:(data:any)  =>{console.log(data)},
+  error: () =>alert("Phonenumber or password incorrect"),
 
 };
 
 login() {
+  //this.auth.authenticate(this.userlogin.phonenumber,this.userlogin.password)
+
   console.log(this.userlogin)
   this.userloginservice.login(this.userlogin)
       .subscribe(this.observer);

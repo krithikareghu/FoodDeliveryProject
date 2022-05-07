@@ -7,10 +7,17 @@ import { IndexComponent } from './profile/index/index.component';
 import { SignupComponent } from './profile/signup/signup.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { AddaddressComponent } from './profile/addaddress/addaddress.component';
 import { SharedModule } from './shared/shared.module';
+import { UserloginService } from './services/login/userlogin.service';
+import { UserComponent } from './profile/user/user.component';
+import { HttpinterceptorService } from './services/auth/httpinterceptor.service';
+import { MenuComponent } from './public/menu/menu.component';
+import { CategoryComponent } from './public/category/category.component';
+import { AddcategoriesComponent } from './private/owner/addcategories/addcategories.component';
+import { AddfooditemsComponent } from './private/owner/addfooditems/addfooditems.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +25,12 @@ import { SharedModule } from './shared/shared.module';
     IndexComponent,
     SignupComponent,
     PagenotfoundComponent,
-    AddaddressComponent
+    AddaddressComponent,
+    UserComponent,
+    MenuComponent,
+    CategoryComponent,
+    AddcategoriesComponent,
+    AddfooditemsComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +39,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     CoreModule
   ],
-  providers: [],
+  providers: [UserloginService,{ provide:HTTP_INTERCEPTORS, useClass:HttpinterceptorService, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

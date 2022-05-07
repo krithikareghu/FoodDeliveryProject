@@ -31,7 +31,7 @@ body {
 }
 
 .container,
-.form__input,
+.form-control,
 .form__button {
     font:500 1rem;   
 }
@@ -65,7 +65,7 @@ input.ng-touched.ng-invalid{
 
 }
 
-.form__message__success {
+/* .form__message__success {
     color: var(--color-success);
   
 }
@@ -73,12 +73,17 @@ input.ng-touched.ng-invalid{
 .form__message--error {
     color: var(--color-error);
    
-}
-.form__input-group {
+} */
+.form-group {
     margin-bottom: 2rem;
 }
+.has-error{
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-error);
+}
 
-.form__input {
+.form-control {
     display: block;
     width: 100%;
     padding: 0.75rem;
@@ -89,20 +94,25 @@ input.ng-touched.ng-invalid{
     background: #eeeeee;
    
 }  
-.form__input:focus{
+input.ng-touched.ng-invalid{
+    border-color: var(--color-error);
+    color: var(--color-error);
+
+}
+.form-control:focus{
     border-color: var(--color-primary);
     background: #ffffff;
 }
-.form__input--error{
+/* .form__input--error{
     color: var(--color-error);
     border-color: var(--color-error);
-}
+} */
 
-.form__input-error-message{
+/* .form__input-error-message{
     margin-top: 0.5rem;
     font-size: 0.85rem;
     color: var(--color-error);
-}
+} */
 .form__button{
     width: 100%;
     padding: 1rem 2rem;

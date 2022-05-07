@@ -3,19 +3,20 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navigation/navbar/navbar.component';
 import { LoginnavComponent } from './navigation/loginnav/loginnav.component';
 import { RouterModule } from '@angular/router';
-import { CoreModule } from '../core/core.module';
+import { AdminnavComponent } from './navigation/adminnav/adminnav.component';
 @NgModule({
   declarations: [
     NavbarComponent,
-    LoginnavComponent
+    LoginnavComponent,
+    AdminnavComponent,
+    
   ],
   imports: [
- 
-CommonModule,
-  RouterModule,CoreModule
+    CommonModule,
+    RouterModule
   ],
-  exports:[
-    NavbarComponent,LoginnavComponent
+  exports: [
+    NavbarComponent, LoginnavComponent, AdminnavComponent
   ]
 })
 export class SharedModule { }

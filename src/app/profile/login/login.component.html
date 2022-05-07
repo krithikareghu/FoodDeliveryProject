@@ -10,42 +10,55 @@
 
 <body>
     <div class="container">
-        <form class="form" id="login" (ngSubmit)="login()">
+        <form #loginform="ngForm" id="login" (ngSubmit)="login()">
 
             <h1 class="form__title">Login</h1>
 
-            <div class="form__message form__message--error"></div>
+            <div class="form-group" [class.has-error]="phonenumber.invalid &&  phonenumber.touched"
+                [class.has-success]="phonenumber.valid">
+                <input type="tel" class="form-control" minlength="10" maxlength="10 " id="phonenumber" pattern="[0-9]*"
+                    name="phonenumber" #phonenumber="ngModel" [(ngModel)]="userlogin.phonenumber" autofocus
+                    placeholder="Phonenumber" required>
+                <div class="alert alert-danger" *ngIf="phonenumber.touched && !phonenumber.valid">
 
-            <div class="form__input-group">
-                <input type="text" class="form__input" id="phonenumber" name="phonenumber"
-                    [(ngModel)]="userlogin.phonenumber" autofocus placeholder="Phonenumber" required>
+                    <div *ngIf="phonenumber.errors?.['required']">Phonenumber required</div>
+                    <div *ngIf="phonenumber.errors?.['minlength']">phonenumber invalid</div>
+                    <div *ngIf="phonenumber.errors?.['pattern']">phonenumber invalid</div>
+
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="password.invalid &&  password.touched"
+                [class.has-success]="password.valid">
+
+                <input type="password" id="password" name="password" class="form-control" #password="ngModel"
+                    [(ngModel)]="userlogin.password" placeholder="Password" required>
+                <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+                    <div *ngIf="password.errors?.['required']">password required</div>
+                    <div *ngIf="password.errors?.['minlength']">Password is weak</div>
+                </div>
+
             </div>
 
-            <div class="form__input-group">
-
-                <input type="password" id="password" name="password" class="form__input"
-                    [(ngModel)]="userlogin.password" autofocus placeholder="Password" required>
-            </div>
-
-            <div class="form__input-group" style="font-size: 14px; margin-bottom: 1rem;">
+            <div class="form-group" style="font-size: 14px; margin-bottom: 1rem;">
                 <a routerLink="" class="form__link" id="Forgot password">Forgot password?</a>
             </div>
 
 
-            <div class="form-group" >
+            <div class="form-group">
                 <button class="form__button" id="signupsubmit" type="submit">Login
                 </button>
             </div>
 
-           
-
-    <p class="form__text">
-        <a routerLink="/home/signup" class="form__link" id="linkCreateAccount">Don't have an account? Create account</a>
-    </p>
 
 
+            <p class="form__text">
+                <a routerLink="/home/signup" class="form__link" id="linkCreateAccount">Don't have an account?
+                    Create account</a>
+            </p>
 
-    </form>
+
+
+        </form>
 
 
 

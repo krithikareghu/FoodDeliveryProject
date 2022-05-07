@@ -16,64 +16,44 @@
             <h1 class="form__title">Create Account</h1>
 
 
-            <div class="form-group">
-                <input type="text" class="form-control" id="username" name="username" minlength="5" maxlength="13"
+            <div class="form-group" [class.has-error]="username.invalid &&  username.touched"
+            [class.has-success]="username.valid">
+                <input type="text" class="form-control" id="username" name="username"
                     [(ngModel)]="userregister.username" #username="ngModel" placeholder="Username" required>
                 <div class="alert alert-danger" *ngIf="username.touched && !username.valid">
 
                     <div *ngIf="username.errors?.['required']">Username required</div>
-                    <div *ngIf="username.errors?.['minlength']">minimum 5 characters</div>
-                    <div *ngIf="username.errors?.['maxlength']">Maximum 13 required</div>
 
                 </div>
             </div>
 
 
             <div class="form-group" [class.has-error]="email.invalid &&  email.touched"
-                [class.has-success]="email.valid">
-                <input type="text" class="form__input" class="form-control" id="email" pattern="[@gmail.com]*"
-                    name="email" #email="ngModel" [(ngModel)]="userregister.email" placeholder="Email" required>
-                <!-- <span class="has-error" *ngIf="email.invalid &&email.touched">Email required</span> -->
+            [class.has-success]="email.valid">
+                <input type="text" class="form-control" id="email" email name="email" #email="ngModel"
+                    [(ngModel)]="userregister.email" placeholder="Email" required>
                 <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-
-                    <div *ngIf="email.errors?.['required']">Email required</div>
-                    <div *ngIf="email.errors?.['minlength']">Email invalid</div>
-                    <div *ngIf="email.errors?.['maxlength']">Email invalid</div>
-                    <div *ngIf="email.errors?.['pattern']">Email invalid</div>
-
+                    <div *ngIf="email.errors">Email invalid</div>
                 </div>
 
             </div>
 
 
-            <div class="form-group" [class.has-error]="phonenumber.invalid &&phonenumber.touched"
-                [class.has-success]="phonenumber.valid">
+            <div class="form-group" [class.has-error]="phonenumber.invalid &&  phonenumber.touched"
+            [class.has-success]="phonenumber.valid">
                 <input type="tel" minlength="10" maxlength="10 " class="form-control" id="phonenumber" pattern="[0-9]*"
                     name="phonenumber" #phonenumber="ngModel" [(ngModel)]="userregister.phonenumber"
                     placeholder="Phonenumber" required>
 
                 <div class="alert alert-danger" *ngIf="phonenumber.touched && !phonenumber.valid">
 
-                    <div *ngIf="phonenumber.errors?.['required']">Phonenumber required</div>
+                    <div *ngIf="phonenumber.errors?.['pattern']">phonenumber invalid</div>
                     <div *ngIf="phonenumber.errors?.['minlength']">phonenumber invalid</div>
-                    <div *ngIf="phonenumber.errors?.['pattern']">phonenumber invalidr</div>
+                    <div *ngIf="phonenumber.errors?.['required']">Phonenumber required</div>
+                   
                 </div>
-                <!-- <div class="valid-feedback">
-                    <div *ngIf="phonenumber.errors?.['maxlength']">phonenumber invalid</div>
-                </div> -->
+
             </div>
-
-            <!-- 
-            <input required type="password" id="password" minlength="5" maxlength="8" placeholder="password"
-            class="form-control" name="password" id="password" #password="ngModel" ngModel>
-
-        <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
-            <div *ngIf="password.errors?.['required']">password required</div>
-            <div *ngIf="password.errors?.['maxlength']">Maximum 5 required</div>
-
-            <div *ngIf="password.errors?.['minlength']">minimum 8 required</div>
-            <br>
-        </div><br> -->
 
             <!-- 
         <label for="confirmpassword">ConfirmPassword</label>

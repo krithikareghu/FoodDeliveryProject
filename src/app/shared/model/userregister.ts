@@ -3,5 +3,6 @@ export class Userregister {
     phonenumber!:string;
     password!:string;
     username!:string;
+    address!:string;
    
 }

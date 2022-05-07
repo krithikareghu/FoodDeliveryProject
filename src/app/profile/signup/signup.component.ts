@@ -13,37 +13,19 @@ import { UserregisterService } from '../../services/register/userregister.servic
 export class SignupComponent implements OnInit {
 
     userregister: Userregister = new Userregister();
-
-    //   registerForm!: FormGroup;
-    //   loading = false;
-    //   submitted = false;
-
     constructor(
-        private registeruserservice: UserregisterService
-        //   private formBuilder: FormBuilder,
-        //   private router: Router,
-        //   private authenticationService: AuthenticationService,
-        //   private userService: UserService,
-        //   private alertService: AlertService
-    ) {
-        //   // redirect to home if already logged in
-        //   if (this.authenticationService.currentUserValue) { 
-        //       this.router.navigate(['/']);
-        //   }
-    }
+        private registeruserservice: UserregisterService,
+           private router: Router){}
+    
 
     ngOnInit() {
-        //   this.registerForm = this.formBuilder.group({
-        //       firstName: ['', Validators.required],
-        //       lastName: ['', Validators.required],
-        //       username: ['', Validators.required],
-        //       password: ['', [Validators.required, Validators.minLength(6)]]
-        //   });
     }
 
     observer = {
-        next: (data: any) => alert("registered successfully"),
-        error: (error: any) =>alert("please enter proper credentials to register"+error),
+        next: () => {alert("registered successfully")
+        this.router.navigate(['/home/login'])
+    },
+        error: (error: any) =>alert("please enter proper credentials to register"),
 
     };
 
