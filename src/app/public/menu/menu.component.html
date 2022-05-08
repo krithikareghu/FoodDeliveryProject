@@ -1,1 +1,23 @@
 
+
+<h2>Different category of food</h2>
+<div class="container"  >
+<div  class="innercontainer" *ngFor="let image of images;  let i=index" >
+
+<a  class="imagelink" href="#"><img  class="image" width="90%" height="" [src]="image" alt="image">
+</a>
+<span class="rating">{{value[i]}}</span>
+<p class="categoryname">{{allcategories[i]}}</p>
+
+</div>
+</div>
+
+
+
+
+
+<!-- <mat-grid-list cols="2" rowHeight="2:1"  *ngFor="let image of images">
+    <mat-grid-tile ><a href="#"><img width="40%" [src]="image" alt="image"></a></mat-grid-tile>
+     <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile> </mat-grid-list> -->

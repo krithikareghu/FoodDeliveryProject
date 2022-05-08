@@ -19,6 +19,9 @@ import { CategoryComponent } from './public/category/category.component';
 import { OwnerModule } from './private/owner/owner.module';
 import { OwnerRoutingModule } from './private/owner/owner-routing.module';
 import { AdminRoutingModule } from './private/admin/admin-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import{ MatButtonModule } from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list'
 
 @NgModule({
   declarations: [
@@ -39,7 +42,7 @@ import { AdminRoutingModule } from './private/admin/admin-routing.module';
     AppRoutingModule,
     FormsModule, HttpClientModule,
     SharedModule,
-    CoreModule,OwnerModule
+    CoreModule,OwnerModule, BrowserAnimationsModule,MatButtonModule,MatGridListModule
   ],
   providers: [UserloginService,{ provide:HTTP_INTERCEPTORS, useClass:HttpinterceptorService, multi:true}],
   bootstrap: [AppComponent]

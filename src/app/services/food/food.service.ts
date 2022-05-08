@@ -10,17 +10,18 @@ import { Category } from './../../shared/model/category';
 })
 export class FoodService {
 
-  private allcategoryurl="http://localhost:8080/allcategory"
-  private categorydetails="http://localhost:8080/findAllcategories"
+  private allcategoryurl = "http://localhost:8080/allcategory"
+  private categorydetails = "http://localhost:8080/findAllcategories"
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
+
+  
+  getcategorydetails() {
+    return this.http.get(this.categorydetails);
+  }
 
 
-getcategorydetails()
-{
-  return this.http.get(this.categorydetails);
-}
-
+ 
 
 
 

@@ -15,5 +15,8 @@ export class HttpclientService {
   getallcategories(){
     return this.http.get('http://localhost:8080/findAllcategories');
   }
+  onlycategoryname(){
+    return this.http.get("http://localhost:8080/allcategory");
+  }
   
 }

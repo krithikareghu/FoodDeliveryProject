@@ -4,6 +4,7 @@ import { NavbarComponent } from './navigation/navbar/navbar.component';
 import { LoginnavComponent } from './navigation/loginnav/loginnav.component';
 import { RouterModule } from '@angular/router';
 import { AdminnavComponent } from './navigation/adminnav/adminnav.component';
+import { MenuComponent } from '../public/menu/menu.component';
 @NgModule({
   declarations: [
     NavbarComponent,

@@ -1,21 +1,42 @@
-<table border=1>
-  <tr>
+<body>
+  <table border="2" bordercolor="green">
     <th style="width:5%">Id</th>
     <th>categoryname</th>
-    <th style="width:30%">picture</th>
+    <th style="width:30%">Restaurants</th>
+    <th>Itemname</th>
 
-  </tr>
-  <tbody>
-    <tr *ngFor="let category of categories">
+    <tr *ngFor="let category of categoriesdetails">
       <td>{{category.id}}</td>
       <td>{{category.categoryname}}</td>
-      <td>{{category.itemname}}</td>
-    </tr>
-    <tr *ngFor="let items of categories">
-      <td>{{items.category_ItemsDatas.itemname"}}</td>
+    <th>{{category.category_restaurants}}</th>
+
     </tr>
 
+  </table>
+  <!-- <ul  class="items"*ngFor="let items of category.category_ItemsDatas">
+        <li> {{items.itemname}}</li>
+      </ul> -->
 
-    
-  </tbody>
-</table>
+      <!-- <th *ngFor="let image of images"> <a href="#"><img width="50%" [src]="image" alt="image"></a></th> -->
+  <!-- <p> [ngClass]={{getImage()}}</p> -->
+
+
+
+
+  <!-- <table>
+    <td *ngFor="let image of images">
+      <a href="#"><img width="50%" [src]="image" alt="image"></a>
+    </td>
+  </table> -->
+  <!-- <img [src]="retrievedImage" alt=""> -->
+
+  <!-- <p>{{images}}</p> -->
+
+  <!-- <div class="container row">
+    <div class="col-md-12">
+        <div *ngIf=images>
+            <img width="30%" [src]="images">
+        </div>
+    </div>
+</div> -->
+</body>

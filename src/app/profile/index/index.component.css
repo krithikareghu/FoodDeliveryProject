@@ -109,4 +109,8 @@ body{
 .btn:hover{
     background: #ffa410;
 }
+.menu{
+    margin:0;
+    padding: 0;
+}
 

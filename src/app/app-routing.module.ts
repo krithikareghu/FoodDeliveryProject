@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './private/admin/admin.component';
 import { CategoryComponent } from './public/category/category.component';
 import { AddrestaurantComponent } from './private/owner/addrestaurant/addrestaurant.component';
+import { MenuComponent } from './public/menu/menu.component';
 
 const routes: Routes = [
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'home/signup', component: SignupComponent },
   { path: "home/addaddress", component: AddaddressComponent },
    { path: "home/addrestaurant", component: AddrestaurantComponent },
+   {path:"home/category",component:MenuComponent},
   { path: "admin/allusers", component: AdminComponent },
   { path: "home/allcategories", component: CategoryComponent },
   { path: "admin", loadChildren: () => (import('./private/admin/admin.module')).then(mod => mod.AdminModule) },

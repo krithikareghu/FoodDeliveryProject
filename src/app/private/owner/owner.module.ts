@@ -6,6 +6,8 @@ import { AddmenuComponent } from './addmenu/addmenu.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { OwnerRoutingModule } from './owner-routing.module';
+import { AppModule } from 'src/app/app.module';
+import { CategoryComponent } from 'src/app/public/category/category.component';
 
 
 
