@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import antlr.collections.List;
 
 @Entity
@@ -28,11 +30,29 @@ public class RestaurantData {
 	@Column(nullable = false)
 	private String restaurantname;
 	
+	///////////////////////////////////
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "category_restaurants")
+	
+	private Set<Categorydata>category_restauarant=new HashSet<>();
+	
+	
+	public Set<Categorydata> getCategory_restauarant() {
+		return category_restauarant;
+	}
+
+	public void setCategory_restauarant(Set<Categorydata> category_restauarant) {
+		this.category_restauarant = category_restauarant;
+	}
+
+	/////////////////////////////////////////////////
 	@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(
 			name="Restaurant_items",joinColumns = @JoinColumn(name="restaurant_id"),
 			inverseJoinColumns = @JoinColumn(name="items_id"))
 	
+
 	
 	private Set<ItemsData>items=new HashSet<ItemsData>();
 	
@@ -45,12 +65,16 @@ public class RestaurantData {
 		this.items = items;
 	}
 
+	
+
 	public RestaurantData() {
 	}
 	
-	public RestaurantData(String restaurantname) {
-
+	public RestaurantData( String restaurantname, String restaurantaddress, String restaurantcontact) {
+	
 		this.restaurantname = restaurantname;
+//		this.restaurantaddress = restaurantaddress;
+//		this.restaurantcontact = restaurantcontact;
 	}
 
 	public Long getID() {
@@ -70,10 +94,33 @@ public class RestaurantData {
 	}
 
 	public void items_restaurant(ItemsData itemsData) {
-		// TODO Auto-generated method stub
 		items.add(itemsData);
 		
 	}
+	
+	//	@Column(nullable = false)
+//	private String restaurantaddress;
+//	
+//	@Column(nullable = false)
+//	private String restaurantcontact;
+//	
+//	public String getRestaurantaddress() {
+//		return restaurantaddress;
+//	}
+//
+//	public void setRestaurantaddress(String restaurantaddress) {
+//		this.restaurantaddress = restaurantaddress;
+//	}
+//
+//	public String getRestaurantcontact() {
+//		return restaurantcontact;
+//	}
+//
+//	public void setRestaurantcontact(String restaurantcontact) {
+//		this.restaurantcontact = restaurantcontact;
+//	}
+
+	
 
 
 	

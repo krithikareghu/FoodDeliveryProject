@@ -22,12 +22,12 @@ public class CustomUserDetailService implements UserDetailsService {
     private UserRepository userRepo;
      
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserData user = userRepo.findByUsername(username);
+    public UserDetails loadUserByUsername(String phonenumber) throws UsernameNotFoundException {
+        UserData user = userRepo.findByPhonenumber(phonenumber);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return  new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+        return  new org.springframework.security.core.userdetails.User(user.getPhonenumber(), user.getPassword(),
 				new ArrayList<>());
     }
     public UserData save(UserDataDto user) {

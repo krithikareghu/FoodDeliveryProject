@@ -13,6 +13,8 @@ public interface ItemsRepository  extends JpaRepository<ItemsData, Long> {
 
 	ItemsData findAllByID(Long restaurantid);
 
+	boolean existsByitempicture(String itempicture);
+
 	//ItemsData findOne(Long restaurantid);
 
 }

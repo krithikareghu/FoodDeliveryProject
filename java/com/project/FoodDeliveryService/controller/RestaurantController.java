@@ -26,7 +26,6 @@ public class RestaurantController {
 	
 	@Autowired
 	RestaurantDetailService  restaurantDetailService;
-	
 	@Autowired
 	ItemsDetailsService itemdetails;
 	@Autowired
@@ -83,5 +82,6 @@ public class RestaurantController {
 		
 		
 	}
+
 
 }

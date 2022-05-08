@@ -55,33 +55,10 @@ public class MainController {
 //	BCryptPasswordEncoder brcyptEncoder;
 //	
 	
-	@Autowired
-	ItemsRepository itemrepo;
+
 	
-	@Autowired
-	UserRepository userrepo;
+
 	
-	@Autowired
-	RestaurantRepository restaurantrepo;
-	
-	
-	//ADMIN
-	
-	@GetMapping("/allusers")
-	public java.util.List<UserData> getallusers(){
-		return userrepo.findAll();
-	}
-	
-	@GetMapping("/allitems")
-	public java.util.List<ItemsData> getallitems(){
-		return itemrepo.findAll();
-	}
-	
-	
-	@GetMapping("/allrestaurants")
-	public java.util.List<RestaurantData> getallrestaurants(){
-		return restaurantrepo.findAll();
-	}
 	
 	
 	

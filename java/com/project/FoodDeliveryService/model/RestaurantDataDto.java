@@ -3,6 +3,8 @@ package com.project.FoodDeliveryService.Model;
 public class RestaurantDataDto {
 	
 	private String restaurantname;
+	
+
 
 	public String getRestaurantname() {
 		return restaurantname;

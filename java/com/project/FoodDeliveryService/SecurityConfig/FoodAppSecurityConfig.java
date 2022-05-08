@@ -41,10 +41,15 @@ public class FoodAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
     @Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
+    	httpSecurity.cors().disable();
 		httpSecurity.csrf().disable()
-				.authorizeRequests().antMatchers("/authenticate", "/register","/addaddress","/getuserdetails"
-						,"/allusers","/additem","/allitems","/updateuser","/{restaurantid}/iteminrestaurant/{itemid}","/allitems","/addrestaurant","/allrestaurants")
-				//.permitAll().antMatchers(HttpMethod.OPTIONS,"/**")
+				.authorizeRequests().antMatchers("/authenticate", "/register","/addaddress","/getuserdetails","/login"
+						,"/allusers","/additem","/allitems","/{restaurantid}/iteminrestaurant/{itemid}","/allitems","/addrestaurant",
+						"/allrestaurants","/addpicture","/findAllcategories","/addcategory","/{categoryid}/addcategorytorestaurants/{restaurantid}",
+						"/{categoryid}/additemstocategory/{itemid}","/finditemsincategories/{categoryid}","/allcategory"
+						,"/findcategorydetails/{categoryid}","/allcategorywithpic","/updatecategory","/fileupload/{categoryid}","/upload",
+						"/deletecategory/{categoryname}","/categorypic/{categoryname}","/categorypic")
+				.permitAll().antMatchers(HttpMethod.OPTIONS,"/**")
 				.permitAll(). anyRequest().authenticated()
 				.and(). exceptionHandling().authenticationEntryPoint(entryPoint)
 				.and()

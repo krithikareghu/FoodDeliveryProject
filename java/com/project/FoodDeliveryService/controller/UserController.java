@@ -63,11 +63,11 @@ public class UserController {
 	@RequestMapping(value = "/addaddress", method = RequestMethod.PUT)
 	public ResponseEntity<?> addaddress(@RequestBody UserDataDto user) throws Exception {
 
-		UserData userData = this.userrepo.findByUsername(user.getUsername());
+		UserData userData = this.userrepo.findByPhonenumber(user.getPhonenumber());
 		System.out.println(user.getUsername());
 		System.out.println(user.getUsername().getClass());
 
-		if (this.userrepo.existsByUsername(user.getUsername())) {
+		if (this.userrepo.existsByPhonenumber(user.getPhonenumber())) {
 			userData.setAddress(user.getAddress());
 			userrepo.save(userData);
 

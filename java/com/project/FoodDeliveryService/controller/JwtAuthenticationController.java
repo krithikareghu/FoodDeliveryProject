@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.FoodDeliveryService.Model.AuthenticationRequest;
 import com.project.FoodDeliveryService.Model.AuthenticationResponse;
-import com.project.FoodDeliveryService.Model.LoginData;
 import com.project.FoodDeliveryService.Model.UserData;
 import com.project.FoodDeliveryService.Model.UserDataDto;
 import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
@@ -64,47 +63,45 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	JwtUtil jwtUtil;
-	
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserDataDto user) throws Exception {
 
 		if (this.userrepo.existsByUsername(user.getUsername()))
-		  return ResponseEntity
-				.badRequest()
-				.body("Error: Username is already taken!");
-	
-	if (this.userrepo.existsByEmail(user.getEmail())) {
-		return ResponseEntity
-				.badRequest()
-				.body("Error: Email is already in use!");
-	}
-		else
+			return ResponseEntity.badRequest().body("Error: Username is already taken!");
+
+		if (this.userrepo.existsByEmail(user.getEmail())) {
+			return ResponseEntity.badRequest().body("Error: Email is already in use!");
+		}
+		if (this.userrepo.existsByPhonenumber(user.getPhonenumber())) {
+			return ResponseEntity.badRequest().body("Error: Phonenumber is already in use!");
+		}else
 			customUserDetailService.save(user);
 
 		return ResponseEntity.ok(user);
 	}
 
-	
-
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
 			throws Exception {
 
-		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
-		final UserDetails userDetails = customUserDetailService.loadUserByUsername(authenticationRequest.getUsername());
+		authenticate(authenticationRequest.getPhonenumber(), authenticationRequest.getPassword());
+		
+	System.out.println(authenticationRequest.getPhonenumber());
+		final UserDetails userDetails = customUserDetailService.loadUserByUsername(authenticationRequest.getPhonenumber());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
 		return ResponseEntity.ok(new AuthenticationResponse(token));
 
 	}
-	
-	
+
 	private void authenticate(String username, String password) throws Exception {
 		try {
+			System.out.println("hi");
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			System.out.println("hi");
+			
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {
@@ -113,32 +110,32 @@ public class JwtAuthenticationController {
 	}
 
 //	@PostMapping("/login")
-//	public ResponseEntity<?> loginuser(@RequestBody UserDataDto userdata,
-//			@RequestHeader(value = "accept") String headers,
-//			@RequestHeader(value = "Authorization") String authorisationheaders)throws Exception {
+//	public ResponseEntity<?> loginuser(@RequestBody UserDataDto userdata) {
+//		// @RequestHeader(value = "accept") String headers,
+//		// @RequestHeader(value = "Authorization") String authorisationheaders)throws
+//		// Exception {
 //
-//		//if (jwtUtil.validateToken(authorisationheaders, userdata)) {
-//			UserData user = this.userrepo.findByPhonenumber(userdata.getPhonenumber());
+//		// if (jwtUtil.validateToken(authorisationheaders, userdata)) {
+//		UserData user = this.userrepo.findByPhonenumber(userdata.getPhonenumber());
+//		System.out.println(userdata.getPhonenumber());
+//		if ((brcyptEncoder.matches(userdata.getPassword(), user.getPassword()))
+//				&& (user.getPhonenumber().equals(userdata.getPhonenumber()))) {
 //
-//			if ((brcyptEncoder.matches(userdata.getPassword(), user.getPassword()))
-//					&& (user.getPhonenumber().equals(userdata.getPhonenumber()))) {
-//				// System.out.println(userdata.getPhonenumber());
-//
-//				return ResponseEntity.ok(user);
-//				// return new ResponseEntity<>(user,HttpStatus.FOUND);
-//			}
-//			return (new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//
+//			// return ResponseEntity.ok(user);
+//			return new ResponseEntity<>(user, HttpStatus.FOUND);
+//			//ResponseEntity.badRequest().body("Error: Username is already taken!");
 //		}
-		//else {
-		//	return ResponseEntity.status(HttpStatus.OK).body(authorisationheaders);
-		//}
-//	
+//		return (new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//
+//	}
+//		else {
+//			return ResponseEntity.status(HttpStatus.OK).body(authorisationheaders);
+//		}
+
 //	@RequestMapping(value = "/addaddress", method = RequestMethod.POST)
 //	public ResponseEntity<?> saveUser(@RequestBody UserDataDto user) throws Exception {
 //		System.out.println();
 //		return ResponseEntity.ok(customUserDetailService.save(user));
 //	}
 
-	
 }
