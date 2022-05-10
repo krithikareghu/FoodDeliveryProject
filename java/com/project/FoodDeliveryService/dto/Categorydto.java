@@ -1,4 +1,4 @@
-package com.project.FoodDeliveryService.Model;
+package com.project.FoodDeliveryService.dto;
 
 
 

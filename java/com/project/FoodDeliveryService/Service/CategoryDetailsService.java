@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.FoodDeliveryService.Model.Categorydata;
-import com.project.FoodDeliveryService.Model.Categorydto;
-import com.project.FoodDeliveryService.Model.ItemDataDto;
 import com.project.FoodDeliveryService.Model.ItemsData;
+import com.project.FoodDeliveryService.dto.Categorydto;
+import com.project.FoodDeliveryService.dto.ItemDataDto;
 import com.project.FoodDeliveryService.repository.CategoryRepository;
 @Component
 public class CategoryDetailsService implements UserDetailsService {

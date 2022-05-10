@@ -1,8 +1,14 @@
 package com.project.FoodDeliveryService.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.FoodDeliveryService.Model.Roledata;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.Model.UserDataDto;
+import com.project.FoodDeliveryService.Service.CustomUserDetailService;
+import com.project.FoodDeliveryService.Service.CustomeruserDetailsService;
+import com.project.FoodDeliveryService.dto.UserDataDto;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
 @RestController
@@ -25,7 +34,42 @@ public class UserController {
 	@Autowired
 	BCryptPasswordEncoder brcyptEncoder;
 	
+	@Autowired
+	private CustomUserDetailService customUserDetailService;
+	
+
+	@Autowired
+	private CustomeruserDetailsService customeruserDetailsService;
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<?> saveUser(@RequestBody UserDataDto user) throws Exception {
+
+		if (this.userrepo.existsByUsername(user.getUsername()))
+			return ResponseEntity.badRequest().body("Error: Username is already taken!");
+
+		if (this.userrepo.existsByEmail(user.getEmail())) {
+			return ResponseEntity.badRequest().body("Error: Email is already in use!");
+		}
+		if (this.userrepo.existsByPhonenumber(user.getPhonenumber())) {
+			return ResponseEntity.badRequest().body("Error: Phonenumber is already in use!");}
+		else
+		{
+			Set<Roledata>roles=new HashSet<Roledata>();
+			Roledata userRoledata=new Roledata();
+			userRoledata.setRolename("user");
+			userRoledata.setRoleDescription("user role");
+			roles.add(userRoledata);
+	    	user.setRoles(roles);
+	    	System.out.println("hi");
+			customUserDetailService.registeruser(user);
+		}
+
+		return ResponseEntity.ok(user);
+	}
+	
+	
 	@RequestMapping(value = "/updateuser", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('user')")
 	public ResponseEntity<?> updateUser(@RequestBody UserDataDto user) throws Exception {
 		
 		
@@ -46,6 +90,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/getuserdetails", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('user')")
 	public UserData getuserdetails(@RequestParam String phonenumber) throws Exception {
 		// System.out.println(phonenumber);
 		// System.out.println(phonenumber.getClass());
@@ -61,6 +106,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/addaddress", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('user')")
 	public ResponseEntity<?> addaddress(@RequestBody UserDataDto user) throws Exception {
 
 		UserData userData = this.userrepo.findByPhonenumber(user.getPhonenumber());
@@ -76,5 +122,9 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 	}
-
+	@PostConstruct
+	public void initrolesandusers()
+	{
+		customeruserDetailsService.initRolesandUser();
+	}
 }

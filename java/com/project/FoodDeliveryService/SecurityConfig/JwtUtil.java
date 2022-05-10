@@ -30,7 +30,7 @@ public class JwtUtil implements Serializable{
 	public boolean validateToken(String token,UserDetails userDetails) {
 		final String username=getUsernameFromToken(token);
 //		System.out.println("hi");
-//		System.out.println(username);
+		System.out.println(username);
 		return(username.equals(userDetails.getUsername())&&!isTokenExpired(token));
 	}
 	private boolean isTokenExpired(String token) {

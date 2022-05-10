@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.FoodDeliveryService.Model.ItemDataDto;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.RestaurantData;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.Model.UserDataDto;
 import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
 import com.project.FoodDeliveryService.Service.ItemsDetailsService;
+import com.project.FoodDeliveryService.dto.ItemDataDto;
+import com.project.FoodDeliveryService.dto.UserDataDto;
 import com.project.FoodDeliveryService.repository.ItemsRepository;
 import com.project.FoodDeliveryService.repository.RestaurantRepository;
 import com.project.FoodDeliveryService.repository.UserRepository;

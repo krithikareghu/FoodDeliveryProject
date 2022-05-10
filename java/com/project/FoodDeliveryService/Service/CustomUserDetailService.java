@@ -1,25 +1,43 @@
 package com.project.FoodDeliveryService.Service;
 
+import java.io.Console;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import com.project.FoodDeliveryService.Model.Roledata;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.Model.UserDataDto;
+import com.project.FoodDeliveryService.dto.UserDataDto;
+import com.project.FoodDeliveryService.repository.RoleRepository;
 import com.project.FoodDeliveryService.repository.UserRepository;
  @Component
+// @Transactional
 public class CustomUserDetailService implements UserDetailsService {
 	 
 	 @Lazy
 	 @Autowired
 	 PasswordEncoder brcyptEncoder;
+	 
+	 @Autowired
+	 private RoleRepository rolerepo;
+	 
  
     @Autowired
     private UserRepository userRepo;
+    
+    
      
     @Override
     public UserDetails loadUserByUsername(String phonenumber) throws UsernameNotFoundException {
@@ -28,9 +46,20 @@ public class CustomUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
         return  new org.springframework.security.core.userdetails.User(user.getPhonenumber(), user.getPassword(),
-				new ArrayList<>());
+				getauthorities(user));
     }
-    public UserData save(UserDataDto user) {
+    
+    private Set getauthorities(UserData user) {
+    	Set authorities=new HashSet<>();	
+    	
+    	user.getRoles().forEach( role ->{
+    		authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRolename()));
+    		System.out.println(authorities);
+    	}); 
+    	return authorities;
+    	
+    }
+    public UserData registeruser(UserDataDto user) {
     	
     	UserData newuser=new UserData();
     	newuser.setUsername(user.getUsername());
@@ -39,5 +68,7 @@ public class CustomUserDetailService implements UserDetailsService {
     	newuser.setPhonenumber(user.getPhonenumber());
     	newuser.setAddress(user.getAddress());
 		return  userRepo.save(newuser);
-	}
+	}  
+   
+	
 }

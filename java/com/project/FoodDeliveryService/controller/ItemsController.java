@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.FoodDeliveryService.Model.ItemDataDto;
 import com.project.FoodDeliveryService.Service.ItemsDetailsService;
+import com.project.FoodDeliveryService.dto.ItemDataDto;
 import com.project.FoodDeliveryService.repository.ItemsRepository;
 
 

@@ -30,7 +30,55 @@ public class RestaurantData {
 	@Column(nullable = false)
 	private String restaurantname;
 	
+	@Column(nullable = false)
+	private String restaurantcontact;
+	
+	@Column(nullable = false)
+	private String restaurantEmail;
+	
+	@Column(nullable = false)
+	private String Restaurantpassword;
+	
+	@Column
+	private String Restaurantdescription;
+	
+	public String getRestaurantcontact() {
+		return restaurantcontact;
+	}
+
+	public void setRestaurantcontact(String restaurantcontact) {
+		this.restaurantcontact = restaurantcontact;
+	}
+
+	public String getRestaurantEmail() {
+		return restaurantEmail;
+	}
+
+	public void setRestaurantEmail(String restaurantEmail) {
+		this.restaurantEmail = restaurantEmail;
+	}
+
+	public String getRestaurantpassword() {
+		return Restaurantpassword;
+	}
+
+	public void setRestaurantpassword(String restaurantpassword) {
+		Restaurantpassword = restaurantpassword;
+	}
+
+	public String getRestaurantdescription() {
+		return Restaurantdescription;
+	}
+
+	public void setRestaurantdescription(String restaurantdescription) {
+		Restaurantdescription = restaurantdescription;
+	}
+
+
+	
+	
 	///////////////////////////////////
+	
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "category_restaurants")
@@ -49,7 +97,7 @@ public class RestaurantData {
 	/////////////////////////////////////////////////
 	@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(
-			name="Restaurant_items",joinColumns = @JoinColumn(name="restaurant_id"),
+			name="Restaurant_items",joinColumns = @JoinColumn(name="restaurant_id", updatable = true),
 			inverseJoinColumns = @JoinColumn(name="items_id"))
 	
 

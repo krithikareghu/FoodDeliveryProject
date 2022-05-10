@@ -1,4 +1,9 @@
-package com.project.FoodDeliveryService.Model;
+package com.project.FoodDeliveryService.dto;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.project.FoodDeliveryService.Model.Roledata;
 
 public class UserDataDto {
 	private int ID;
@@ -11,7 +16,14 @@ public class UserDataDto {
     private String password;
     private String phonenumber;
     private String address;
+    private Set<Roledata>roles=new HashSet<>();
     
+	public Set<Roledata> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Roledata> roles) {
+		this.roles = roles;
+	}
 	public String getAddress() {
 		return address;
 	}

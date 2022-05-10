@@ -32,9 +32,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.FoodDeliveryService.Model.AuthenticationRequest;
 import com.project.FoodDeliveryService.Model.AuthenticationResponse;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.Model.UserDataDto;
 import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
+import com.project.FoodDeliveryService.dto.UserDataDto;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
 import net.bytebuddy.asm.Advice.Return;
@@ -51,10 +51,6 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUtil jwtTokenUtil;
 
-//	 @Lazy
-//	 @Autowired
-//	 PasswordEncoder passwordEncoder;
-
 	@Autowired
 	BCryptPasswordEncoder brcyptEncoder;
 
@@ -64,22 +60,7 @@ public class JwtAuthenticationController {
 	@Autowired
 	JwtUtil jwtUtil;
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody UserDataDto user) throws Exception {
-
-		if (this.userrepo.existsByUsername(user.getUsername()))
-			return ResponseEntity.badRequest().body("Error: Username is already taken!");
-
-		if (this.userrepo.existsByEmail(user.getEmail())) {
-			return ResponseEntity.badRequest().body("Error: Email is already in use!");
-		}
-		if (this.userrepo.existsByPhonenumber(user.getPhonenumber())) {
-			return ResponseEntity.badRequest().body("Error: Phonenumber is already in use!");
-		}else
-			customUserDetailService.save(user);
-
-		return ResponseEntity.ok(user);
-	}
+	
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
@@ -91,16 +72,17 @@ public class JwtAuthenticationController {
 		final UserDetails userDetails = customUserDetailService.loadUserByUsername(authenticationRequest.getPhonenumber());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
+		UserData userData=userrepo.findByPhonenumber(authenticationRequest.getPhonenumber());
 
-		return ResponseEntity.ok(new AuthenticationResponse(token));
+		return ResponseEntity.ok(new AuthenticationResponse(token,userData));
 
 	}
 
-	private void authenticate(String username, String password) throws Exception {
+	private void authenticate(String phonenumber, String password) throws Exception {
 		try {
-			System.out.println("hi");
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-			System.out.println("hi");
+			//System.out.println("hi");
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phonenumber, password));
+			//System.out.println("authenticate");
 			
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
@@ -108,6 +90,17 @@ public class JwtAuthenticationController {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 //	@PostMapping("/login")
 //	public ResponseEntity<?> loginuser(@RequestBody UserDataDto userdata) {

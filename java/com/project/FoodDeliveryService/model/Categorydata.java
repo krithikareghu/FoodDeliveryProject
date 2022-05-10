@@ -39,7 +39,7 @@ public class Categorydata {
 	
 	@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(
-			name="category_items",joinColumns = @JoinColumn(name="category_id"),
+			name="category_items",joinColumns = @JoinColumn(name="category_id", updatable = true),
 			inverseJoinColumns = @JoinColumn(name="items_id"))
 	
 	private Set<ItemsData>category_ItemsDatas=new HashSet<ItemsData>();

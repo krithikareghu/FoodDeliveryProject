@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.project.FoodDeliveryService.Model.Categorydata;
-import com.project.FoodDeliveryService.Model.Categorydto;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.RestaurantData;
+import com.project.FoodDeliveryService.dto.Categorydto;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Categorydata, Long> {

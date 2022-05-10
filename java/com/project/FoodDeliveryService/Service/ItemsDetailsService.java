@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.project.FoodDeliveryService.Model.ItemDataDto;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.Model.UserDataDto;
+import com.project.FoodDeliveryService.dto.ItemDataDto;
+import com.project.FoodDeliveryService.dto.UserDataDto;
 import com.project.FoodDeliveryService.repository.ItemsRepository;
 @Component
 public class ItemsDetailsService implements UserDetailsService {

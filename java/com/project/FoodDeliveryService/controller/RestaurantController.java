@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.RestaurantData;
-import com.project.FoodDeliveryService.Model.RestaurantDataDto;
 import com.project.FoodDeliveryService.Service.ItemsDetailsService;
 import com.project.FoodDeliveryService.Service.RestaurantDetailService;
+import com.project.FoodDeliveryService.dto.RestaurantDataDto;
 import com.project.FoodDeliveryService.repository.ItemsRepository;
 import com.project.FoodDeliveryService.repository.RestaurantRepository;
 
@@ -50,6 +50,29 @@ public class RestaurantController {
 
 		return ResponseEntity.ok(restaurant);
 	}
+	
+	
+	@RequestMapping(value = "/updaterestaurant", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDataDto restaurant) throws Exception {
+	
+		if (this.restaurantrepo.existsByrestaurantname(restaurant.getRestaurantname()))
+		{
+			restaurantDetailService.save(restaurant);
+			return ResponseEntity.ok(restaurant);
+
+		  
+		}
+		else {
+			return ResponseEntity
+		
+				.badRequest()
+				.body("Error: Restaurant is not included");
+			
+
+			}
+	}
+	
+	
 	@PutMapping("/{restaurantid}/iteminrestaurant/{itemid}")
 	public ResponseEntity<?> itemsinrestaurants(@PathVariable Long restaurantid,@PathVariable Long itemid) {
 		RestaurantData restaurantData=restaurantrepo.findAllByID(restaurantid);

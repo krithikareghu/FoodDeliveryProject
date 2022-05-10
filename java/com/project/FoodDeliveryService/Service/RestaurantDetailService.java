@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import com.project.FoodDeliveryService.Model.RestaurantData;
-import com.project.FoodDeliveryService.Model.RestaurantDataDto;
+import com.project.FoodDeliveryService.dto.RestaurantDataDto;
 import com.project.FoodDeliveryService.repository.RestaurantRepository;
 
 @Component
