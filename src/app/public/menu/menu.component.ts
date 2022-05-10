@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
          await (this.images=res);
           
         });   
-    this.value= Array.from({length: 20},()=>(Math.random() * (10.00 - 1.00 + 1.00) + 1.00).toFixed(1));
+    this.value= Array.from({length: 20},()=>(Math.random() * (9.00 - 2.00 + 2.00) + 1.00).toFixed(1));
  
       
 

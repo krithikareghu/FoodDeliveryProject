@@ -5,40 +5,47 @@
 <div style="text-align: center;">
 
     <form #categorydata="ngForm" (ngSubmit)="onUpload()">
-
-
         <label for="choose category">Choose category </label>&nbsp;
 
-
-        <select name="category" id="category">
+        <ng-template #elseblock> 
+        <select  name="category" id="category">
             <option *ngFor="let category of categories" value="">{{category.categoryname}}</option>
         </select>
+    </ng-template>
+
         &nbsp;
-        <input type="checkbox">&nbsp;
+
+       <br><br>
         <label for="categoryname">Add new Category </label>&nbsp;
+        <input #check (change)="true" type="checkbox">&nbsp;
 
-        <input type="text" [(ngModel)]="addcategory.categoryname" required name="categoryname"
-            #categoryname="ngModel">&nbsp;
-        <input type="file" (change)="onFileChanged($event)">
+        <div *ngIf="check.checked ;else elseblock">
+            <br>
+            <input type="text" [(ngModel)]="addcategory.categoryname" required name="categoryname"
+                #categoryname="ngModel">&nbsp;
+            <input type="file" (change)="onFileChanged($event)">
+            <img [src]="imgURL" *ngIf="imgURL">
+            
+        </div>
 
-        <img [src]="imgURL" *ngIf="imgURL">
+       
+    
+        <!-- 
+        <tr class="even" *ngFor="let item of rows">
+            <input value="{{item.check}}" type="checkbox" checked="item.check"> -->
+
+
         <!-- <input type="button" value="Upload"><br><br> -->
         <br>
         <br>
         <br>
         <label for="itemname">Itemname </label>&nbsp;
-        <input type="text">&nbsp;
+        <input type="text"><br><br>
         <label for="itemprice">Itemprice</label>&nbsp;
-        <input type="text">&nbsp;
+        <input type="text"><br><br>
 
-        <label for="itempicture">Itempicture</label>&nbsp;
+        <label for="itempicture">Picture</label>&nbsp;
         <input type="file" (change)="onFileChanged($event)">
-       
-
-
-
-
-
         <br>
         <br>
 
@@ -51,4 +58,3 @@
 
 
 
-<img [src]="convertedImage">

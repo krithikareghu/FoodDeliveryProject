@@ -1,6 +1,6 @@
 body {
-    --color-primary: #1b708d;
-    --color-primary-dark: #184065;
+    --color-primary: #ffb411;;
+    --color-primary-dark:#ffb411;;
     --color-secondary: #252c6a;
     --color-error: #cc3333;
     --color-success: hsl(116, 45%, 49%);
@@ -12,7 +12,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    background: #f5f4f2f2;
+    /* background: #f5f4f2f2; */
 }
 .container {
     width: 400px;
@@ -56,6 +56,9 @@ body {
     margin-bottom: 1.8rem;
     /* display: inline-block; */
     /* width:50%; */
+}
+.form__button:hover{
+    background: var(--color-primary-dark);
 }
 
 .form-control {
@@ -122,4 +125,57 @@ input.ng-touched.ng-invalid{
 }
 .form-groupsubmit{
     width: 100%;
+}
+
+header{
+   margin: 0;
+   padding: 0;
+   font-family: "Poppins",sans-serif;
+   list-style: none;
+   text-decoration: none;
+   box-sizing: border-box;
+}
+
+   
+
+header{
+   position: fixed;
+   width:100% ;
+   top: 0;
+   right: 0;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background:var(--bg-color);
+   padding: 18px 70px;
+   box-shadow: 0 0.5rem 50rem rgba(0, 0, 0, 0.1);
+   height: 10%;
+
+}
+.logo img{
+    color: var(--main-color);
+    width: 50px;
+    height: 40px;
+   
+}
+.navbar a{
+     padding:  20px;
+    color:  var(--text-color);
+    font-weight: 500;
+    
+}
+.header .navbar{
+    text-decoration: none;
+    /* background-color: #1b708d; */
+    list-style: none;
+}
+
+.navbar{
+    display: flex;
+}
+
+.header a:hover {
+    background-color: #7291cf;
+    color: var(--main-color);
+    cursor: pointer;
 }

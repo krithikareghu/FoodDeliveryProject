@@ -5,14 +5,14 @@
     <th style="width:30%">Restaurants</th>
     <th>Itemname</th>
 
-    <tr *ngFor="let category of categoriesdetails">
+    <tr *ngFor="let category of categoriesdetails; let i =index">
       <td>{{category.id}}</td>
       <td>{{category.categoryname}}</td>
-    <th>{{category.category_restaurants}}</th>
-
     </tr>
 
   </table>
+  <p>{{restaurants}}</p>
+  
   <!-- <ul  class="items"*ngFor="let items of category.category_ItemsDatas">
         <li> {{items.itemname}}</li>
       </ul> -->

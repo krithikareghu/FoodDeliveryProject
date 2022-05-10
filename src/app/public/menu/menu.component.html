@@ -1,13 +1,23 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<h2>Different category of food</h2>
-<div class="container"  >
+<!-- <app-navbar></app-navbar> -->
+<br><br><br>
+
+<div class="heading">
+    <span style="color:#ffb411;">Categories</span>
+    <h2>Tasty menu of the week </h2>
+</div>
+
+
+
+<div class="container">
 <div  class="innercontainer" *ngFor="let image of images;  let i=index" >
 
 <a  class="imagelink" href="#"><img  class="image" width="90%" height="" [src]="image" alt="image">
 </a>
-<span class="rating">{{value[i]}}</span>
-<p class="categoryname">{{allcategories[i]}}</p>
+<span  class="rating" style="font-style:italic;"> <span class="fa fa-star checked"></span>&nbsp;{{value[i]}}</span>
+<h3 class="categoryname">{{allcategories[i]}}</h3>
 
 </div>
 </div>
@@ -21,3 +31,19 @@
      <mat-grid-tile>2</mat-grid-tile>
     <mat-grid-tile>3</mat-grid-tile>
     <mat-grid-tile>4</mat-grid-tile> </mat-grid-list> -->
+
+    <!-- <div class="menu-container">
+    <div class="box"  *ngFor="let image of images;  let i=index" >
+        <div class="box-img">
+            <a  class="imagelink" href="#"><img  class="image" [src]="image" alt="image"></a>
+        </div>
+        <span class="rating">{{value[i]}}</span>
+        <p class="categoryname">{{allcategories[i]}}</p>
+       
+        <i class='bx bx-cart-alt'></i>
+    </div>
+
+</div> -->
+
+
+<!-- <h2 style="color:#ffb411;">Categories</h2> -->

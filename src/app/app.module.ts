@@ -20,8 +20,11 @@ import { OwnerModule } from './private/owner/owner.module';
 import { OwnerRoutingModule } from './private/owner/owner-routing.module';
 import { AdminRoutingModule } from './private/admin/admin-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import{ MatButtonModule } from '@angular/material/button';
-import {MatGridListModule} from '@angular/material/grid-list'
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ForbiddenComponent } from './public/forbidden/forbidden/forbidden.component'
+import { AuthGuard } from './core/auth/-auth.guard';
+import { AuthinterceptorInterceptor } from './core/auth/helpers/authinterceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,17 +37,20 @@ import {MatGridListModule} from '@angular/material/grid-list'
     UserComponent,
     MenuComponent,
     CategoryComponent,
+    ForbiddenComponent,
 
   ],
   imports: [
-    BrowserModule,OwnerRoutingModule,
+    BrowserModule, OwnerRoutingModule,
     AdminRoutingModule,
     AppRoutingModule,
     FormsModule, HttpClientModule,
     SharedModule,
-    CoreModule,OwnerModule, BrowserAnimationsModule,MatButtonModule,MatGridListModule
+    CoreModule, OwnerModule, BrowserAnimationsModule, MatButtonModule, MatGridListModule
   ],
-  providers: [UserloginService,{ provide:HTTP_INTERCEPTORS, useClass:HttpinterceptorService, multi:true}],
+  providers: [UserloginService, AuthGuard, 
+    { provide: HTTP_INTERCEPTORS,
+     useClass: AuthinterceptorInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

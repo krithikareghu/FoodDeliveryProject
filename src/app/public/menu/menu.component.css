@@ -3,23 +3,41 @@ mat-grid-tile{
 }
 .container {
     display:grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto ;
     box-sizing: border-box;
     justify-content: center;
     padding: 10px;
     column-gap: 50px;
     row-gap: 50px; 
-    margin-bottom: -10px; 
+    margin-bottom: -10px;
+    /* display: grid; */
+    /* grid-template-columns: repeat(auto-fit, minmax(220px, auto)); */
+    gap: 1.5rem;
+    align-items: center; 
 }
 .image{
     justify-content: center;
     padding: 30px;
     align-items: center;
-    margin-left: -20px;
+    margin-left: -15px;
+    /* width: 80%; */
 }
 .innercontainer{
+        /* position: relative; */
+        margin-top: 2rem;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgb(4 64 54 / 10%);
+        /* height: auto; */
  padding: 10px;
 }
+.innercontainer-img {
+    width: 200px;
+    height: 200px;
+  }
 .imagelink{
    box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.8);
@@ -40,11 +58,170 @@ mat-grid-tile{
 }
 .rating{
     text-align: left;
-    background-color: rgb(40, 215, 145);
-   padding: 5px;
+    background-color: #ffa410;
+   padding: 2px;
    padding-left: 10px;
    padding-right: 10px;
    font-size: small;
     color: aliceblue;
     border: 1pxs solid black;
 }
+h2{
+    text-align: center;
+}
+ 
+
+.heading {
+    text-align: center;
+    
+  }
+
+  .heading span {
+    color: var(--main-color);
+    /* font-weight: 800; */
+    font-size: large;
+  }
+  .heading h2 {
+    font-size: 2.24rem;
+  
+  }
+
+  /* @media (max-width: 768px) {
+    section {
+      padding: 50px 8%;
+    }
+    #menu-icon {
+      display: initial;
+      color: var(--text-color);
+    }
+    header .navbar {
+      position: absolute;
+      top: -400px;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      background: var(--bg-color);
+      box-shadow: 0 4px 4px rgb(0 0 0 / 10%);
+      transition: 0.2s ease;
+    }
+    .navbar.active {
+      top: 100%;
+    }
+    .navbar a {
+      padding: 1.5rem;
+      display: block;
+      background: var(--bg-color);
+    }
+    #darkmode {
+      position: absolute;
+      top: 1.4rem;
+      right: 2rem;
+    }
+  }
+  @media (max-width: 715px) {
+    header {
+      padding: 10px 16px;
+    }
+    .home {
+      grid-template-columns: 1fr;
+    }
+    .about {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .about-img {
+      order: 2;
+    }
+  }
+  @media (max-width: 515px) {
+    .connect {
+      flex-direction: column;
+    }
+    .connect .btn {
+      margin-top: 1rem;
+    }
+  }
+  @media (max-width: 450px) {
+    :root {
+      --big-font: 2rem;
+      --h2-font: 1.4rem;
+    }
+    .home-text {
+      padding-top: 4rem;
+    }
+  }
+ */
+
+
+
+
+  /*
+  .menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .box {
+    /* position: relative; */
+   /* margin-top: 2rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgb(4 64 54 / 10%);
+    padding: 10px;
+  }
+  .box-img {
+    width: 200px;
+    height: 200px;
+  }
+  .box-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+  .box h2 {
+    font-size: 1.2rem;
+  }
+  .box h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 4px 0 10px;
+  }
+  .box span {
+    font-size: var(--p-font);
+    font-weight: 500;
+  }
+  .box .bx {
+ position: absolute; 
+     right: 0;
+    top: 0;
+    font-size: 20px;
+    background: var(--main-color);
+    border-radius: 0 0.5rem 0 0.5rem;
+    padding: 5px 8px;
+  }
+  .box .bx:hover {
+    background: #ffa400;
+  }
+   .servives-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, auto));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .s-box {
+    text-align: center;
+  }
+  .s-box img {
+    width: 60px;
+  }
+  .s-box h3 {
+    margin: 4px 0 10px;
+  }  */

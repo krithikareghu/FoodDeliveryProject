@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { UserloginService } from '../../services/login/userlogin.service';
 
 import {  Router } from '@angular/router';
@@ -13,32 +13,41 @@ import { AuthenticationService } from 'src/app/services/auth/authentication.serv
 })
 export class LoginComponent implements OnInit {
 
-  userlogin: Userlogin = new Userlogin();
-  
-
-  
+  userlogin: Userlogin = new Userlogin();  
   constructor(
     private userloginservice:UserloginService,
        private router: Router,
-       private auth:AuthenticationService
-    
+       private auth:AuthenticationService   
   ) {
   }
 
-  ngOnInit() {
-  
+  ngOnInit() { 
 }
 
 observer = {
-  next:(data:any)  =>{console.log(data)},
+  next:(response:any)  =>{
+    this.auth.setRoles(response.userData.roles);
+    this.auth.setToken(response.jwttoken);
+    console.log(response)
+   const role= response.userData.roles[0].rolename;
+   //console.log(response.userData.roles[0].rolename)
+   //console.log(response.userData.roles);
+  // console.log(response.jwttoken);
+    if(role==='Admin')
+    {
+this.router.navigate(['/admin/allusers'])
+    }
+    else{
+      this.router.navigate(['/home'])
+    }
+    },
+  
   error: () =>alert("Phonenumber or password incorrect"),
 
 };
 
 login() {
   //this.auth.authenticate(this.userlogin.phonenumber,this.userlogin.password)
-
-  console.log(this.userlogin)
   this.userloginservice.login(this.userlogin)
       .subscribe(this.observer);
 }
