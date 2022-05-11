@@ -13,7 +13,6 @@ import { AddaddressComponent } from './profile/addaddress/addaddress.component';
 import { SharedModule } from './shared/shared.module';
 import { UserloginService } from './services/login/userlogin.service';
 import { UserComponent } from './profile/user/user.component';
-import { HttpinterceptorService } from './services/auth/httpinterceptor.service';
 import { MenuComponent } from './public/menu/menu.component';
 import { CategoryComponent } from './public/category/category.component';
 import { OwnerModule } from './private/owner/owner.module';
@@ -25,6 +24,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ForbiddenComponent } from './public/forbidden/forbidden/forbidden.component'
 import { AuthGuard } from './core/auth/-auth.guard';
 import { AuthinterceptorInterceptor } from './core/auth/helpers/authinterceptor.interceptor';
+import { SearchpipePipe } from './shared/pipes/searchpipe.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { AuthinterceptorInterceptor } from './core/auth/helpers/authinterceptor.
     CategoryComponent,
     ForbiddenComponent,
 
+
   ],
   imports: [
     BrowserModule, OwnerRoutingModule,
@@ -46,6 +47,7 @@ import { AuthinterceptorInterceptor } from './core/auth/helpers/authinterceptor.
     AppRoutingModule,
     FormsModule, HttpClientModule,
     SharedModule,
+  
     CoreModule, OwnerModule, BrowserAnimationsModule, MatButtonModule, MatGridListModule
   ],
   providers: [UserloginService, AuthGuard, 

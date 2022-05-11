@@ -5,11 +5,13 @@ import { LoginnavComponent } from './navigation/loginnav/loginnav.component';
 import { RouterModule } from '@angular/router';
 import { AdminnavComponent } from './navigation/adminnav/adminnav.component';
 import { MenuComponent } from '../public/menu/menu.component';
+import { SearchpipePipe } from './pipes/searchpipe.pipe';
 @NgModule({
   declarations: [
     NavbarComponent,
     LoginnavComponent,
     AdminnavComponent,
+    SearchpipePipe,
     
   ],
   imports: [

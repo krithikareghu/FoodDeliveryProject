@@ -11,16 +11,45 @@
 
 
 
-<div class="container">
-<div  class="innercontainer" *ngFor="let image of images;  let i=index" >
+<!-- <div class="container">
+    <div class="innercontainer" *ngFor="let image of images;  let i=index">
+        <a class="imagelink" href="#"><img class="image" width="90%" height="" [src]="image" alt="image">
+        </a>
+        <span class="rating" style="font-style:italic;"> <span
+                class="fa fa-star checked"></span>&nbsp;{{value[i]}}</span>
+        <h3 class="categoryname">{{allcategories[i]}}</h3>
+    </div>
+</div> -->
 
-<a  class="imagelink" href="#"><img  class="image" width="90%" height="" [src]="image" alt="image">
-</a>
-<span  class="rating" style="font-style:italic;"> <span class="fa fa-star checked"></span>&nbsp;{{value[i]}}</span>
-<h3 class="categoryname">{{allcategories[i]}}</h3>
+<!-- <div class="container">
+    <div class="innercontainer" *ngFor="let food of allcategories;let j=index">
+        <a class="imagelink">
+            <img class="image" width="90%" src="{{food.categoryurl}}" alt="categories">
+        </a>
 
+        <span class="rating" style="font-style:italic;"> <span
+                class="fa fa-star checked"></span>&nbsp;{{value[j]}}</span>
+                <h3>{{food.categoryname}}</h3>
+    </div>
+</div> -->
+<div class="items">
+    <div *ngFor ="let item of foodcategory.Restaurant; let i=index">
+       <p>{{item.restaurantname}}</p>
+        <p>{{i}}</p>
+        <img [src]="item.Items[i].itemurl" alt="food.itemname"><br>
+        <p>{{item.Items[i].itemname}}</p>
+        <p>{{item.Items[i].itemprice}}</p>
+        <span class="rating" style="font-style:italic;"> <span
+            class="fa fa-star checked"></span>&nbsp;{{value[i]}}</span>
+        <br>
+    </div>
+    <br>
+    <!-- <img [src]="foodcategory.categoryurl" alt="food.categoryname"> -->
 </div>
-</div>
+
+
+
+
 
 
 
@@ -32,7 +61,7 @@
     <mat-grid-tile>3</mat-grid-tile>
     <mat-grid-tile>4</mat-grid-tile> </mat-grid-list> -->
 
-    <!-- <div class="menu-container">
+<!-- <div class="menu-container">
     <div class="box"  *ngFor="let image of images;  let i=index" >
         <div class="box-img">
             <a  class="imagelink" href="#"><img  class="image" [src]="image" alt="image"></a>

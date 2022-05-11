@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FoodService } from './../../../services/food/food.service';
 import { Addcategory } from './../../../shared/model/addcategory';
 import { HttpclientService } from 'src/app/services/httpclient.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addcategories',
@@ -11,11 +12,11 @@ import { HttpclientService } from 'src/app/services/httpclient.service';
 })
 export class AddcategoriesComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient, private client: HttpclientService,
-    private categoryservice: FoodService) { }
+  constructor(private httpClient: HttpClient, private client: HttpclientService,private router:Router,    private categoryservice: FoodService) { }
 
   addcategory: Addcategory = new Addcategory();
   ngOnInit() {
+   // this.client.onlycategoryname().subscribe((response:any)=>this.handlecategoryResponse(response),)
     this.client.getallcategories().subscribe(
       response => this.handlecategoryResponse(response),
     );
@@ -51,8 +52,8 @@ export class AddcategoriesComponent implements OnInit {
       this.receivedImageData = res;
       this.base64Data = this.receivedImageData.pic;
       this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
-      console.log("hi");
       alert("category added successfully");
+      this.router.navigate(['/owner/addmenu'])
     },
     error: (err: any) => console.log('Error Occured during saving: ' + err.value)
 

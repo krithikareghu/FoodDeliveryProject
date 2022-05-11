@@ -8,6 +8,7 @@
     </head>
 <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
     <!-- <navbar> -->
@@ -16,12 +17,13 @@
 
     </header>
 
+
     <!-- Home section -->
     <section class="home" id="home">
         <div class="home-text">
             <h1>Dinner Mate</h1>
             <h2>Discover the best <br>food & drinks</h2><br>
-            <a routerLink="category" class="btn">View Menu</a>
+            <a id="menu"href="#menu" class="btn">View Menu</a>
         </div>
         <div class="home-img">
             <img src="assets/images/pizza.jpg" alt="image">
@@ -29,8 +31,27 @@
 
     </section>
     <section class="menu">
-        <app-menu></app-menu>
+
+        <div class="heading">
+            <span style="color:#ffb411;">Categories</span>
+            <h2>Tasty menu of the week </h2>
+        </div>
+<a id="#menu">
+        <div class="container">
+            <div class="innercontainer" *ngFor="let food of categories;let j=index">
+                <a routerLink="category/{{food.id}}">
+                    <img class="image"  src="{{food.categoryurl}}" alt="categories" >
+                </a>
+        
+                <span class="rating" style="font-style:italic;"> <span
+                        class="fa fa-star checked"></span>&nbsp;{{value[j]}}</span>
+                        <h3>{{food.categoryname}}</h3>
+            </div>
+        </div>
+    </a>
     </section>
+
+  
 
     <!-- About -->
     <section class="about" id="About">
@@ -48,6 +69,6 @@
         </div>
     </section>
 </body>
-<!-- <script src="/FoodDeliveryFrontEnd/index.js\"></script> -->
+
 
 <!-- </html> -->

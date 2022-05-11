@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Userlogin } from 'src/app/shared/model/userlogin';
 import { UserloginService } from 'src/app/services/login/userlogin.service';
+import { SearchpipePipe } from './../../pipes/searchpipe.pipe';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +12,12 @@ import { UserloginService } from 'src/app/services/login/userlogin.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth:AuthenticationService,private router:Router,public userlogin:UserloginService) { }
-
+  constructor(private auth:AuthenticationService,private router:Router,public userlogin:UserloginService,private route:ActivatedRoute) { }
+  public searchFilter: any = '';
   ngOnInit(): void {
+    this.route.params.subscribe(params=>{
+      if(params['searchFilter'])
+        this.searchFilter=params['searchFilter']})
   }
 public isloggedin(){
 

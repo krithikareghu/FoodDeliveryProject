@@ -5,9 +5,12 @@
     <th style="width:30%">Restaurants</th>
     <th>Itemname</th>
 
+    <p>
+      {{categoriesdetails}}
+    </p>
     <tr *ngFor="let category of categoriesdetails; let i =index">
       <td>{{category.id}}</td>
-      <td>{{category.categoryname}}</td>
+      <td>{{allcategories[i]}}</td>
     </tr>
 
   </table>

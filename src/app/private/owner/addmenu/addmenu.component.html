@@ -1,1 +1,24 @@
-<p>addmenu works!</p>
+<form  #categorydata="ngForm" (ngSubmit)="onUpload()">
+
+    
+
+    <label for="choose category">Choose category </label>&nbsp;
+
+   
+    <select [(ngModel)]="additems.categoryname" name="categoryname" id="categoryname">
+        <option  [value]="category.categoryname"*ngFor="let category of categories">{{category.categoryname}}</option>
+    </select>
+    <!-- [ngValue]="category" -->
+<br><br>
+<label for="itemname">Itemname </label>&nbsp;
+        <input name="itemname" type="text"[(ngModel)]="additems.itemname"><br><br>
+        <label for="itemprice">Itemprice</label>&nbsp;
+        <input  name="itemprice"  type="text" [(ngModel)]="additems.itemprice"><br><br>
+
+        <label for="itempicture">Picture</label>&nbsp;
+        <input type="file" (change)="onFileChanged($event)">
+      
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">submit</button>
+</form>

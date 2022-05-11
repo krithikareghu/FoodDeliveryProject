@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FoodService } from 'src/app/services/food/food.service';
 import { HttpclientService } from 'src/app/services/httpclient.service';
+import { Foodcategory } from './../../shared/model/foodcategory';
 
 @Component({
   selector: 'app-menu',
@@ -8,13 +11,36 @@ import { HttpclientService } from 'src/app/services/httpclient.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  images: any=[];
+  images: any = [];
   allcategories!: any
-  value!:any;
-  constructor(private http: HttpClient,private allcategory: HttpclientService) { }
+  value!: any;
+  constructor(private http: HttpClient, private allcategory: HttpclientService, private food: FoodService
+    ,private route:ActivatedRoute) {
+      this.route.params.subscribe(params=>{
+        if(params['id']){
+          this.foodcategory=this.food.getfoodbyid(params['id'])
+        }
+      })
+      console.log(this.foodcategory.Restaurant)
+     }
+  categories!: any;
+  foodcategory!:Foodcategory;
+  ngOnInit() {
 
-  ngOnInit(): void {
-    
+    // this.route.params.subscribe(params=>{
+    //   if(params['searchItem']){
+    //     this.categories=this.food.getall().filter
+    //     (categoryfood=>categoryfood.categoryname
+    //       .toLowerCase()
+    //     .includes(params['searchItem'].toLowerCase))
+    //     console.log(this.categories)
+    //   }
+    //   else{
+    //   this.categories = this.food.getall();
+    //   }
+    // })
+
+  
     this.allcategory.onlycategoryname().subscribe(
       response => this.handleallcategoryResponse(response),
     );
@@ -29,13 +55,12 @@ export class MenuComponent implements OnInit {
     this.http.get('http://localhost:8080/categorypic')
       .subscribe(
         async res => {
-         await (this.images=res);
-          
-        });   
-    this.value= Array.from({length: 20},()=>(Math.random() * (9.00 - 2.00 + 2.00) + 1.00).toFixed(1));
- 
-      
+          await (this.images = res);
+
+        });
+        this.value = Array.from({ length: 20 }, () => (Math.random() * (9.00 - 2.00 + 2.00) + 1.00).toFixed(1));
 
   }
-}// this.value= Array.from({length: 20}, () =>(Math.random() * 10));
-// this.value= Array.from({length: 20},()=>Math.random() * (10.0 - 1.0 + 1.00) + 1.00);
+
+
+}
