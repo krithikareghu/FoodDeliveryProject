@@ -30,9 +30,9 @@ public class CustomUserDetailService implements UserDetailsService {
 	 @Autowired
 	 PasswordEncoder brcyptEncoder;
 	 
+	
 	 @Autowired
-	 private RoleRepository rolerepo;
-	 
+	 RoleRepository roleRepository;
  
     @Autowired
     private UserRepository userRepo;
@@ -67,6 +67,21 @@ public class CustomUserDetailService implements UserDetailsService {
     	newuser.setEmail(user.getEmail());
     	newuser.setPhonenumber(user.getPhonenumber());
     	newuser.setAddress(user.getAddress());
+    	Set<Roledata>userroles=new HashSet<>();
+    	
+    	
+		Roledata userRoledata=roleRepository.findById("user").get();
+		if(userRoledata==null)
+		{
+		   userRoledata=new Roledata();
+			userRoledata.setRolename("user");
+			userRoledata.setRoleDescription("Default role");
+			
+		}
+	
+		userroles.add(userRoledata);
+    	newuser.setRoles(userroles);
+	
 		return  userRepo.save(newuser);
 	}  
    

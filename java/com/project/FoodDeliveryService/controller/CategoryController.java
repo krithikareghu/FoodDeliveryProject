@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.project.FoodDeliveryService.Model.Categorydata;
-import com.project.FoodDeliveryService.Model.ImageModel;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.RestaurantData;
 import com.project.FoodDeliveryService.Service.CategoryDetailsService;
@@ -110,20 +109,16 @@ public class CategoryController {
 	@GetMapping ("/categorypic")
 	public List categorypics() {
 	List<String> list=new ArrayList<String>();
+	
 		 for(Categorydata category:categoryRepo.findAll())
 		 {
 			 byte[] file=category.getCategorypicture();
-			
 			 String encodebase64=null;
-			 
-			// FileInputStream fileInputStream=new FileInputStream(file)
-			 //byte[] bytes=new byte[(int)category.length()];
-	
 			 encodebase64=Base64.getEncoder().encodeToString(file);
-			 //list.add("data:image/jpeg;base64"+);
 			 list.add("data:image/jpeg;base64,"+encodebase64);
 			 
 		 }
+		 System.out.println("hii");
 		 return list;
 	}
 
@@ -134,7 +129,6 @@ public class CategoryController {
 			return null;
 		}
 		
-//	System.out.println("hi");
 		final Categorydata retrievedImage = categoryRepo.findBycategoryname(categoryname);
 		if(retrievedImage.getCategorypicture()==null)
 			return null;
@@ -148,13 +142,6 @@ public class CategoryController {
 		return retrievedImage;
 	}
 
-//	@GetMapping("/categorypicture")
-//	public byte[] categorypic(@RequestBody String name) {
-//		Categorydata categorydata=categoryRepo.findBycategoryname(name);
-//		
-//		return categorydata.getCategorypicture();
-//		
-//	}
 
 	@PutMapping("/updatecategory")
 	public ResponseEntity<?> updatecategory(@RequestBody Categorydto category) {
@@ -175,12 +162,12 @@ public class CategoryController {
 
 	}
 
-	@GetMapping("/finditemsincategories/{categoryid}")
-	public Set<ItemsData> findallitemsincategories(@PathVariable Long categoryid) {
-		Categorydata categorydata = categoryRepo.findAllByID(categoryid);
-		return categorydata.getCategory_ItemsDatas();
-
-	}
+//	@GetMapping("/finditemsincategories/{categoryid}")
+//	public Set<ItemsData> findallitemsincategories(@PathVariable Long categoryid) {
+//		Categorydata categorydata = categoryRepo.findAllByID(categoryid);
+//		return categorydata.getCategory_ItemsDatas();
+//
+//	}
 
 	@GetMapping("/allcategory")
 	public List<String> allcategory() {
@@ -204,17 +191,17 @@ public class CategoryController {
 		}
 
 	}
-	@GetMapping("/allcategorywithpic")
-	public HashMap<String, byte[]> allcategorywithpic() {
-	   List<Categorydata> categorydata= categoryRepo.findAll();
-	   
-	   HashMap<String, byte[]> categorydetails = new HashMap<>();
-	   for (Categorydata temp : categorydata) { 
-          categorydetails.put(temp.getCategoryname(),temp.getCategorypicture());
-         }
-	return categorydetails;
-	 
-	}
+//	@GetMapping("/allcategorywithpic")
+//	public HashMap<String, byte[]> allcategorywithpic() {
+//	   List<Categorydata> categorydata= categoryRepo.findAll();
+//	   
+//	   HashMap<String, byte[]> categorydetails = new HashMap<>();
+//	   for (Categorydata temp : categorydata) { 
+//          categorydetails.put(temp.getCategoryname(),temp.getCategorypicture());
+//         }
+//	return categorydetails;
+//	 
+//	}
 
 
 	@GetMapping("/findcategorydetails/{categoryid}")
@@ -222,8 +209,7 @@ public class CategoryController {
 		return categoryRepo.findAllByID(categoryid);
 
 	}
-
-	@PutMapping("/{categoryid}/additemstocategory/{itemid}")
+	@PutMapping("/additemstocategory")
 	public ResponseEntity<?> additemstocategory(@PathVariable Long categoryid, @PathVariable Long itemid) {
 
 		Categorydata category = categoryRepo.findAllByID(categoryid);
@@ -244,44 +230,5 @@ public class CategoryController {
 		return ResponseEntity.ok(category);
 
 	}
-
-	@PutMapping("/{categoryid}/addcategorytorestaurants/{restaurantid}")
-	public ResponseEntity<?> addcategorytorestaurants(@PathVariable Long categoryid, @PathVariable Long restaurantid) {
-
-		Categorydata category = categoryRepo.findAllByID(categoryid);
-
-		RestaurantData restaurantData = restaurantRepo.findAllByID(restaurantid);
-
-		if (category == null) {
-			return ResponseEntity.badRequest().body("category not found");
-		}
-
-		if (restaurantData == null) {
-			return ResponseEntity.badRequest().body("restaurant not found");
-		}
-
-		category.restaurant_category(restaurantData);
-
-		categoryRepo.save(category);
-
-		return ResponseEntity.ok(category);
-
-	}
-
-	
-	//////////////category pic upload
-	
-//	@PostMapping("/fileupload/{categoryid}")
-//	public Categorydata uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long categoryid)
-//			throws IOException {
-//
-//		Categorydata fileDb = new Categorydata(file.getOriginalFilename(), file.getBytes());
-//
-//		final Categorydata categorydata = categoryRepo.save(fileDb);
-//		System.out.println("hi");
-//
-//		return categorydata;
-//
-//	}
 
 }

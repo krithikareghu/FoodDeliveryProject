@@ -15,6 +15,7 @@ import com.project.FoodDeliveryService.Model.RestaurantData;
 import com.project.FoodDeliveryService.Service.ItemsDetailsService;
 import com.project.FoodDeliveryService.Service.RestaurantDetailService;
 import com.project.FoodDeliveryService.dto.RestaurantDataDto;
+import com.project.FoodDeliveryService.dto.UserDataDto;
 import com.project.FoodDeliveryService.repository.ItemsRepository;
 import com.project.FoodDeliveryService.repository.RestaurantRepository;
 
@@ -33,10 +34,10 @@ public class RestaurantController {
 	@Autowired
 	RestaurantRepository restaurantrepo;
 	
-	
 	@RequestMapping(value = "/addrestaurant", method = RequestMethod.POST)
 	public ResponseEntity<?> saveRestaurant(@RequestBody RestaurantDataDto restaurant) throws Exception {
 	
+		
 		if (this.restaurantrepo.existsByrestaurantname(restaurant.getRestaurantname()))
 		{
 			
@@ -45,10 +46,13 @@ public class RestaurantController {
 				.body("Error: Restaurant is already included!");
 		}
 		else
+		{
 			
 			restaurantDetailService.save(restaurant);
+			
 
 		return ResponseEntity.ok(restaurant);
+		}
 	}
 	
 	
@@ -73,9 +77,9 @@ public class RestaurantController {
 	}
 	
 	
-	@PutMapping("/{restaurantid}/iteminrestaurant/{itemid}")
-	public ResponseEntity<?> itemsinrestaurants(@PathVariable Long restaurantid,@PathVariable Long itemid) {
-		RestaurantData restaurantData=restaurantrepo.findAllByID(restaurantid);
+	@PutMapping("/{restaurantname}/iteminrestaurant/{itemid}")
+	public ResponseEntity<?> itemsinrestaurants(@PathVariable String restaurantname,@PathVariable Long itemid) {
+		RestaurantData restaurantData=restaurantrepo.findAllByrestaurantname(restaurantname);
 		ItemsData itemsData=itemrepo.findAllByID(itemid);
 		if(restaurantData==null)
 		{
@@ -98,7 +102,7 @@ public class RestaurantController {
 //				.badRequest()
 //				.body("Error: Item is already included in the Restaurant!");
 //		}
-		restaurantData.items_restaurant(itemsData);
+		//restaurantData.items_restaurant(itemsData);
 		restaurantrepo.save(restaurantData);
 		
 		return ResponseEntity.ok(restaurantData);

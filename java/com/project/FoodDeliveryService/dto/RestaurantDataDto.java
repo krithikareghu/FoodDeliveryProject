@@ -1,12 +1,15 @@
 package com.project.FoodDeliveryService.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
+
+import com.project.FoodDeliveryService.Model.Roledata;
 
 public class RestaurantDataDto {
 	
 	private String restaurantname;
-	
-
 	
 	private String restaurantcontact;
 	
@@ -14,10 +17,10 @@ public class RestaurantDataDto {
 	private String restaurantEmail;
 	
 
-	private String Restaurantpassword;
+	private String restaurantpassword;
 	
-	private String Restaurantdescription;
-
+	private String restaurantdescription;
+	
 	public String getRestaurantname() {
 		return restaurantname;
 	}
@@ -43,20 +46,21 @@ public class RestaurantDataDto {
 	}
 
 	public String getRestaurantpassword() {
-		return Restaurantpassword;
+		return restaurantpassword;
 	}
 
 	public void setRestaurantpassword(String restaurantpassword) {
-		Restaurantpassword = restaurantpassword;
+		this.restaurantpassword = restaurantpassword;
 	}
 
 	public String getRestaurantdescription() {
-		return Restaurantdescription;
+		return restaurantdescription;
 	}
 
 	public void setRestaurantdescription(String restaurantdescription) {
-		Restaurantdescription = restaurantdescription;
+		this.restaurantdescription = restaurantdescription;
 	}
+
 	
 
 }

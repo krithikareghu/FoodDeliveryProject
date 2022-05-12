@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.FoodDeliveryService.Model.Categorydata;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.RestaurantData;
 import com.project.FoodDeliveryService.Model.Roledata;
@@ -41,6 +42,8 @@ public class AdminController {
 	
 	@Autowired
 	CustomUserDetailService customUserDetailService;
+	@Autowired
+	CategoryRepository categoryRepository;
 	
 	
 	@GetMapping("/forAdmin")
@@ -60,19 +63,25 @@ public class AdminController {
 	}
 
 	@GetMapping("/allitems")
-	@PreAuthorize("hasRole('Admin')")
+	//@PreAuthorize("hasRole('Admin')")
 	public java.util.List<ItemsData> getallitems() {
 		return itemrepo.findAll();
 	}
+	
+	@GetMapping("/allcategories")
+	public java.util.List<Categorydata> getallcategories() {
+		return categoryRepository.findAll();
+	}
+	
 
 	@GetMapping("/allrestaurantdetails")
-	@PreAuthorize("hasRole('Admin')")
+	//@PreAuthorize("hasRole('Admin')")
 	public java.util.List<RestaurantData> getallrestaurantdetails() {
 		return restaurantrepo.findAll();
 	}
 	
 	@GetMapping("/allrestaurants")
-	@PreAuthorize("hasRole('Admin')")
+	//@PreAuthorize("hasRole('Admin')")
 	public List<String> getallrestaurants() {
 		List<String> restaurants=new ArrayList<String>();
 		for(RestaurantData restaurantData:restaurantrepo.findAll())

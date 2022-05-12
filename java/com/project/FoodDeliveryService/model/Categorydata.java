@@ -26,39 +26,38 @@ public class Categorydata {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ID;
-	
-	//@Column(nullable = false)
+
 	private String categoryname;
 	
-//	@Column
-//	private String categorypicture;
 	
 	@Lob
 	@Column
 	private byte[] categorypicture;
 	
-	@ManyToMany(cascade = { CascadeType.ALL})
-	@JoinTable(
-			name="category_items",joinColumns = @JoinColumn(name="category_id", updatable = true),
-			inverseJoinColumns = @JoinColumn(name="items_id"))
+//	 @OneToMany(mappedBy = "categorydata",cascade = CascadeType.ALL,orphanRemoval = true)
+//	 private Set<ItemsData>category_ItemsDatas=new HashSet<ItemsData>();
+	 
+	
+	@ManyToMany(mappedBy = "categorydatas")
 	
 	private Set<ItemsData>category_ItemsDatas=new HashSet<ItemsData>();
+
 	
-	///////////////////////////////////////////
 	
-	@ManyToMany(cascade = { CascadeType.ALL})
-	@JoinTable(
-			name="restaurants_category",joinColumns = @JoinColumn(name="category_id"),
-			inverseJoinColumns = @JoinColumn(name="restaurant_id"))
-	
-	private Set<RestaurantData>category_restaurants=new HashSet<RestaurantData>();
-	
-	public Set<RestaurantData> getCategory_restaurants() {
-		return category_restaurants;
-	}
-	public void setCategory_restaurants(Set<RestaurantData> category_restaurants) {
-		this.category_restaurants = category_restaurants;
-	}
+//	
+//	@ManyToMany(cascade = { CascadeType.ALL})
+//	@JoinTable(
+//			name="restaurants_category",joinColumns = @JoinColumn(name="category_id"),
+//			inverseJoinColumns = @JoinColumn(name="restaurant_id"))
+//	
+//	private Set<RestaurantData>category_restaurants=new HashSet<RestaurantData>();
+//	
+//	public Set<RestaurantData> getCategory_restaurants() {
+//		return category_restaurants;
+//	}
+//	public void setCategory_restaurants(Set<RestaurantData> category_restaurants) {
+//		this.category_restaurants = category_restaurants;
+//	}
 	
 	//////////////////////////////////////
 	
@@ -66,11 +65,6 @@ public class Categorydata {
 	public Set<ItemsData> getCategory_ItemsDatas() {
 		return category_ItemsDatas;
 	}
-//	public Categorydata(String categoryname, String categorypicture) {
-//		this.categoryname = categoryname;
-//		this.categorypicture = categorypicture;
-//		
-//	}
 	
 	public void setCategory_ItemsDatas(Set<ItemsData> category_ItemsDatas) {
 		this.category_ItemsDatas = category_ItemsDatas;
@@ -89,7 +83,7 @@ public class Categorydata {
 	public Categorydata(String name, byte[] pic) {
 		this.categoryname=name;
 		this.categorypicture=pic;
-		// TODO Auto-generated constructor stub
+		
 	}
 	public void setCategoryname(String categoryname) {
 		this.categoryname = categoryname;
@@ -113,11 +107,11 @@ public class Categorydata {
 	public void category_items(ItemsData itemsData) {
 		category_ItemsDatas.add(itemsData);
 		
+//	}
+//	public void restaurant_category(RestaurantData restaurantData) {
+//		category_restaurants.add(restaurantData);
+//		
+//	}
 	}
-	public void restaurant_category(RestaurantData restaurantData) {
-		category_restaurants.add(restaurantData);
-		
-	}
-	
 
 }

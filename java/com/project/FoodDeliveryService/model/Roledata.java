@@ -30,15 +30,6 @@ public class Roledata {
 			this.rolename = rolename;
 		}
 		
-//		public Roledata() {
-//		super();
-//		// TODO Auto-generated constructor stub
-//	}
-//	public Roledata(String rolename) {
-//		super();
-//		this.rolename = rolename;
-//	}
-		
 
 		
 

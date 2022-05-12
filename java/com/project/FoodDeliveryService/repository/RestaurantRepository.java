@@ -6,14 +6,15 @@ import org.springframework.stereotype.Repository;
 import com.project.FoodDeliveryService.Model.RestaurantData;
 
 @Repository
-public interface RestaurantRepository  extends JpaRepository<RestaurantData, Long> {
+public interface RestaurantRepository  extends JpaRepository<RestaurantData, String> {
 
 	RestaurantData findByRestaurantname(String restaurantname);
 
 	boolean existsByrestaurantname(String restaurantname);
 
-	RestaurantData findAllByID(Long itemid);
+	RestaurantData findAllByrestaurantname(String restaurantname);
 
+	
 	//RestaurantData findByID(Long restaurantid);
 
 	//RestaurantData findOne(Long itemid);

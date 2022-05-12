@@ -22,6 +22,7 @@ import com.project.FoodDeliveryService.Model.UserData;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
 import com.project.FoodDeliveryService.Service.CustomeruserDetailsService;
 import com.project.FoodDeliveryService.dto.UserDataDto;
+import com.project.FoodDeliveryService.repository.RoleRepository;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
 @RestController
@@ -30,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	UserRepository userrepo;
+	
+	@Autowired
+	RoleRepository roleRepository;
 	
 	@Autowired
 	BCryptPasswordEncoder brcyptEncoder;
@@ -41,8 +45,11 @@ public class UserController {
 	@Autowired
 	private CustomeruserDetailsService customeruserDetailsService;
 	
+	
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserDataDto user) throws Exception {
+	
 
 		if (this.userrepo.existsByUsername(user.getUsername()))
 			return ResponseEntity.badRequest().body("Error: Username is already taken!");
@@ -54,13 +61,7 @@ public class UserController {
 			return ResponseEntity.badRequest().body("Error: Phonenumber is already in use!");}
 		else
 		{
-			Set<Roledata>roles=new HashSet<Roledata>();
-			Roledata userRoledata=new Roledata();
-			userRoledata.setRolename("user");
-			userRoledata.setRoleDescription("user role");
-			roles.add(userRoledata);
-	    	user.setRoles(roles);
-	    	System.out.println("hi");
+			
 			customUserDetailService.registeruser(user);
 		}
 
@@ -90,7 +91,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/getuserdetails", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('user')")
+	//@PreAuthorize("hasRole('user')")
 	public UserData getuserdetails(@RequestParam String phonenumber) throws Exception {
 		// System.out.println(phonenumber);
 		// System.out.println(phonenumber.getClass());

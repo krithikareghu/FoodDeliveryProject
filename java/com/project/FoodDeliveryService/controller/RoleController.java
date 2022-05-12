@@ -28,11 +28,11 @@ public class RoleController {
 		return roledata;
 	
 	}
-	@PostMapping("/admin/addroletouser")
-	public ResponseEntity<?> saveroletouser(@RequestBody Roletouserdto data){
-		ResponseEntity<?>responseEntity=  
-				customeruserDetailsService.addroletouser(data.getPhonenumber(), data.getRolename());
-		return ResponseEntity.ok().body(responseEntity);
-
-}
+//	@PostMapping("/admin/addroletouser")
+//	public ResponseEntity<?> saveroletouser(@RequestBody Roletouserdto data){
+//		ResponseEntity<?>responseEntity=  
+//				customeruserDetailsService.addroletouser(data.getPhonenumber(), data.getRolename());
+//		return ResponseEntity.ok().body(responseEntity);
+//
+//}
 }
