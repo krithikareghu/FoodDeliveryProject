@@ -30,6 +30,11 @@ getfoodbyid(id:number):Foodcategory{
 
 
   // }
+  
+
+  Items=[ {itemname: 'Noodles',itemprice: 150,itemurl: '/assets/images/Italian.jpg'}, 
+  { itemname: 'Icecreams',itemprice: 250, itemurl: '/assets/images/Icecreams.jpg'}
+]
   getall() {
   return [ 
       {
@@ -42,18 +47,34 @@ getfoodbyid(id:number):Foodcategory{
             restaurantcontact: '836238272',
             Items:[ {
               
-                itemname: 'Icecream',
+                itemname: 'Noodles',
                 itemprice: 150,
                 itemurl: '/assets/images/Italian.jpg'
 
               }, {
-                itemname: 'Cakes',
+                itemname: 'Icecreams',
                 itemprice: 250,
                 itemurl: '/assets/images/Icecreams.jpg'
               }
             ]
           },{
-            restaurantname: 'Adyar ananda bhavan',
+            restaurantname: 'Food truck',
+            restaurantcontact: '836238272',
+            Items:[ {
+              
+                itemname: 'Icecream',
+                itemprice: 150,
+                itemurl: '/assets/images/Italian.jpg'
+
+              }, {
+                itemname: 'Icecreams',
+                itemprice: 200,
+                itemurl: '/assets/images/Icecreams.jpg'
+              }
+            ]
+          }
+          ,{
+            restaurantname: 'Gupta Bavan',
             restaurantcontact: '836238272',
             Items:[ {
               
@@ -69,9 +90,7 @@ getfoodbyid(id:number):Foodcategory{
             ]
           }
         
-      ]
-        
-
+        ]
       },{
         id: 2,
         categoryname: 'Italian',

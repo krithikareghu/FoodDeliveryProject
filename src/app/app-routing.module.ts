@@ -14,6 +14,8 @@ import { ForbiddenComponent } from './public/forbidden/forbidden/forbidden.compo
 import { UserComponent } from './profile/user/user.component';
 import { AuthGuard } from './core/auth/-auth.guard';
 import { AddmenuComponent } from './private/owner/addmenu/addmenu.component';
+import { RestaurantsComponent } from './public/restaurants/restaurants.component';
+import { FooditemsComponent } from './public/fooditems/fooditems.component';
 
 const routes: Routes = [
 
@@ -21,16 +23,19 @@ const routes: Routes = [
   { path: 'home', component: IndexComponent },
   { path: 'home/login', component: LoginComponent },
   { path: 'home/signup', component: SignupComponent },
-  { path: "home/addaddress", component: AddaddressComponent, canActivate: [AuthGuard], data: { roles: ['user'] } },
-  { path: "home/addrestaurant", component: AddrestaurantComponent },
-  { path: "home/category", component: MenuComponent },
+  { path: "addaddress", component: AddaddressComponent, canActivate: [AuthGuard], data: { roles: ['user'] } },
+  { path: "addrestaurant", component: AddrestaurantComponent },
+  { path: "category", component: MenuComponent },
   { path: "admin/allusers", component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: "home/allcategories", component: CategoryComponent },
   { path: "forbidden", component: ForbiddenComponent },
   { path: "home/user", component: UserComponent },
   { path: "owner/addmenu", component: AddmenuComponent },
-  {path:"search/:searchItem",component:IndexComponent},
-  {path:'home/category/:id',component:MenuComponent},
+  { path: 'home/user', component: UserComponent },
+  { path: "search/:searchItem", component: IndexComponent },
+  { path: 'category/:id', component: MenuComponent },
+  { path: 'restaurants/:categoryid', component: RestaurantsComponent },
+  { path: 'restaurants/:categoryid/items/:restaurantname', component: FooditemsComponent },
   { path: "admin", loadChildren: () => (import('./private/admin/admin.module')).then(mod => mod.AdminModule) },
   { path: "admin", loadChildren: () => (import('./core/core.module')).then(mod => mod.CoreModule) },
   { path: "home", loadChildren: () => (import('./shared/shared.module')).then(mod => mod.SharedModule) },

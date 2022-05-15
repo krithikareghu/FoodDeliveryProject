@@ -4,7 +4,7 @@ import { AdminComponent } from './admin.component';
 import { RouterModule } from '@angular/router';
 import { CategorydetailsComponent } from './categorydetails/categorydetails.component';
 
-
+import { SharedModule } from './../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,8 +12,9 @@ import { CategorydetailsComponent } from './categorydetails/categorydetails.comp
     CategorydetailsComponent
   ],
   imports: [
-  
-  CommonModule,RouterModule
+ 
+
+  CommonModule,RouterModule,SharedModule
   ],
   exports:[
    AdminComponent

@@ -1,0 +1,92 @@
+
+*{
+    margin: auto;
+  }
+  
+  /* *{
+    position: relative;
+  } */
+  .images{
+    border-bottom: 1px solid #ffa410;
+    border-radius: 50px;
+  }
+  
+  .container {
+      display:grid;
+      grid-template-columns: auto auto  auto ;
+      box-sizing: border-box;
+      justify-content: center;
+      padding: 10px;
+      column-gap: 50px;
+      row-gap: 50px; 
+      margin-bottom: -10px;
+    
+      /* display: grid; */
+      /* grid-template-columns: repeat(auto-fit, minmax(220px, auto)); */
+      gap: 1.5rem;
+      align-items: center; 
+  }
+  .image{
+      justify-content: center;
+      padding: 30px;
+      align-items: center;
+      /* margin-left: -15px; */
+      /* width: 80%; */
+  }
+  .innercontainer{
+          /* position: relative; */
+          margin-top: 2rem;
+          justify-content: center;
+          align-items: center;
+          /* display: flex; */
+          flex-direction: column;
+          border-radius: 0.5rem;
+          box-shadow: 0 2px 10px rgb(4 64 54 / 10%);
+          /* height: auto; */
+   padding: 10px;
+   /* width: 10vw;
+   height: 10vw; */
+  }
+  .innercontainer  img {
+    padding: 15px;
+    width: 25vw;
+    height: 30vh;
+    }
+  .imagelink{
+     box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: 0px    ;
+    color: black;
+  
+  }
+  .innercontainer:hover{
+      box-shadow: 0 0 40px rgba(238, 157, 157, 0.2);
+      border: 1px solid rgba(161, 160, 160, 0.8);
+  }
+  .categoryname{
+      padding: 0;
+      text-align: center;
+  }
+  .rating{
+      text-align: left;
+      background-color: #ffa410;
+     padding: 2px;
+     padding-left: 10px;
+     padding-right: 10px;
+     font-size: small;
+      color: aliceblue;
+      border: 1pxs solid black;
+  }
+  h2{
+      text-align: center;
+  }
+ 
+   
+    .restaurantname{
+        font-size: medium;
+        color: #f0980a;
+        font-family: 'Poppins', sans-serif;
+    }

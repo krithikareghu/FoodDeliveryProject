@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Userlogin } from 'src/app/shared/model/userlogin';
@@ -18,6 +18,19 @@ export class NavbarComponent implements OnInit {
     this.route.params.subscribe(params=>{
       if(params['searchFilter'])
         this.searchFilter=params['searchFilter']})
+  }
+
+  ngbarfixed:boolean=false;
+
+  @HostListener('window:scroll',['$event'])onscroll(){
+    if(window.scrollY>40)
+    {
+      this.ngbarfixed=true;
+    }
+    else{
+      this.ngbarfixed=false;
+    }
+     
   }
 public isloggedin(){
 

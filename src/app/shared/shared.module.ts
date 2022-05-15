@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { AdminnavComponent } from './navigation/adminnav/adminnav.component';
 import { MenuComponent } from '../public/menu/menu.component';
 import { SearchpipePipe } from './pipes/searchpipe.pipe';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -16,7 +18,8 @@ import { SearchpipePipe } from './pipes/searchpipe.pipe';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatToolbarModule
   ],
   exports: [
     NavbarComponent, LoginnavComponent, AdminnavComponent

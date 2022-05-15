@@ -37,6 +37,9 @@ observer = {
     {
 this.router.navigate(['/admin/allusers'])
     }
+    else if(role=='owner'){
+      this.router.navigate(['/owner/addcategory'])
+    }
     else{
       this.router.navigate(['/home'])
     }

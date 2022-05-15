@@ -1,9 +1,10 @@
 export class Restaurantdetails {
-    name!:string;
-    password!:string;
-    email!:string;
-    address!:string;
-    restaurantaddress!:string;
-    description!:string;
-    phonenumber!:string;
+    forEach(arg0: (param: any) => void) {
+      throw new Error('Method not implemented.');
+    }
+    restaurantname!:string;
+    restaurantpassword!:string;
+    restaurantEmail!:string;
+    restaurantdescription!:string;
+    restaurantcontact!:string;
 }

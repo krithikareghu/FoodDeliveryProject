@@ -1,7 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { MessageService } from 'src/app/services/message.service';
 import { Userregister } from 'src/app/shared/model/userregister';
 import { UserregisterService } from '../../services/register/userregister.service';
 
@@ -14,7 +16,7 @@ export class SignupComponent implements OnInit {
 
     userregister: Userregister = new Userregister();
     constructor(
-        private registeruserservice: UserregisterService,
+        private registeruserservice: UserregisterService,private message:MessageService,
            private router: Router){}
     
 
@@ -22,10 +24,11 @@ export class SignupComponent implements OnInit {
     }
 
     observer = {
-        next: () => {alert("registered successfully")
-        this.router.navigate(['/home/login'])
+        next: () => {this.router.navigate(['home/login'])
+            this.message.registerSuccess()
+        
     },
-        error: (error: any) =>alert("please enter proper credentials to register"),
+        error: (error: any) =>this.message.emailExistAlready()
 
     };
 

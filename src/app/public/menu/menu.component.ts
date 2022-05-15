@@ -13,20 +13,23 @@ import { Foodcategory } from './../../shared/model/foodcategory';
 export class MenuComponent implements OnInit {
   images: any = [];
   allcategories!: any
+  categorydetials:any;
   value!: any;
-  constructor(private http: HttpClient, private allcategory: HttpclientService, private food: FoodService
-    ,private route:ActivatedRoute) {
-      this.route.params.subscribe(params=>{
-        if(params['id']){
-          this.foodcategory=this.food.getfoodbyid(params['id'])
-        }
-      })
-      console.log(this.foodcategory.Restaurant)
-     }
-  categories!: any;
-  foodcategory!:Foodcategory;
+  constructor(private http: HttpClient, private helper: HttpclientService, private food: FoodService
+    ,private route:ActivatedRoute) {}
+    //   this.route.params.subscribe(params=>{
+    //     if(params['id']){
+    //       this.foodcategory=this.food.getfoodbyid(params['id'])
+    //     }
+    //   })
+    //   console.log(this.foodcategory.Restaurant)
+    //  }
+  // foodcategory!:Foodcategory;
   ngOnInit() {
 
+// this.allcategory.getallcategories().subscribe(response=>{
+//   this.handlecategorydetailsResponse(response)
+// })
     // this.route.params.subscribe(params=>{
     //   if(params['searchItem']){
     //     this.categories=this.food.getall().filter
@@ -41,7 +44,7 @@ export class MenuComponent implements OnInit {
     // })
 
   
-    this.allcategory.onlycategoryname().subscribe(
+    this.helper.getallcategories().subscribe(
       response => this.handleallcategoryResponse(response),
     );
     this.display();
@@ -52,7 +55,7 @@ export class MenuComponent implements OnInit {
   }
 
   display() {
-    this.http.get('http://localhost:8080/categorypic')
+    this.helper.getcategorypics()
       .subscribe(
         async res => {
           await (this.images = res);

@@ -25,7 +25,10 @@ import { ForbiddenComponent } from './public/forbidden/forbidden/forbidden.compo
 import { AuthGuard } from './core/auth/-auth.guard';
 import { AuthinterceptorInterceptor } from './core/auth/helpers/authinterceptor.interceptor';
 import { SearchpipePipe } from './shared/pipes/searchpipe.pipe';
-
+import { RestaurantsComponent } from './public/restaurants/restaurants.component';
+import { FooditemsComponent } from './public/fooditems/fooditems.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { NgToastModule } from 'ng-angular-popup';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +41,8 @@ import { SearchpipePipe } from './shared/pipes/searchpipe.pipe';
     MenuComponent,
     CategoryComponent,
     ForbiddenComponent,
+    RestaurantsComponent,
+    FooditemsComponent,
 
 
   ],
@@ -47,6 +52,9 @@ import { SearchpipePipe } from './shared/pipes/searchpipe.pipe';
     AppRoutingModule,
     FormsModule, HttpClientModule,
     SharedModule,
+    MatToolbarModule,
+    NgToastModule,
+  
   
     CoreModule, OwnerModule, BrowserAnimationsModule, MatButtonModule, MatGridListModule
   ],

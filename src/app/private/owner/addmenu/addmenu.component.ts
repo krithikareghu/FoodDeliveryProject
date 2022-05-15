@@ -72,7 +72,7 @@ export class AddmenuComponent implements OnInit {
     const params = new HttpParams()
       .append('itemname', Itemname)
       .append('itemprice',Itemprice)
-      .append('categoryname',Categoryname)
+       .append('categoryname',Categoryname)
       console.log(Categoryname)
 
     return this.httpClient.post("http://localhost:8080/additem", uploadData, {

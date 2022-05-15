@@ -3,6 +3,7 @@ import { UserregisterService } from './../../services/register/userregister.serv
 import { Userregister } from 'src/app/shared/model/userregister';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-user',
@@ -11,14 +12,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
-  private baseurl="localhost:8080/getuserdetails"
+  constructor(private http:HttpClient,private auth:AuthenticationService) { }
+  private baseurl="localhost:8080/getuserdetails/{phonenumber}"
   ngOnInit() {
   }
-  getuserdetails(user:Userregister):Observable<object>{
+  getuserdetails():Observable<object>{
    
-    return this.http.get(`${this.baseurl}`+user.phonenumber);
+    return this.http.get(`${this.baseurl}`+this.auth.getToken());
 
   }
+  
 
 }
