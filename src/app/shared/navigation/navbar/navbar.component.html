@@ -55,17 +55,17 @@
       </nav>
     
       <ul class="navbar">
-        <li *ngIf="!isloggedin()"><a routerLink="addrestaurant">Add Restaurant</a></li>
+        <li *ngIf="!isloggedin()"><a routerLink="/addrestaurant">Add Restaurant</a></li>
         <!-- <li><a routerLink="/">Home</a></li> -->
-        <li><a routerLink="../category">Menu</a></li>
-        <li *ngIf="isloggedin() && userlogin.roleMatch(['Admin'])"><a routerLink="#",routerLinkActive>UsersList</a></li>
+        <li><a routerLink="/category" >Menu</a></li>
+        <li *ngIf="isloggedin() && userlogin.roleMatch(['Admin'])"><a routerLink="#">UsersList</a></li>
         <li *ngIf="isloggedin() && userlogin.roleMatch(['Admin'])"><a routerLink="#">All restaurants</a></li>
-        <li *ngIf="isloggedin() && userlogin.roleMatch(['user'])"><a routerLink="../addaddress">Add delivery address</a></li>
+        <li *ngIf="isloggedin() && userlogin.roleMatch(['user'])"><a routerLink="../addaddress" >Add delivery address</a></li>
     
-        <li *ngIf="userlogin.roleMatch(['Admin'])"><a routerLink="../admin/allusers">Admin</a></li>
-        <li *ngIf="userlogin.roleMatch(['user'])"><a routerLink="user">user</a></li>
-        <li *ngIf="isloggedin()" id="cart"> <a routerLink="cart"><i class="fa fa-shopping-cart"> </i>&nbsp;
-          <span class="cartvalue">1
+        <li *ngIf="userlogin.roleMatch(['Admin'])"><a routerLink="../admin/allusers" >Admin</a></li>
+        <li *ngIf="userlogin.roleMatch(['user'])"><a routerLink="user" >user</a></li>
+        <li *ngIf="isloggedin()" id="cart"> <a routerLink="/cart"><i class="fa fa-shopping-cart">Cart </i>&nbsp;
+          <span class="cartvalue">{{noofitems}}
 
           </span>
          </a></li>
@@ -73,8 +73,8 @@
         <!-- <li *ngIf="isloggedin() &&userlogin.roleMatch(['user'])" id="logout">Cart  -->
          <li *ngIf="isloggedin()" id="logout"> <a>
             <button (click)="logout()">logout</button></a></li>
-        <li *ngIf="!isloggedin()" id="signup"> <a routerLink="signup">Sign up</a></li>
-        <li *ngIf="!isloggedin()" id="login"> <a routerLink="login">Log in</a></li>
+        <li *ngIf="!isloggedin()" id="signup"> <a routerLink="/signup">Sign up</a></li>
+        <li *ngIf="!isloggedin()" id="login"> <a routerLink="/login">Log in</a></li>
     
       </ul>
     

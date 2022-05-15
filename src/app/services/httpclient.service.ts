@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Userregister } from 'src/app/shared/model/userregister';
-import { Category } from '../shared/model/category';
 
 @Injectable({
   providedIn: 'root'

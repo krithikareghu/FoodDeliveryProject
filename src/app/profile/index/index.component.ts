@@ -20,14 +20,14 @@ value!: any;
    
     this.route.params.subscribe(params=>{
       
-      if(params['searchItem']){
-        this.categories=this.food.getall().filter
-        (category=>category.categoryname.toLowerCase().includes(params['searchItem'].toLowerCase));
-      // console.log('searchItem')
-      }
-      else{
-      this.categories = this.food.getall();
-      }
+      // if(params['searchItem']){
+      //   this.categories=this.food.getall().filter
+      //   (category=>category.categoryname.toLowerCase().includes(params['searchItem'].toLowerCase));
+      // // console.log('searchItem')
+      // }
+      // else{
+      // this.categories = this.food.getall();
+      // }
      
    //this.categories= this.food.getall();
   })

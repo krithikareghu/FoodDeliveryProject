@@ -29,7 +29,7 @@ export class MessageService {
   }
 
   pleaseLoginMessage() {
-    this.toast.info({detail:"Success",summary:"This is Success", position:"tr",duration:4000})
+    this.toast.error({summary:"Please log in to continue", position:"tr",duration:4000})
    // this.toast.info("Please login to access the page")
   }
 

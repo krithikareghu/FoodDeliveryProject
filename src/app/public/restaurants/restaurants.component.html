@@ -9,9 +9,9 @@
 
 
 <div class="container">
-    <div class="innercontainer" *ngFor="let image of allrestaurant;  let i=index">
+    <div class="innercontainer"  *ngFor="let image of allrestaurant;  let i=index">
         <a class="imagelink"routerLink="items/{{allrestaurant[i].restaurantname}}">
-            <img class="images" src="assets/images/hotel/restaurant{{i+1}}.jpg" style="border-radius: 5px;" alt=""><br>
+            <img (click)="storerestaurant(allrestaurant[i].restaurantname)" class="images" src="assets/images/hotel/restaurant{{i+1}}.jpg" style="border-radius: 5px;" alt=""><br>
             <p class="restaurantname" style="font-weight:500 ;">{{allrestaurant[i].restaurantname|titlecase}}</p>
       <br>
         <!-- <span class="rating" style="font-style:italic;"> <span

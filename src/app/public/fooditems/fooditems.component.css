@@ -66,7 +66,8 @@
 }
 .itemname{
 
-
+font-weight: bolder;
+font-style: italic;
     padding: 0;
     text-align: center;
     color: #f0980a;
@@ -85,3 +86,20 @@
 h2{
     text-align: center;
 }
+.cart {
+  margin: 10px;
+  background-color: #fca71f; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.5 s linear;
+}
+.cart:hover{
+  background-color: #f0980a;
+}
+

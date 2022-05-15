@@ -1,15 +1,19 @@
-<br><br>
+<app-navbar></app-navbar>
 
+<br><br><br>
+<br>
 
 <div class="container">
     <div class="innercontainer" *ngFor="let image of allitems;  let i=index">
-        <a class="imagelink"routerLink=""><img class="image"style="border-radius: 5px;" width="90%" height=""
+        <a class="imagelink"routerLink="#"><img class="image"style="border-radius: 5px;" width="90%" height=""
              [src]="itempic[i]" alt="image">
         </a>
-        <span class="itemname">{{image.itemname|titlecase}}</span>
-        <span >&#8377;{{image.itemprice}}</span>
-        <span class="rating" style="font-style:italic;"> <span
-            class="fa fa-star checked"> </span>&nbsp;{{rating[i]}}</span>
+    
+        <span class="itemname" >{{image.itemname|titlecase}} &nbsp; <span> &#8377;{{image.itemprice}}</span></span>
+      <button (click)="storeitem(image)"  class="cart">Add to cart</button>
+
+        <!-- <span class="rating" style="font-style:italic;"> <span
+            class="fa fa-star checked"> </span>&nbsp;{{rating[i]}}</span> -->
            
        
     </div>

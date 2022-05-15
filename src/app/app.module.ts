@@ -29,6 +29,8 @@ import { RestaurantsComponent } from './public/restaurants/restaurants.component
 import { FooditemsComponent } from './public/fooditems/fooditems.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { NgToastModule } from 'ng-angular-popup';
+import { ItemComponent } from './public/item/item.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +45,8 @@ import { NgToastModule } from 'ng-angular-popup';
     ForbiddenComponent,
     RestaurantsComponent,
     FooditemsComponent,
+    ItemComponent,
+
 
 
   ],

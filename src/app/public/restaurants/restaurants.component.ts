@@ -23,5 +23,10 @@ allrestaurant!:any;
       this.allrestaurant=response;
     })
   }
+  restaurant:any;
+  storerestaurant(restaurant: any)
+  {
+    localStorage.setItem('selectedrestaurant',restaurant);
+  }
 
 }

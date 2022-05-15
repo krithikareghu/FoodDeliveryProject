@@ -14,27 +14,6 @@ export class AddrestaurantComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  // public selectedFile!: any;
-  // public event1!: any;
-  // imgURL: any;
-  // receivedImageData: any;
-  // base64Data: any;
-  // convertedImage: any;
-
-  // public onFileChanged(event: any) {
-  //   console.log(event);
-  //   this.selectedFile = event.target.files[0];
-  //   let reader = new FileReader();
-  //   reader.readAsDataURL(event.target.files[0]);
-  //   reader.onload = (event2) => {
-  //     this.imgURL = reader.result;
-  //   };
-  // }
-
-
-
-
   restaurantdetails: Restaurantdetails = new Restaurantdetails();
   observer = {
     next: () => {
