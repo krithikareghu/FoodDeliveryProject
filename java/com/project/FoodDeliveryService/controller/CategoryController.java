@@ -223,12 +223,14 @@ public class CategoryController {
 		if (itemsData == null) {
 			return ResponseEntity.badRequest().body("item not found");
 		}
-		category.category_items(itemsData);
+		//category.category_items(itemsData);
 
 		categoryRepo.save(category);
 
 		return ResponseEntity.ok(category);
 
 	}
+	
+	
 
 }

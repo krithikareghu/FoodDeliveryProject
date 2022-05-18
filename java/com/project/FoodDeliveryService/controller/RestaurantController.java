@@ -1,21 +1,32 @@
 package com.project.FoodDeliveryService.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.project.FoodDeliveryService.Model.Categorydata;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.RestaurantData;
+import com.project.FoodDeliveryService.Model.Roledata;
 import com.project.FoodDeliveryService.Service.ItemsDetailsService;
 import com.project.FoodDeliveryService.Service.RestaurantDetailService;
 import com.project.FoodDeliveryService.dto.RestaurantDataDto;
 import com.project.FoodDeliveryService.dto.UserDataDto;
+import com.project.FoodDeliveryService.repository.CategoryRepository;
 import com.project.FoodDeliveryService.repository.ItemsRepository;
 import com.project.FoodDeliveryService.repository.RestaurantRepository;
 
@@ -33,10 +44,16 @@ public class RestaurantController {
 	ItemsRepository  itemrepo;
 	@Autowired
 	RestaurantRepository restaurantrepo;
+	@Autowired
+	CategoryRepository categoryRepository;
+	
+	@Lazy
+	@Autowired
+	PasswordEncoder brcyptEncoder;
 	
 	@RequestMapping(value = "/addrestaurant", method = RequestMethod.POST)
 	public ResponseEntity<?> saveRestaurant(@RequestBody RestaurantDataDto restaurant) throws Exception {
-	
+	System.out.println("hii");
 		
 		if (this.restaurantrepo.existsByrestaurantname(restaurant.getRestaurantname()))
 		{
@@ -47,12 +64,22 @@ public class RestaurantController {
 		}
 		else
 		{
-			
 			restaurantDetailService.save(restaurant);
-			
-
 		return ResponseEntity.ok(restaurant);
 		}
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/addrestaurantstocategory/{categoryid}/{restaurantid}", method = RequestMethod.PUT)
+	public ResponseEntity<?>addrestaurantstocategory(@PathVariable Long categoryid,@PathVariable Long restaurantid){
+		RestaurantData restaurantData=restaurantrepo.findByID(restaurantid);
+		Categorydata categorydata=categoryRepository.findAllByID(categoryid);
+		categorydata.restaurant_category(restaurantData);
+		categoryRepository.save(categorydata);
+		
+		return ResponseEntity.ok(categorydata);
 	}
 	
 	

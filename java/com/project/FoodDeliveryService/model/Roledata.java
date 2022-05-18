@@ -11,11 +11,20 @@ import javax.persistence.Table;
 @Table(name="roles")
 public class Roledata {
 	
-		@Id
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long ID;
+		
 		private String rolename;
 		
 		private String roleDescription;
 		
+		public Roledata() {
+		
+		}
+		public Roledata(String rolename) {
+			this.rolename = rolename;
+		}
 		public String getRoleDescription() {
 			return roleDescription;
 		}

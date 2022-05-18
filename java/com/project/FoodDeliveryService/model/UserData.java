@@ -1,14 +1,21 @@
 package com.project.FoodDeliveryService.Model;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -16,11 +23,11 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "users")
 public class UserData {
 
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//private Long ID;
-	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long ID;	
+
+	@Column(nullable = false)
 	private String phonenumber;
 
 	@Column(nullable = false)
@@ -35,7 +42,8 @@ public class UserData {
 	@Column()
 	private String address;
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
+	 
 	@JoinTable(name = "user_role",
 	joinColumns = {
 			@JoinColumn(name="user_id")
@@ -46,6 +54,47 @@ public class UserData {
 	
 	private Set<Roledata>roles=new HashSet<>();
 
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	@JoinTable(name = "user_order",
+//	joinColumns = {
+//			@JoinColumn(name="user_id")
+//	},
+//	inverseJoinColumns = {
+//			@JoinColumn(name="order_id")
+//	})
+//	private Set<OrderData>orderDatas=new HashSet<OrderData>();
+	
+//	@OneToMany(cascade = CascadeType.ALL,mappedBy="userData")
+//	
+//	public Set<CartData>cartDatas=new HashSet<CartData>();
+//	
+//	public void setcart(CartData item) {
+//		cartDatas.add(item);
+//	}
+//	public void  setorder(OrderData order) {
+//		orderDatas.add(order);
+//	}
+//	
+//	public void removecartitems(CartData cartData) {
+//		cartDatas.remove(cartData);
+//	}
+//	public Set<CartData> getCartDatas() {
+//		return cartDatas;
+//	}
+//
+//	public void setCartDatas(Set<CartData> cartDatas) {
+//		this.cartDatas = cartDatas;
+//	}
+
+
+//
+//	public Set<OrderData> getOrderDatas() {
+//		return orderDatas;
+//	}
+//
+//	public void setOrderDatas(Set<OrderData> orderDatas) {
+//		this.orderDatas = orderDatas;
+//	}
 
 	public Set<Roledata> getRoles() {
 		return roles;
@@ -61,12 +110,12 @@ public class UserData {
 		this.address = address;
 	}
 
-//	public Long getID() {
-//		return ID;
-//	}
-//	public void setID(Long ID) {
-//		this.ID = ID;
-//	}
+	public Long getID() {
+		return ID;
+	}
+	public void setID(Long ID) {
+		this.ID = ID;
+	}
 
 	public String getUsername() {
 		return username;
@@ -99,19 +148,15 @@ public class UserData {
 	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
-	 public void addrole(Roledata role) {
-		 this.roles.add(role);
-		
+
+	public UserData() {}
+
+	public UserData( String username, String password, String email, String phonenumber) {
+
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.phonenumber = phonenumber;
 	}
-//	public UserData() {}
-//
-//	public UserData( String username, String password, String email, String phonenumber, String address) {
-//
-//		this.username = username;
-//		this.password = password;
-//		this.email = email;
-//		this.phonenumber = phonenumber;
-//		this.address = address;
-//	}
 }
 	

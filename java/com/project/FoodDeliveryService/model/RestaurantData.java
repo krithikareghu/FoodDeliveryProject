@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -24,6 +25,8 @@ import antlr.collections.List;
 public class RestaurantData {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long ID;
 	private String restaurantname;
 	
 	@Column(nullable = false)
@@ -36,8 +39,29 @@ public class RestaurantData {
 	private String Restaurantpassword;
 	
 	@Column
+	
 	private String Restaurantdescription;
 	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinTable(name = "restaurant_role",
+	joinColumns = {
+			@JoinColumn(name="restauarnt_id")
+	},
+	inverseJoinColumns = {
+			@JoinColumn(name="role_id")
+	})
+	
+	private Set<Roledata>roles=new HashSet<>();
+
+
+	public Set<Roledata> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Roledata> roles) {
+		this.roles = roles;
+	}
+
 	public String getRestaurantcontact() {
 		return restaurantcontact;
 	}
@@ -70,38 +94,35 @@ public class RestaurantData {
 		Restaurantdescription = restaurantdescription;
 	}
 	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "category_restaurants")
+	
+	private Set<Categorydata>category_restauarant=new HashSet<>();
+	
+	
+	public Set<Categorydata> getCategory_restauarant() {
+		return category_restauarant;
+	}
+
+	public void setCategory_restauarant(Set<Categorydata> category_restauarant) {
+		this.category_restauarant = category_restauarant;
+	}
+	
+	@ManyToMany(cascade = { CascadeType.MERGE})
+	@JoinTable(
+			name="Restaurant_items",joinColumns = @JoinColumn(name="restaurant_id", updatable = true),
+			inverseJoinColumns = @JoinColumn(name="items_id"))
+	private Set<ItemsData>items=new HashSet<ItemsData>();
 	
 
-	
-//	@JsonIgnore
-//	@ManyToMany(mappedBy = "category_restaurants")
-//	
-//	private Set<Categorydata>category_restauarant=new HashSet<>();
-//	
-//	
-//	public Set<Categorydata> getCategory_restauarant() {
-//		return category_restauarant;
-//	}
-//
-//	public void setCategory_restauarant(Set<Categorydata> category_restauarant) {
-//		this.category_restauarant = category_restauarant;
-//	}
-//	
-//	@ManyToMany(cascade = { CascadeType.MERGE})
-//	@JoinTable(
-//			name="Restaurant_items",joinColumns = @JoinColumn(name="restaurant_id", updatable = true),
-//			inverseJoinColumns = @JoinColumn(name="items_id"))
-//	private Set<ItemsData>items=new HashSet<ItemsData>();
-//	
-//
-//	public Set<ItemsData> getItems() {
-//		return items;
-//	}
-//
-//	public void setItems(Set<ItemsData> items) {
-//		this.items = items;
-//	}
-//
+	public Set<ItemsData> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<ItemsData> items) {
+		this.items = items;
+	}
+
 //	
 
 	public RestaurantData() {
@@ -116,12 +137,22 @@ public class RestaurantData {
 		this.restaurantname = restaurantname;
 	}
 //
-//	public void items_restaurant(ItemsData itemsData) {
-//		items.add(itemsData);
-//		
-//	}
-//	
-//	
+	public boolean items_restaurant(ItemsData itemsData) {
+	boolean contain=items.contains(itemsData);
+	System.out.println(contain);
+	
+		if(contain==true)
+		{
+			return true;
+		}
+		else {
+			items.add(itemsData);
+			
+			return false;
+		}
+		
+	}
+	
 
 
 

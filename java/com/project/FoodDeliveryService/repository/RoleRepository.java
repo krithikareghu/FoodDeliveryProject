@@ -7,10 +7,11 @@ import org.springframework.stereotype.Repository;
 import com.project.FoodDeliveryService.Model.Roledata;
 
 @Repository
-public interface RoleRepository extends CrudRepository<Roledata, String> {
+public interface RoleRepository extends JpaRepository<Roledata, Long> {
 
 	Roledata findByrolename(String rolename);
 //
 //	Role findbyrolename(String rolename);
 //
+
 }

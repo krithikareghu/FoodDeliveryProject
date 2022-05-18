@@ -24,11 +24,11 @@ import org.springframework.lang.NonNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "items")
+@Table(name = "Menu")
 public class ItemsData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ID;
+	 private Long ID;
 	
 	@Column(nullable = false)
 	private String itemname;
@@ -36,7 +36,12 @@ public class ItemsData {
 	@Column(nullable = false)
 	private String itemprice;
 	
-	 @NonNull
+	private Long category_ID;
+
+	
+	 
+
+	@NonNull
 	public String getItemprice() {
 		return itemprice;
 	}
@@ -44,41 +49,48 @@ public class ItemsData {
 	public void setItemprice(String itemprice) {
 		this.itemprice = itemprice;
 	}
-	
+
+	public Long getCategory_ID() {
+		return category_ID;
+	}
+
+	public void setCategory_ID(Long category_ID) {
+		this.category_ID = category_ID;
+	}
+
+	public Long getID() {
+		return ID;
+	}
+
 	@Lob
 	@Column
 	private byte[] itempicture;
 	
 	
-//	@JsonIgnore
-//	@ManyToMany(mappedBy = "items")	
-//   private Set<RestaurantData>restaurantDatas=new HashSet<>();
+	@JsonIgnore
+	@ManyToMany(mappedBy = "items")	
+   private Set<RestaurantData>restaurantDatas=new HashSet<>();
+	
+	public Set<RestaurantData> getRestaurantDatas() {
+	return restaurantDatas;
+}
+
+public void setRestaurantDatas(Set<RestaurantData> restaurantDatas) {
+	this.restaurantDatas = restaurantDatas;
+}
+
+//@JsonIgnore
+//@ManyToOne(fetch = FetchType.EAGER)
+//	private Categorydata categorydata;
 //	
-//	public Set<RestaurantData> getRestaurantDatas() {
-//	return restaurantDatas;
+//	public Categorydata getCategorydata() {
+//	return categorydata;
 //}
-
-//public void setRestaurantDatas(Set<RestaurantData> restaurantDatas) {
-//	this.restaurantDatas = restaurantDatas;
+//
+//public void setCategorydata(Categorydata categorydata) {
+//	this.categorydata = categorydata;
 //}
-
- @JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name="item_category",joinColumns = 
-			@JoinColumn(name="item_id")
-	 ,inverseJoinColumns =@JoinColumn(name= "category_id") )
-	
-	private Set<Categorydata>categorydatas=new HashSet<Categorydata>();
-	
-	public Set<Categorydata> getCategorydatas() {
-		return categorydatas;
-	}
-
-	public void setCategorydatas(Set<Categorydata> categorydatas) {
-		this.categorydatas = categorydatas;
-	}
-
-
+//
 	public ItemsData() {
 	}
 
@@ -103,10 +115,7 @@ public class ItemsData {
 	public void setItemname(String itemname) {
 		this.itemname = itemname;
 	}
-	public void category_items(Categorydata categorydata) {
-		categorydatas.add(categorydata);
-		
-	}
+
 	
 	}
 

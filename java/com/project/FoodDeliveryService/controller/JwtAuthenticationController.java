@@ -34,6 +34,7 @@ import com.project.FoodDeliveryService.Model.AuthenticationResponse;
 import com.project.FoodDeliveryService.Model.UserData;
 import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
+import com.project.FoodDeliveryService.Service.RestaurantDetailService;
 import com.project.FoodDeliveryService.dto.UserDataDto;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
@@ -59,6 +60,19 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	JwtUtil jwtUtil;
+	@Autowired
+	RestaurantDetailService restaurantDetailService;
+	@Autowired
+	UserRepository userRepository;
+	
+	
+	public UserData getuserid(String jwttoken)
+	{
+		String phonenumber=jwtUtil.getUsernameFromToken(jwttoken);
+		UserData userData = this.userRepository.findByPhonenumber(phonenumber);
+		return userData;
+		
+	}
 
 	
 
@@ -68,8 +82,23 @@ public class JwtAuthenticationController {
 
 		authenticate(authenticationRequest.getPhonenumber(), authenticationRequest.getPassword());
 		
-	System.out.println(authenticationRequest.getPhonenumber());
+	//System.out.println(authenticationRequest.getPhonenumber());
 		final UserDetails userDetails = customUserDetailService.loadUserByUsername(authenticationRequest.getPhonenumber());
+
+		final String token = jwtTokenUtil.generateToken(userDetails);
+		UserData userData=userrepo.findByPhonenumber(authenticationRequest.getPhonenumber());
+
+		return ResponseEntity.ok(new AuthenticationResponse(token,userData));
+
+	}
+	
+	@RequestMapping(value = "/authenticaterestaurant", method = RequestMethod.POST)
+	public ResponseEntity<?> createAuthenticationTokenforrestaurant(@RequestBody AuthenticationRequest authenticationRequest)
+			throws Exception {
+
+		authenticate(authenticationRequest.getPhonenumber(), authenticationRequest.getPassword());
+
+		final UserDetails userDetails =restaurantDetailService.loadUserByUsername(authenticationRequest.getPhonenumber());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 		UserData userData=userrepo.findByPhonenumber(authenticationRequest.getPhonenumber());
@@ -80,10 +109,8 @@ public class JwtAuthenticationController {
 
 	private void authenticate(String phonenumber, String password) throws Exception {
 		try {
-			//System.out.println("hi");
+		
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phonenumber, password));
-			//System.out.println("authenticate");
-			
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {

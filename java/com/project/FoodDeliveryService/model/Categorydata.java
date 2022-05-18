@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,13 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "category")
+@Table(name = "FoodCategory")
 public class Categorydata {
 	
 	@Id
@@ -33,43 +35,59 @@ public class Categorydata {
 	@Lob
 	@Column
 	private byte[] categorypicture;
-	
-//	 @OneToMany(mappedBy = "categorydata",cascade = CascadeType.ALL,orphanRemoval = true)
-//	 private Set<ItemsData>category_ItemsDatas=new HashSet<ItemsData>();
+//	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="item_category",joinColumns = 
+			@JoinColumn(name="item_id")
+	 ,inverseJoinColumns =@JoinColumn(name="category_id") )
+	private Set<ItemsData>itemsDatas=new HashSet<ItemsData>();
+//	
 	 
 	
-	@ManyToMany(mappedBy = "categorydatas")
-	
-	private Set<ItemsData>category_ItemsDatas=new HashSet<ItemsData>();
+//	@ManyToMany(mappedBy = "categorydatas")	
+//	private Set<ItemsData>category_ItemsDatas=new HashSet<ItemsData>();
 
 	
 	
-//	
-//	@ManyToMany(cascade = { CascadeType.ALL})
-//	@JoinTable(
-//			name="restaurants_category",joinColumns = @JoinColumn(name="category_id"),
-//			inverseJoinColumns = @JoinColumn(name="restaurant_id"))
-//	
-//	private Set<RestaurantData>category_restaurants=new HashSet<RestaurantData>();
-//	
-//	public Set<RestaurantData> getCategory_restaurants() {
-//		return category_restaurants;
-//	}
-//	public void setCategory_restaurants(Set<RestaurantData> category_restaurants) {
-//		this.category_restaurants = category_restaurants;
-//	}
+	public void category_items(ItemsData categorydata) {
+		itemsDatas.add(categorydata);
+		
+	}
+
+	public Set<ItemsData> getItemsDatas() {
+		return itemsDatas;
+	}
+	public void setItemsDatas(Set<ItemsData> itemsDatas) {
+		this.itemsDatas = itemsDatas;
+	}
+
+
+
+
+	@ManyToMany(cascade = { CascadeType.ALL})
+	@JoinTable(
+			name="category_restaurants",joinColumns = @JoinColumn(name="category_id"),
+			inverseJoinColumns = @JoinColumn(name="restaurant_id"))
 	
-	//////////////////////////////////////
+	private Set<RestaurantData>category_restaurants=new HashSet<RestaurantData>();
 	
-	
-	public Set<ItemsData> getCategory_ItemsDatas() {
-		return category_ItemsDatas;
+	public Set<RestaurantData> getCategory_restaurants() {
+		return category_restaurants;
+	}
+	public void setCategory_restaurants(Set<RestaurantData> category_restaurants) {
+		this.category_restaurants = category_restaurants;
 	}
 	
-	public void setCategory_ItemsDatas(Set<ItemsData> category_ItemsDatas) {
-		this.category_ItemsDatas = category_ItemsDatas;
-	}
+//	
+//	public Set<ItemsData> getCategory_ItemsDatas() {
+//		return category_ItemsDatas;
+//	}
+//	
+//	public void setCategory_ItemsDatas(Set<ItemsData> category_ItemsDatas) {
+//		this.category_ItemsDatas = category_ItemsDatas;
+//	}
 	
+
 	public byte[] getCategorypicture() {
 		return categorypicture;
 	}
@@ -104,14 +122,15 @@ public class Categorydata {
 	
 	
 	
-	public void category_items(ItemsData itemsData) {
-		category_ItemsDatas.add(itemsData);
-		
-//	}
-//	public void restaurant_category(RestaurantData restaurantData) {
-//		category_restaurants.add(restaurantData);
+//	public void category_items(ItemsData itemsData) {
+//		category_ItemsDatas.add(itemsData);
 //		
 //	}
+	public void restaurant_category(RestaurantData restaurantData) {
+		category_restaurants.add(restaurantData);
+		
 	}
+	
+
 
 }

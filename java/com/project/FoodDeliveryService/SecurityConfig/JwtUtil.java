@@ -1,30 +1,69 @@
 package com.project.FoodDeliveryService.SecurityConfig;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 @Component
 public class JwtUtil implements Serializable{
-	private String Secret_key="secret";
+	
+	private String secret;
+	private int jwtExpirationInMs;
+	private int refreshExpirationDateInMs;
+
+	@Value("${jwt.secret}")
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
+
+	@Value("${jwt.expirationDateInMs}")
+	public void setJwtExpirationInMs(int jwtExpirationInMs) {
+		this.jwtExpirationInMs = jwtExpirationInMs;
+	}
 	private static final long serialVersionUID = -2550185165626007488L;
 
-	public String generateToken(UserDetails userDetails)
-	{
-		Map<String, Object>claims=new HashMap<>();
-		return createtoken(claims,userDetails.getUsername());
+	
+	
+	public String generateToken(UserDetails userDetails) {
+		Map<String, Object> claims = new HashMap<>();
+
+		Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
+
+		if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+			claims.put("isAdmin", true);
+		}
+		if (roles.contains(new SimpleGrantedAuthority("ROLE_USER"))) {
+			claims.put("isUser", true);
+		}
+
+		return createtoken(claims, userDetails.getUsername());
 	}
+
 	
 	private String createtoken(Map<String, Object> claims,String subject)
 	{
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date (System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis()+1000*60*60*10))
-				.signWith(SignatureAlgorithm.HS256,Secret_key).compact();	
+				.signWith(SignatureAlgorithm.HS256,secret).compact();	
 	}
 	
 	public boolean validateToken(String token,UserDetails userDetails) {
@@ -33,6 +72,16 @@ public class JwtUtil implements Serializable{
 		System.out.println(username);
 		return(username.equals(userDetails.getUsername())&&!isTokenExpired(token));
 	}
+//	public boolean validateToken(String authToken) {
+//		try {
+//			Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(authToken);
+//			return true;
+//		} catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
+//			throw new BadCredentialsException("INVALID_CREDENTIALS", ex);
+//		} catch (ExpiredJwtException ex) {
+//			throw ex;
+//		}
+//	}
 	private boolean isTokenExpired(String token) {
 		return getExpirationDateFromToken(token).before(new Date());
 	}
@@ -51,8 +100,35 @@ public class JwtUtil implements Serializable{
 	}
 
 	private Claims getAllClaimsFromToken(String token) {
-		return Jwts.parser().setSigningKey(Secret_key).parseClaimsJws(token).getBody();
+		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 	}
+	
+	public String doGenerateRefreshToken(Map<String, Object> claims, String subject) {
+
+		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs))
+				.signWith(SignatureAlgorithm.HS512, secret).compact();
+
+	}
+	public List<SimpleGrantedAuthority> getRolesFromToken(String token) {
+		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+
+		List<SimpleGrantedAuthority> roles = null;
+
+		Boolean isAdmin = claims.get("isAdmin", Boolean.class);
+		Boolean isUser = claims.get("isUser", Boolean.class);
+
+		if (isAdmin != null && isAdmin) {
+			roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
+
+		if (isUser != null && isAdmin) {
+			roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+		}
+		return roles;
+
+	}
+	
 	
 }
 

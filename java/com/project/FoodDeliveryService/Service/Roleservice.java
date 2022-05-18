@@ -14,7 +14,7 @@ public class Roleservice {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	public Roledata createNewRole(Roledata role) {
+//	public Roledata createNewRole(Roledata role) {
 //		
 //		Roledata roledata = roleRepository.findByrolename(role.getRolename());
 //		
@@ -25,7 +25,7 @@ public class Roleservice {
 //			System.out.println("hi");
 //			return null;
 //		}
-		return roleRepository.save(role);
-	}
+//		return roleRepository.save(role);
+//	}
 
 }

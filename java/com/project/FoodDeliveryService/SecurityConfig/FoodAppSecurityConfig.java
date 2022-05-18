@@ -44,8 +44,11 @@ public class FoodAppSecurityConfig extends WebSecurityConfigurerAdapter {
  
     	httpSecurity.cors().disable();
     	httpSecurity.csrf().disable()
-		.authorizeRequests().antMatchers("/authenticate","/allitems","/allcategories","/categorypic","/register",
-				"/findAllcategories","/allcategory","/getitem","/addrestaurant","/getuserdetails","/allrestaurants")
+		.authorizeRequests().antMatchers("/authenticate","/allitems","/allcategories","/categorypic","/register","/getitembyid/{itemname}","/addtocart",
+				"/findAllcategories","/allcategory","/getitem","/addrestaurant","/getuserdetails","/allrestaurants","/checkout_order","/allusers","/getOrdersByUserId",
+				"/addrestaurantstocategory/{categoryid}/{restaurantid}","/getrestaurantsfromcategory/{categoryid}","/findcategorydetails/{categoryid}",
+				"{restaurantname}/iteminrestaurant/{itemid}","/getuserdetails/{phonenumber}","/getcartitems","/additemtocart","/getCartsByUserId",
+				"/additemstorestaurant/{itemid}/{restaurantid}","/getitemsfromrestaurants/{restaurantname}","/itempic/{restaurantname}","/addrestaurant")
 		.permitAll().antMatchers(HttpMethod.OPTIONS,"/**")
 		.permitAll(). anyRequest().authenticated()
 		.and(). exceptionHandling().authenticationEntryPoint(entryPoint)
