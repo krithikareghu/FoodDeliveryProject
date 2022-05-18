@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoodService } from 'src/app/services/food/food.service';
 import { HttpclientService } from 'src/app/services/httpclient.service';
-import { Foodcategory } from './../../shared/model/foodcategory';
+
 
 @Component({
   selector: 'app-menu',

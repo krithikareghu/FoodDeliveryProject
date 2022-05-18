@@ -58,13 +58,13 @@
         <li *ngIf="!isloggedin()"><a routerLink="/addrestaurant">Add Restaurant</a></li>
         <!-- <li><a routerLink="/">Home</a></li> -->
         <li><a routerLink="/category" >Menu</a></li>
-        <li *ngIf="isloggedin() && userlogin.roleMatch(['Admin'])"><a routerLink="#">UsersList</a></li>
+        <li *ngIf="isloggedin() && userlogin.roleMatch(['Admin'])"><a routerLink="../admin/allusers">UsersList</a></li>
         <li *ngIf="isloggedin() && userlogin.roleMatch(['Admin'])"><a routerLink="#">All restaurants</a></li>
-        <li *ngIf="isloggedin() && userlogin.roleMatch(['user'])"><a routerLink="../addaddress" >Add delivery address</a></li>
+        <li *ngIf="isloggedin() && userlogin.roleMatch(['user'])"><a routerLink="/addaddress" >Add delivery address</a></li>
     
-        <li *ngIf="userlogin.roleMatch(['Admin'])"><a routerLink="../admin/allusers" >Admin</a></li>
-        <li *ngIf="userlogin.roleMatch(['user'])"><a routerLink="user" >user</a></li>
-        <li *ngIf="isloggedin()" id="cart"> <a routerLink="/cart"><i class="fa fa-shopping-cart">Cart </i>&nbsp;
+        <li *ngIf="userlogin.roleMatch(['Admin'])"><a routerLink="" >Admin</a></li>
+        <li *ngIf="userlogin.roleMatch(['user'])"><a routerLink="/user" >user</a></li>
+        <li *ngIf="isloggedin() && userlogin.roleMatch(['user'])" id="cart"> <a routerLink="/cart"><i class="fa fa-shopping-cart">Cart </i>&nbsp;
           <span class="cartvalue">{{noofitems}}
 
           </span>

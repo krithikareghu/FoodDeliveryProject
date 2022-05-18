@@ -1,0 +1,121 @@
+<app-navbar></app-navbar>
+<br><br><br>
+<body>
+ 
+  <div class="cartcontainer">
+    <div>
+      <div class="Header" *ngIf="cartObj.length>0 && ordersuccess==false; else elseblock">
+        
+        <h2 class="Heading">Checkout Cart</h2>
+        </div>       
+        <tbody class="container" >
+          <tr *ngFor="let cart of cartObj ;let i=index" class="cartitems">
+            <td class="itemname"><h4>{{cart.itemname|titlecase}} </h4></td>&nbsp;&nbsp;&nbsp;&nbsp;
+            <td class="price">$ {{cart.price}}</td>
+            <td> <button type="button" class="quantitychange" (click)="minus(cart)">-</button>
+              <span class="quantity">{{cart.qty}}</span>
+              <button type="button" class="quantitychange" (click)="plus(cart)">+</button>
+            </td>
+            <td> <button (click)="removeCartById(cart)" type="button" class="removecart"
+                data-sbmincart-idx="0">×</button></td>
+            </tr>
+
+        </tbody>
+     
+      <span class="totalprice">
+        Total: <span class="price">${{cartTotalPrice}}</span>
+      </span>
+      <br>
+     
+
+      <div class="paymentdetails">
+        <div class="paymentcontainer">
+          <span><input [(ngModel)]="pay_type" value="cash_on_delivery" type="radio" name="pay_type" /><span
+              class="radio_text">Cash on Delivery</span></span>
+          <span><input [(ngModel)]="pay_type" value="online" name="pay_type" type="radio" /><span
+              class="radio_text">Online</span></span>
+        </div>
+        <div>
+          <textarea class="delivery_address" placeholder="Enter the Delivery address"
+            [(ngModel)]="delivery_address"></textarea>
+        </div>
+       
+<br><br>
+        <span class="placeordercontainer">
+          <button class="placeorder" (click)="checkoutCart()">Place Order</button>
+        </span>
+     
+      </div>
+    </div>
+
+  
+  </div>
+ </body>
+
+ <ng-template #elseblock>
+   <h2 class="empty">Cart is Empty</h2>
+
+ </ng-template>
+ <div *ngIf ="ordersuccess">
+
+  <app-ordersucess [cartObj]="cartObj" #childcomponent></app-ordersucess>
+
+ </div>
+
+ 
+
+
+<!--
+
+<div class="checkout">
+  <div class="container">
+    <div>
+      <h1 class="heading">Checkout Cart</h1>
+
+      <table class="table">
+       
+        <tbody class="innercontainer-2">
+          <tr *ngFor="let cart of cartObj ;let i=index" class="innercontainer">
+            <td class="itemname"><h2>{{cart.itemname}} </h2></td>
+            <td>$ {{cart.price}}</td>
+            <td> <button type="button" class="quantitychange" (click)="minus(cart)">-</button>
+              <span>{{cart.qty}}</span>
+              <button type="button" class="quantitychange" (click)="plus(cart)">+</button>
+            </td>
+            <td> <button (click)="removeCartById(cart)" type="button" class="removecart"
+                data-sbmincart-idx="0">×</button></td>
+          </tr>
+
+        </tbody>
+      </table>
+      <span class="totalprice">
+        Total: <span class="price">${{cartTotalPrice}}</span>
+      </span>
+
+
+      <div class="paymentdetails">
+        <div class="paymentcontainer">
+          <span><input [(ngModel)]="pay_type" value="cash_on_delivery" type="radio" name="pay_type" /><span
+              class="radio_text">Cash on Delivery</span></span>
+          <span><input [(ngModel)]="pay_type" value="online" name="pay_type" type="radio" /><span
+              class="radio_text">Online</span></span>
+        </div>
+        <span>
+          <textarea class="delivery_address" placeholder="Enter the Delivery address"
+            [(ngModel)]="delivery_address"></textarea>
+        </span>
+
+
+
+
+
+        <span class="placeordercontainer">
+          <button class="placeorder" (click)="checkoutCart()">Place Order</button>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+</div> -->
+<!-- </div> -->

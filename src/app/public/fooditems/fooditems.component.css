@@ -45,11 +45,14 @@
     height: 35vh;
     border-bottom: 1px solid #ffa410;
   }
+  .imagelink:active{
+    transform: scale(0.98);
+  }
 .imagelink{
   border-radius: 40px;
    box-sizing: border-box;
    justify-content: center;
-  
+  cursor: pointer;
    /* margin-left: 13px; */
   background-color: rgba(255, 255, 255, 0.8);
   font-size: 30px;
@@ -88,7 +91,7 @@ h2{
 }
 .cart {
   margin: 10px;
-  background-color: #fca71f; /* Green */
+  background-color: #faab2b; /* Green */
   border: none;
   color: white;
   padding: 10px 20px;
@@ -100,6 +103,8 @@ h2{
   transition: 0.5 s linear;
 }
 .cart:hover{
-  background-color: #f0980a;
+  background-color: #ffa410;
 }
-
+.cart:active{
+  transform: scale(0.98);
+}

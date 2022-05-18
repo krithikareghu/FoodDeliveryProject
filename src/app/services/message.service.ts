@@ -9,49 +9,63 @@ export class MessageService {
   constructor(private toast:NgToastService ) { }
 
   loginSuccess() {
-    this.toast.success({detail:"Success",summary:"Loggedin successfully", position:"tr",duration:5000})
-    // this.toast.success("Logged in successfully");
+    this.toast.success({detail:"Success",summary:"Loggedin successfully", duration:2000})
   }
 
   logoutSuccess() {
-    this.toast.error({detail:"Success",summary:"Logged out",position:"tr",duration:5000})
-    // this.toast.error("Logged out")
+    this.toast.success({detail:"Success",summary:"Logged out",duration:2000})
   }
 
   registerSuccess() {
-    this.toast.success({detail:"Success",summary:"Registered successfully" ,position:"tr",duration:5000})
-    //this.toast.success("Registered Successfully")
-  }
-
-  normalLogoutMessage() {
-    this.toast.error({detail:"Success",summary:"This is Success",position:"tr",duration:4000})
-    //this.toast.error("Session expired")
+    this.toast.success({detail:"Success",summary:"Registered successfully" ,position:"tr",duration:2000})
   }
 
   pleaseLoginMessage() {
-    this.toast.error({summary:"Please log in to continue", position:"tr",duration:4000})
-   // this.toast.info("Please login to access the page")
+    this.toast.error({summary:"Please log in to continue", position:"tr",duration:2000})
   }
 
   invalidEmailPasswordMessage() {
-    this.toast.error({detail:"Success",summary:"This is Success",position:"tr",duration:4000})
-    //this.toast.error("Invalid email or password")
+    this.toast.error({detail:"Success",summary:"Phonenumber or password incorrect",position:"tr",duration:2000})
   }
 
   loginAsAdmin() {
-    this.toast.success({detail:"Success",summary:"This is Success",position:"tr",duration:4000})
-    // this.toast.info("Login as Admin to access the page", undefined, {
-    //   timeOut:3000
-    // })
+    this.toast.success({detail:"Success",summary:"Logged in as Admin",position:"tr",duration:2000})
+   
+  }
+
+  loginAsUser() {
+    this.toast.error({summary:"Login as user to continue",position:"tr",duration:2000})
+   
+  }
+  loginAsOwner() {
+    this.toast.success({detail:"Success",summary:"Logged in as owner",position:"tr",duration:2000})
+   
   }
 
   emailExistAlready() {
-    this.toast.error({detail:"Success",summary:"Credentials already exists ",position:"tr",duration:4000})
-    // this.toast.error("Email already exisits!", undefined, {
-    //   timeOut:3000
-    // })
+    this.toast.error({detail:"Success",summary:"Credentials already exists ",position:"tr",duration:2000})
+   
+  }
+  addtocart(){
+    this.toast.success({detail:"Success",summary:"Added to cart",duration:2000})
   }
 
- 
+  failedtoaddtocart(){
+    this.toast.error({detail:"error",summary: "Try again",position:"tr",duration:2000})
+  }
+  itemalreadyexists(){
+    this.toast.warning({summary: "Already added to cart",position:"tr",duration:2000})
+
+  }
+ cartempty(){
+  this.toast.warning({summary: "Cart is empty",position:"tr",duration:2000})
+   
+ }
+ warn(message:any){
+  this.toast.warning({summary:message,position:"tr",duration:2000})
+ }
+ ordersucess(message:any){
+  this.toast.success({summary:message,duration:2000})
+ }
   }
 

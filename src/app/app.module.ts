@@ -7,7 +7,7 @@ import { IndexComponent } from './profile/index/index.component';
 import { SignupComponent } from './profile/signup/signup.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { AddaddressComponent } from './profile/addaddress/addaddress.component';
 import { SharedModule } from './shared/shared.module';
@@ -29,7 +29,9 @@ import { RestaurantsComponent } from './public/restaurants/restaurants.component
 import { FooditemsComponent } from './public/fooditems/fooditems.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { NgToastModule } from 'ng-angular-popup';
-import { ItemComponent } from './public/item/item.component';
+import { CheckoutComponent } from './private/checkout/checkout.component';
+import { OrdersucessComponent } from './private/ordersucess/ordersucess.component';
+
 
 @NgModule({
   declarations: [
@@ -45,19 +47,23 @@ import { ItemComponent } from './public/item/item.component';
     ForbiddenComponent,
     RestaurantsComponent,
     FooditemsComponent,
-    ItemComponent,
-
+CheckoutComponent,
+OrdersucessComponent
+  
 
 
   ],
   imports: [
-    BrowserModule, OwnerRoutingModule,
+ 
+  BrowserModule, OwnerRoutingModule,
     AdminRoutingModule,
     AppRoutingModule,
     FormsModule, HttpClientModule,
     SharedModule,
     MatToolbarModule,
     NgToastModule,
+  
+    
   
   
     CoreModule, OwnerModule, BrowserAnimationsModule, MatButtonModule, MatGridListModule

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from 'src/app/services/food/food.service';
+import { UserloginService } from 'src/app/services/login/userlogin.service';
 
 @Component({
   selector: 'app-index',
@@ -10,14 +11,14 @@ import { FoodService } from 'src/app/services/food/food.service';
 })
 export class IndexComponent implements OnInit {
 
-  constructor(private auth:AuthenticationService,private router:Router,private food:FoodService,private route:ActivatedRoute) { }
+  constructor(private auth:AuthenticationService,private router:Router,private food:FoodService,private route:ActivatedRoute,public userlogin:UserloginService) { }
 categories!:any;
 value!: any;
  
 
   ngOnInit() {
 
-   
+  console.log(this.auth.getroles()) ;
     this.route.params.subscribe(params=>{
       
       // if(params['searchItem']){

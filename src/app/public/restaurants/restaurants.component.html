@@ -1,13 +1,18 @@
 
-<app-navbar></app-navbar>
-<br><br>
+<div class="nav">
+    <app-navbar></app-navbar>
+</div>
+
+<br><br><br><br>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap" rel="stylesheet">
 
 
-
+<div class="heading">
+    Restaurants
+</div>
 <div class="container">
     <div class="innercontainer"  *ngFor="let image of allrestaurant;  let i=index">
         <a class="imagelink"routerLink="items/{{allrestaurant[i].restaurantname}}">

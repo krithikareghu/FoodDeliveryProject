@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
     }
 
     observer = {
-        next: () => {this.router.navigate(['home/login'])
+        next: () => {this.router.navigate(['/login'])
             this.message.registerSuccess()
         
     },

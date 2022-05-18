@@ -3,6 +3,14 @@
     margin: auto;
   }
   
+  .heading{
+    background-color:#E3F0FF;
+     /* #fbae31; */
+    text-align: center;
+    font-size: 30px;
+    padding: 10px;
+    color: rgb(5, 4, 4);
+  }
   /* *{
     position: relative;
   } */
@@ -10,7 +18,9 @@
     border-bottom: 1px solid #ffa410;
     border-radius: 50px;
   }
-  
+  .innercontainer:active{
+    transform: scale(0.98);
+  }
   .container {
       display:grid;
       grid-template-columns: auto auto  auto ;

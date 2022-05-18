@@ -3,127 +3,155 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../auth/authentication.service';
 import { MessageService } from '../message.service';
+import { HttpclientService } from 'src/app/services/httpclient.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Userlogin } from '../../shared/model/userlogin';
+import { UserloginService } from 'src/app/services/login/userlogin.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  public cartServiceEvent = new BehaviorSubject({}); 
+   //cart:Cart=new Cart();
   placeholder: any = [];
-  cartitems = new BehaviorSubject([]);
-  items:any=[];
-  constructor(private message: MessageService, private auth: AuthenticationService) {
-    
-    // const itemholder = JSON.parse(localStorage.getItem('cartitems') || '[]')
-    // if (itemholder) {
-    //   this.cartitems.next(itemholder);
-    //   //console.log(itemholder)
-    // }
-    this.items.push((localStorage.getItem("cartitems")));
-      console.log(this.items)
-  // localStorage.removeItem("cartitems")
-  // localStorage.removeItem("totalPrice")
+  noofitems = new BehaviorSubject([]);
+  items:any=[];   
+  cartitems!:any;
+  cartarray!:any;
 
-  }
-
-
-  totalPrice:number=parseInt(localStorage.getItem("totalPrice") || "0");
-  
-  public storeitem(menu: any) {
-    //const itemholder = JSON.parse(localStorage.getItem('cartitems') ||  '[]')
-
-    if (this.isloggedin()) {
-      
-     
-     
-       this.placeholder.push(menu.itemname)
  
-    
-       if(!localStorage.getItem('cartitems'))
-       {
-         this.cartitems.next(this.placeholder)
-         this.cartitems.getValue()
-         localStorage.setItem("cartitems",JSON.stringify(this.placeholder))
-       
-         //localStorage.setItem("cartitems", `[{"itemname":"${menu.itemname}","itemprice":"${menu.itemprice}"}]`)
-         this.totalPrice+=parseInt(menu.itemprice);
-      localStorage.setItem("totalPrice", ""+this.totalPrice)
-    
-  
-       }
-       else{
-      const newdata=[...this.items,JSON.stringify(this.placeholder)];
-      this.cartitems.next(this.placeholder)
-      localStorage.setItem("cartitems",JSON.stringify(newdata));
-     // localStorage.setItem("cartitems","["+localStorage.getItem("cartitems")+","+`{"itemname":"${menu.itemname}","itemprice":"${menu.itemprice}"}]`)
-      this.totalPrice+=parseInt(menu.itemprice)
-      localStorage.setItem("totalPrice",""+this.totalPrice)
-    
-       }
-    }
-    else {
-      this.message.pleaseLoginMessage();
-    }
-  }
-  
-  public isloggedin() {
+  constructor(private message: MessageService, private auth: AuthenticationService,
+    private http:HttpClient,private helper:HttpclientService,private Userlogin:UserloginService) { 
+    const itemholder = JSON.parse(localStorage.getItem('cartitems') || '[]')
+    if (itemholder) {
+      this.noofitems.next(itemholder);
 
-    return this.auth.isUserLoggedIn();
+      this.getCartDetailsByUser();
+  
+    }
+
   }
-  public getitems(){
-   // console.log(this.cartset)
-    return  localStorage.getItem('cartitems')
-  }
-  public gettotalcost(){
-    return localStorage.getItem('totalPrice')
+
+  
+  cartQty = 0;
+  cartObj = [];
+ public cartTotalPrice :any;
+
+
+   getCartDetailsByUser(){
+   
+     this.helper.getcartsbyuser().subscribe(this.observer)
+     
+    }
+
+    observer={
+    next:(data:any)=>{
+
+    this.cartObj = data;
+      this.cartQty = data.length;
+     this.cartServiceEvent.next({"status":"completed"})
+
+  },
+  error:()=>{
+    alert("Error while fetching the cart Details");
+
   }
 }
 
+  addCart(item:any){
+    this.cartServiceEvent.next({"status":"completed"})//emitter
+
+    if(this.isloggedin())
+    {
+    if( this.Userlogin.roleMatch(['user']))
+    {
+
+      var request  = {
+        "itemID":item.id,
+        "qty":1,
+        "itemname":item.itemname,
+        "price":item.itemprice,
+       
+      }
   
+      this.helper.addtocart(request).subscribe(this.addcartobserver)
+    }
+    else{
+      this.message.loginAsUser();
+    }
+  }
+    else{
+      this.message.pleaseLoginMessage();
+    }
 
+    }
+      addcartobserver={
+        next:(data:any)=>{
+          this.getCartDetailsByUser();
+         
+  
+        },error:(error:any)=>{
+         this.message.itemalreadyexists();
+        }
+   
+    }
+    getCartOBj(){
+    return this.cartObj;
+  }
 
+  // getTotalAmounOfTheCart(){
+  //   let obj = this.cartObj;
+  //   let totalPrice  = 0;
 
-  // storeitem(menu: any) {
-  //   if(this.isloggedin()){
-  //   this.cart.push(menu)
-  //   if (localStorage.getItem("cartitems") == null) {
-  //     localStorage.setItem("cartitems",this.cart)
-  //     this.totalPrice+=menu.itemprice
-  //     localStorage.setItem("totalPrice", ""+this.totalPrice)
-  //   } else {
-  //     localStorage.setItem("cartitems",localStorage.getItem("cartItem")+","+`{"itemname":"${menu.itemname}","itemprice":"${menu.itemprice}"}`)
-  //     this.totalPrice+=parseInt(menu.itemprice)
-  //     localStorage.setItem("totalPrice",""+this.totalPrice)
+  //   for(var o in obj ){      
+  //     totalPrice = totalPrice +parseFloat(obj[o].price);
   //   }
+
+  //   return totalPrice.toFixed(2);
   // }
- 
- // let exist: any;
-      // console.log(itemholder)
-      // if (itemholder) {
-      //   exist = itemholder.find((item: any) => {
-      //    return item.itemname === menu.itemname;
+  userid!:any;
+  getQty(){
+    return this.cartQty;
+  }
+  token!:any;
+getuserid(){
+  this.helper.getuserid().subscribe(this.getidobserver)
 
-      //   })
-      // }
-      // if (!exist) {
-      //   if (itemholder) {
-      //     const newdata = [...itemholder, menu];
-      //     localStorage.setItem('cartitems', JSON.stringify(newdata));
-      //     this.cartitems.next(JSON.parse(localStorage.getItem('cartitems') || null || '{}'))
+}
+getidobserver={
+  next:(res:any)=>{
+this.userid=res;
+  },error:()=>{
+   console.log("error in getting the id")
+  }
 
+}
+   removeCart(cartId:number){
+     this.getuserid();
+      var request = {         
+          "userId":this.userid,
+          "cartId":cartId,
+      }
+      console.log(request)
+      this.helper.removecartitem(request).subscribe(this.removeCartobserver)
+  }
+  removeCartobserver=(data:any)=>{
+    next:{ this.getCartDetailsByUser();}
+  error:(error:any)=>{
+    alert("Error while fetching the cart Details");
+  }
+  }
 
-      //   }
-      //   else{
-      //     this.placeholder.push(menu)
-      //     localStorage.setItem('cartitems', JSON.stringify(this.placeholder));
-      //     this.cartitems.next(this.placeholder);
+public isloggedin() {
 
-      //   }
-      // }
-      // if(itemholder)
-      // {
-     
-      // //this.cartset.add(itemholder);
-      // console.log("hi")
-      // console.log(itemholder)
-      // }
+  return this.auth.isUserLoggedIn();
+}
+
+public gettotalcost(){
+  return localStorage.getItem('totalPrice')
+}
+}
+

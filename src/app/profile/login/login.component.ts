@@ -5,6 +5,8 @@ import { UserloginService } from '../../services/login/userlogin.service';
 import {  Router } from '@angular/router';
 import { Userlogin } from 'src/app/shared/model/userlogin';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { MessageService } from 'src/app/services/message.service';
+import { HttpclientService } from './../../services/httpclient.service';
 
 @Component({
   selector: 'app-login',
@@ -17,37 +19,47 @@ export class LoginComponent implements OnInit {
   constructor(
     private userloginservice:UserloginService,
        private router: Router,
-       private auth:AuthenticationService   
+       private auth:AuthenticationService  ,private message:MessageService,private http:HttpclientService 
   ) {
   }
 
   ngOnInit() { 
 }
-
+phonenumber!:string;
 observer = {
   next:(response:any)  =>{
     this.auth.setRoles(response.userData.roles);
     this.auth.setToken(response.jwttoken);
-    console.log(response)
    const role= response.userData.roles[0].rolename;
-   //console.log(response.userData.roles[0].rolename)
-   //console.log(response.userData.roles);
-  // console.log(response.jwttoken);
     if(role==='Admin')
     {
-this.router.navigate(['/admin/allusers'])
+this.router.navigate(['/home'])
+
+this.message.loginAsAdmin();
     }
     else if(role=='owner'){
       this.router.navigate(['/owner/addcategory'])
+      this.message.loginAsOwner();
     }
     else{
       this.router.navigate(['/home'])
+      this.message.loginSuccess();
     }
+ 
     },
   
-  error: () =>alert("Phonenumber or password incorrect"),
+  error: () =>this.message.invalidEmailPasswordMessage()
 
 };
+
+// getuserobserver={
+//   next:(res:any)=>{
+//     this.phonenumber=res;
+//     localStorage.setItem("phonenumber",this.phonenumber)
+//   },error:()=>{
+// alert("something went wrong")
+//   }
+
 
 login() {
   //this.auth.authenticate(this.userlogin.phonenumber,this.userlogin.password)

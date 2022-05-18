@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginnavComponent } from './loginnav.component';
+import { OrdersucessComponent } from './ordersucess.component';
 
-describe('LoginnavComponent', () => {
-  let component: LoginnavComponent;
-  let fixture: ComponentFixture<LoginnavComponent>;
+describe('OrdersucessComponent', () => {
+  let component: OrdersucessComponent;
+  let fixture: ComponentFixture<OrdersucessComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginnavComponent ]
+      declarations: [ OrdersucessComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginnavComponent);
+    fixture = TestBed.createComponent(OrdersucessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

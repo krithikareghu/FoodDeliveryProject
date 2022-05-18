@@ -16,7 +16,10 @@ import { AuthGuard } from './core/auth/-auth.guard';
 import { AddmenuComponent } from './private/owner/addmenu/addmenu.component';
 import { RestaurantsComponent } from './public/restaurants/restaurants.component';
 import { FooditemsComponent } from './public/fooditems/fooditems.component';
-import { ItemComponent } from './public/item/item.component';
+import { CheckoutComponent } from './private/checkout/checkout.component';
+import { OrdersucessComponent } from './private/ordersucess/ordersucess.component';
+
+
 
 const routes: Routes = [
 
@@ -32,12 +35,13 @@ const routes: Routes = [
   { path: "forbidden", component: ForbiddenComponent },
   { path: "home/user", component: UserComponent },
   { path: "owner/addmenu", component: AddmenuComponent },
-  { path: 'home/user', component: UserComponent },
+  { path: 'user', component: UserComponent },
   { path: "search/:searchItem", component: IndexComponent },
   { path: 'category/:id', component: MenuComponent },
   { path: 'restaurants/:categoryid', component: RestaurantsComponent },
   { path: 'restaurants/:categoryid/items/:restaurantname', component: FooditemsComponent },
-  { path: 'cart', component: ItemComponent },
+  { path: 'ordersucess', component: OrdersucessComponent },
+  { path: 'cart', component: CheckoutComponent },
   { path: "admin", loadChildren: () => (import('./private/admin/admin.module')).then(mod => mod.AdminModule) },
   { path: "admin", loadChildren: () => (import('./core/core.module')).then(mod => mod.CoreModule) },
   { path: "home", loadChildren: () => (import('./shared/shared.module')).then(mod => mod.SharedModule) },
@@ -47,6 +51,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+ 
 
 
 

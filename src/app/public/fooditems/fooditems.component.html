@@ -4,13 +4,13 @@
 <br>
 
 <div class="container">
-    <div class="innercontainer" *ngFor="let image of allitems;  let i=index">
-        <a class="imagelink"routerLink="#"><img class="image"style="border-radius: 5px;" width="90%" height=""
+    <div class="innercontainer"  *ngFor="let item of allitems;  let i=index">
+        <a class="imagelink" (click)="storeitem(item)"><img class="image"style="border-radius: 5px;" width="90%" height=""
              [src]="itempic[i]" alt="image">
         </a>
     
-        <span class="itemname" >{{image.itemname|titlecase}} &nbsp; <span> &#8377;{{image.itemprice}}</span></span>
-      <button (click)="storeitem(image)"  class="cart">Add to cart</button>
+        <span class="itemname" >{{item.itemname|titlecase}} &nbsp; <span> &#8377;{{item.itemprice}}</span></span>
+      <button (click)="storeitem(item)" class="cart"  >Add to cart</button>
 
         <!-- <span class="rating" style="font-style:italic;"> <span
             class="fa fa-star checked"> </span>&nbsp;{{rating[i]}}</span> -->

@@ -32,6 +32,9 @@ border-radius: 50px;
     /* margin-left: -5px; */
     /* width: 80%; */
 }
+.innercontainer:active{
+  transform: scale(0.98);
+}
 .innercontainer{
         /* position: relative; */
         margin-top: 2rem;

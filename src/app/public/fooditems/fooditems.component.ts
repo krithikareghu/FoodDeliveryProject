@@ -3,7 +3,10 @@ import { HttpclientService } from 'src/app/services/httpclient.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { MessageService } from './../../services/message.service';
+
+import { Cart } from 'src/app/shared/model/cart';
 import { CartService } from 'src/app/services/cart/cart.service';
+
 
 @Component({
   selector: 'app-fooditems',
@@ -16,11 +19,11 @@ export class FooditemsComponent implements OnInit {
   itempic: any;
   rating: any;
 
-  constructor(private helper: HttpclientService,private cart:CartService,
+  constructor(private helper: HttpclientService,private cart:CartService,private message:MessageService,
     private route: ActivatedRoute) { 
    
     }
-
+//cartmodel:Cart=new Cart();
 
   ngOnInit(): void {
 
@@ -33,14 +36,30 @@ export class FooditemsComponent implements OnInit {
       this.itempic = response;
       this.rating = Array.from({ length: 20 }, () => (Math.random() * (9.00 - 2.00 + 2.00) + 1.00).toFixed(1));
 
-      console.log(this.allitems);
-  
     })
-   // console.log(localStorage.getItem('cartitems'))
+ 
   
   }
+  value:boolean=false;
+ 
+  observer={
+    next:()=>{
+      this.value=true;
+      this.message.addtocart();
+    },
+    error:()=>{
+
+    
+
+this.message.failedtoaddtocart();
+
+    }
+
+  }
   storeitem(item:any){
-    this.cart.storeitem(item);
+    console.log(item.itemname)
+    
+    this.cart.addCart(item)
   }
 
 
