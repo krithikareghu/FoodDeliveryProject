@@ -48,9 +48,9 @@ CategoryRepository categoryRepository;
 	 public List<ItemsData>getAllProducts(){
 			return itemRepo.findAll();
 		}
-		public List<ItemsData>getProductsByCategory(String product_id){
-			return itemRepo.getByCategoryId(product_id);
-		}
+//		public List<ItemsData>getProductsByCategory(String product_id){
+//			return itemRepo.getByCategoryId(product_id);
+//		}
 		
 		public List<Categorydata>getAllCategory(){
 			return categoryRepository.findAll();

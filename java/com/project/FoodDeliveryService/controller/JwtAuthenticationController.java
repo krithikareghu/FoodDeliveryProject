@@ -3,7 +3,12 @@ package com.project.FoodDeliveryService.controller;
 import java.io.Console;
 import java.lang.reflect.Array;
 import java.net.http.HttpHeaders;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -38,6 +43,7 @@ import com.project.FoodDeliveryService.Service.RestaurantDetailService;
 import com.project.FoodDeliveryService.dto.UserDataDto;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
+import io.jsonwebtoken.impl.DefaultClaims;
 import net.bytebuddy.asm.Advice.Return;
 
 @RestController
@@ -91,21 +97,25 @@ public class JwtAuthenticationController {
 		return ResponseEntity.ok(new AuthenticationResponse(token,userData));
 
 	}
-	
-	@RequestMapping(value = "/authenticaterestaurant", method = RequestMethod.POST)
-	public ResponseEntity<?> createAuthenticationTokenforrestaurant(@RequestBody AuthenticationRequest authenticationRequest)
-			throws Exception {
+	@RequestMapping(value = "/refreshtoken", method = RequestMethod.GET)
+	public ResponseEntity<?> refreshtoken(HttpServletRequest request) throws Exception {
+		// From the HttpRequest get the claims
+		DefaultClaims claims = (io.jsonwebtoken.impl.DefaultClaims) request.getAttribute("claims");
 
-		authenticate(authenticationRequest.getPhonenumber(), authenticationRequest.getPassword());
-
-		final UserDetails userDetails =restaurantDetailService.loadUserByUsername(authenticationRequest.getPhonenumber());
-
-		final String token = jwtTokenUtil.generateToken(userDetails);
-		UserData userData=userrepo.findByPhonenumber(authenticationRequest.getPhonenumber());
-
-		return ResponseEntity.ok(new AuthenticationResponse(token,userData));
-
+		Map<String, Object> expectedMap = getMapFromIoJsonwebtokenClaims(claims);
+		String token = jwtUtil.doGenerateRefreshToken(expectedMap, expectedMap.get("sub").toString());
+		return ResponseEntity.ok(new AuthenticationResponse(token));
 	}
+
+	public Map<String, Object> getMapFromIoJsonwebtokenClaims(DefaultClaims claims) {
+		Map<String, Object> expectedMap = new HashMap<String, Object>();
+		for (Entry<String, Object> entry : claims.entrySet()) {
+			expectedMap.put(entry.getKey(), entry.getValue());
+		}
+		return expectedMap;
+	}
+	
+
 
 	private void authenticate(String phonenumber, String password) throws Exception {
 		try {

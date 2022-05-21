@@ -42,7 +42,7 @@ public class UserData {
 	@Column()
 	private String address;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	 
 	@JoinTable(name = "user_role",
 	joinColumns = {
@@ -54,47 +54,6 @@ public class UserData {
 	
 	private Set<Roledata>roles=new HashSet<>();
 
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name = "user_order",
-//	joinColumns = {
-//			@JoinColumn(name="user_id")
-//	},
-//	inverseJoinColumns = {
-//			@JoinColumn(name="order_id")
-//	})
-//	private Set<OrderData>orderDatas=new HashSet<OrderData>();
-	
-//	@OneToMany(cascade = CascadeType.ALL,mappedBy="userData")
-//	
-//	public Set<CartData>cartDatas=new HashSet<CartData>();
-//	
-//	public void setcart(CartData item) {
-//		cartDatas.add(item);
-//	}
-//	public void  setorder(OrderData order) {
-//		orderDatas.add(order);
-//	}
-//	
-//	public void removecartitems(CartData cartData) {
-//		cartDatas.remove(cartData);
-//	}
-//	public Set<CartData> getCartDatas() {
-//		return cartDatas;
-//	}
-//
-//	public void setCartDatas(Set<CartData> cartDatas) {
-//		this.cartDatas = cartDatas;
-//	}
-
-
-//
-//	public Set<OrderData> getOrderDatas() {
-//		return orderDatas;
-//	}
-//
-//	public void setOrderDatas(Set<OrderData> orderDatas) {
-//		this.orderDatas = orderDatas;
-//	}
 
 	public Set<Roledata> getRoles() {
 		return roles;

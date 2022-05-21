@@ -24,7 +24,7 @@ public class CartData {
 	
 @JsonIgnore
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER,cascade = CascadeType.REMOVE,orphanRemoval = true)
     @JoinColumn(name = "item_id")
 ItemsData itemsData;
 	
@@ -91,56 +91,4 @@ ItemsData itemsData;
 		this.itemname = itemname;
 	}
 	
-	
-//itemname
-	
-	
-//	public String getItemname() {
-//		return itemname;
-//	}
-//
-//	private Integer quantity=1;
-//
-//
-//	public Long getID() {
-//		return ID;
-//	}
-//
-//	public void setID(Long iD) {
-//		ID = iD;
-//	}
-//
-//	public Integer getQuantity() {
-//		return quantity;
-//	}
-//
-//	public void setQuantity(Integer quantity) {
-//		this.quantity = quantity;
-//	}
-//
-//	public void setItemname(String itemname) {
-//		this.itemname = itemname;
-//	}
-//
-//	public int getItemprice() {
-//		return itemprice;
-//	}
-//
-//	public void setItemprice(int itemprice) {
-//		this.itemprice = itemprice;
-//	}
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	   @JoinColumn(name = "cart_id")
-//	UserData userData;
-//	
-//
-//	public UserData getUserData() {
-//		return userData;
-//	}
-//
-//	public void setUserData(UserData userData) {
-//		this.userData = userData;
-//	}
-//	
-
 }

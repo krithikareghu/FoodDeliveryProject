@@ -23,8 +23,10 @@ public interface ItemsRepository  extends JpaRepository<ItemsData, Long> {
 	void save(Categorydata categorydata);
 	
 	
-	@Query("Select item FROM ItemsData item WHERE item.category_ID=:cat_id")
-	List<ItemsData> getByCategoryId(@Param("cat_id")String cat_id);
+//	@Query("Select item FROM ItemsData item WHERE item.category_ID=:cat_id")
+//	List<ItemsData> getByCategoryId(@Param("cat_id")String cat_id);
+	@Query("Select itempicture from ItemsData")
+	List<byte[]>finditempictures();
 
 	//Categorydata findbycategorydatas(Categorydata categorydata);
 

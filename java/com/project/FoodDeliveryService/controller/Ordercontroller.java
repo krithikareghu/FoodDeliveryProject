@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.FoodDeliveryService.Model.CartData;
 import com.project.FoodDeliveryService.Model.Checkout_Cart;
 import com.project.FoodDeliveryService.Model.ItemsData;
-import com.project.FoodDeliveryService.Model.OrderData;
 import com.project.FoodDeliveryService.Model.UserData;
 import com.project.FoodDeliveryService.SecurityConfig.CartConfiguration;
 import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
@@ -31,7 +30,7 @@ import com.project.FoodDeliveryService.Service.CartService;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
 import com.project.FoodDeliveryService.repository.CartRepository;
 import com.project.FoodDeliveryService.repository.CheckOutRepository;
-import com.project.FoodDeliveryService.repository.OrderRepository;
+
 import com.project.FoodDeliveryService.repository.UserRepository;
 
 @RestController
@@ -43,8 +42,6 @@ public class Ordercontroller {
 	@Autowired
 	UserRepository userrepo;
 	@Autowired
-	OrderRepository orderRepository;
-	@Autowired
 	CartRepository cartRepository;
 	@Autowired
 	CartService cartService;
@@ -55,15 +52,15 @@ public class Ordercontroller {
 	
 
 	@RequestMapping("checkout_order")
-  	public ResponseEntity<?> checkout_order(@RequestBody HashMap<String,String> addCartRequest,@RequestHeader String token) {
-		  UserData userData=customUserDetailService.getuserid(token);
-		   String userid =String.valueOf(userData.getID());
-		   addCartRequest.put("userId", userid);
-		
+  	public ResponseEntity<?> checkout_order(@RequestBody HashMap<String,String> addCartRequest) {
+
+		System.out.println(addCartRequest);
+		System.out.println("inside");
 		try {
 			String keys[] = {"total_price","pay_type","deliveryAddress","userId"};
 			if(CartConfiguration.validationWithHashMap(keys, addCartRequest)) {		
 			}
+			
 			long user_Id = Long.parseLong(addCartRequest.get("userId"));
 			double total_amt = Double.parseDouble(addCartRequest.get("total_price"));
 			if(cartService.checkTotalAmountAgainstCart(total_amt,user_Id)) {
@@ -82,14 +79,14 @@ public class Ordercontroller {
 					tmp.add(cart);
 				}
 				cartService.saveItemsForCheckout(tmp);
-			
+			  System.out.println("hii");
 				return ResponseEntity.ok("Order placed successfully");
 			}else {
 				
 				throw new Exception("Total amount is mismatch");
 			}
 		}catch(Exception e) {
-			System.out.println("checkout");
+			
 			return ResponseEntity.badRequest().body("error");
 		}
 	}
@@ -97,15 +94,13 @@ public class Ordercontroller {
 	    Random r = new Random( System.currentTimeMillis() );
 	    return 10000 + r.nextInt(20000);
 	}
-	@RequestMapping("getOrdersByUserId")
-		public ResponseEntity<?> getOrdersByUserId(@RequestHeader String token) {
-		UserData userData=customUserDetailService.getuserid(token);
-		Long user_Id = userData.getID();
-		  // Long userid =String.valueOf(userData.getID());
+	@RequestMapping("getOrdersByUserId/{userid}")
+		public ResponseEntity<?> getOrdersByUserId(@PathVariable String userid) {
+		
+		   long user_id =Long.parseLong(userid);
 		 
 		try {
-			String keys[] = {"userId"};	
-		 List<Checkout_Cart> checkoutsCarts=checkOutRepository.getByuserId(user_Id);
+		 List<Checkout_Cart> checkoutsCarts=checkOutRepository.getByuserId(user_id);
 			return ResponseEntity.ok(checkoutsCarts);
 		}catch(Exception e) {
 			e.printStackTrace();

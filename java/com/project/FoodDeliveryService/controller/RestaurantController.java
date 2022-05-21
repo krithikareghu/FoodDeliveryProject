@@ -1,13 +1,21 @@
 package com.project.FoodDeliveryService.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,13 +26,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.FoodDeliveryService.Model.Authenticaterestaurantresponse;
+import com.project.FoodDeliveryService.Model.AuthenticationRequest;
+import com.project.FoodDeliveryService.Model.AuthenticationResponse;
 import com.project.FoodDeliveryService.Model.Categorydata;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.RestaurantData;
 import com.project.FoodDeliveryService.Model.Roledata;
+import com.project.FoodDeliveryService.Model.UserData;
+import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
 import com.project.FoodDeliveryService.Service.ItemsDetailsService;
 import com.project.FoodDeliveryService.Service.RestaurantDetailService;
 import com.project.FoodDeliveryService.dto.RestaurantDataDto;
+import com.project.FoodDeliveryService.dto.Restaurantdto;
 import com.project.FoodDeliveryService.dto.UserDataDto;
 import com.project.FoodDeliveryService.repository.CategoryRepository;
 import com.project.FoodDeliveryService.repository.ItemsRepository;
@@ -46,6 +60,10 @@ public class RestaurantController {
 	RestaurantRepository restaurantrepo;
 	@Autowired
 	CategoryRepository categoryRepository;
+	@Autowired
+	JwtUtil jwtUtil;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	
 	@Lazy
 	@Autowired
@@ -53,7 +71,7 @@ public class RestaurantController {
 	
 	@RequestMapping(value = "/addrestaurant", method = RequestMethod.POST)
 	public ResponseEntity<?> saveRestaurant(@RequestBody RestaurantDataDto restaurant) throws Exception {
-	System.out.println("hii");
+	
 		
 		if (this.restaurantrepo.existsByrestaurantname(restaurant.getRestaurantname()))
 		{
@@ -68,6 +86,37 @@ public class RestaurantController {
 		return ResponseEntity.ok(restaurant);
 		}
 	}
+	
+	@RequestMapping(value = "/loginrestaurant", method = RequestMethod.POST)
+	public ResponseEntity<?> loginrestaurant(@RequestBody Restaurantdto restaurant) throws Exception {
+
+		//System.out.println(restaurant);
+
+			authenticate(restaurant.getRestaurantcontact(), restaurant.getRestaurantpassword());
+			
+		    final UserDetails userDetails = restaurantDetailService.loadUserByUsername(restaurant.getRestaurantcontact());
+
+			final String token = jwtUtil.generateToken(userDetails);
+			RestaurantData restaurantData=restaurantrepo.findByRestaurantcontact(restaurant.getRestaurantcontact());
+
+			return ResponseEntity.ok(new Authenticaterestaurantresponse(token,restaurantData));
+
+		}
+
+	
+private void authenticate(String phonenumber, String password) throws Exception {
+	try {
+	
+		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(phonenumber, password));
+	} catch (DisabledException e) {
+		throw new Exception("USER_DISABLED", e);
+	} catch (BadCredentialsException e) {
+		throw new Exception("INVALID_CREDENTIALS", e);
+	}
+}
+	
+	
+	
 	
 	
 	

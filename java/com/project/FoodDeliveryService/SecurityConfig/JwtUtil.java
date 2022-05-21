@@ -26,13 +26,14 @@ import io.jsonwebtoken.UnsupportedJwtException;
 @Component
 public class JwtUtil implements Serializable{
 	
-	private String secret;
+	private static String ACCESS_TOKEN_SECRET;
+	private static String REFRESH_TOKEN_SECRET_KEY;
 	private int jwtExpirationInMs;
 	private int refreshExpirationDateInMs;
 
 	@Value("${jwt.secret}")
 	public void setSecret(String secret) {
-		this.secret = secret;
+		this. ACCESS_TOKEN_SECRET = secret;
 	}
 
 	@Value("${jwt.expirationDateInMs}")
@@ -63,13 +64,11 @@ public class JwtUtil implements Serializable{
 	{
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date (System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis()+1000*60*60*10))
-				.signWith(SignatureAlgorithm.HS256,secret).compact();	
+				.signWith(SignatureAlgorithm.HS256, ACCESS_TOKEN_SECRET).compact();	
 	}
 	
 	public boolean validateToken(String token,UserDetails userDetails) {
 		final String username=getUsernameFromToken(token);
-//		System.out.println("hi");
-		System.out.println(username);
 		return(username.equals(userDetails.getUsername())&&!isTokenExpired(token));
 	}
 //	public boolean validateToken(String authToken) {
@@ -90,6 +89,7 @@ public class JwtUtil implements Serializable{
 		final Claims claims = getAllClaimsFromToken(token);
 		return claimsResolver.apply(claims);
 	}
+	
 
 	public String getUsernameFromToken(String token) {
 		return getClaimFromToken(token, Claims::getSubject);
@@ -100,18 +100,18 @@ public class JwtUtil implements Serializable{
 	}
 
 	private Claims getAllClaimsFromToken(String token) {
-		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		return Jwts.parser().setSigningKey(ACCESS_TOKEN_SECRET).parseClaimsJws(token).getBody();
 	}
 	
 	public String doGenerateRefreshToken(Map<String, Object> claims, String subject) {
 
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs))
-				.signWith(SignatureAlgorithm.HS512, secret).compact();
+				.signWith(SignatureAlgorithm.HS512,  ACCESS_TOKEN_SECRET).compact();
 
 	}
 	public List<SimpleGrantedAuthority> getRolesFromToken(String token) {
-		Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		Claims claims = Jwts.parser().setSigningKey( ACCESS_TOKEN_SECRET).parseClaimsJws(token).getBody();
 
 		List<SimpleGrantedAuthority> roles = null;
 
@@ -128,6 +128,7 @@ public class JwtUtil implements Serializable{
 		return roles;
 
 	}
+	
 	
 	
 }

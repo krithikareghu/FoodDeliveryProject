@@ -42,7 +42,7 @@ public class RestaurantData {
 	
 	private String Restaurantdescription;
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
 	@JoinTable(name = "restaurant_role",
 	joinColumns = {
 			@JoinColumn(name="restauarnt_id")
@@ -95,7 +95,7 @@ public class RestaurantData {
 	}
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "category_restaurants")
+	@ManyToMany(mappedBy = "category_restaurants",cascade = CascadeType.ALL)
 	
 	private Set<Categorydata>category_restauarant=new HashSet<>();
 	
@@ -108,7 +108,7 @@ public class RestaurantData {
 		this.category_restauarant = category_restauarant;
 	}
 	
-	@ManyToMany(cascade = { CascadeType.MERGE})
+	@ManyToMany(cascade =CascadeType.REMOVE,fetch = FetchType.LAZY)
 	@JoinTable(
 			name="Restaurant_items",joinColumns = @JoinColumn(name="restaurant_id", updatable = true),
 			inverseJoinColumns = @JoinColumn(name="items_id"))
@@ -123,7 +123,7 @@ public class RestaurantData {
 		this.items = items;
 	}
 
-//	
+	
 
 	public RestaurantData() {
 	}
@@ -136,7 +136,7 @@ public class RestaurantData {
 	public void setRestaurantname(String restaurantname) {
 		this.restaurantname = restaurantname;
 	}
-//
+
 	public boolean items_restaurant(ItemsData itemsData) {
 	boolean contain=items.contains(itemsData);
 	System.out.println(contain);

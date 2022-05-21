@@ -6,18 +6,17 @@ public class AuthenticationRequest implements Serializable
 {
 
 	private static final long serialVersionUID = 5926468583005150707L;
-	
-//	private String username;
+
 	private String password;
-//	private String email;
+
 	private String phonenumber;
 	
 	public AuthenticationRequest() {}
 
 	public AuthenticationRequest(String phonenumber, String password) {
-//		this.setUsername(username);
+
 		this.setPassword(password);
-//		this.setEmail(email);
+
 		this.setPhonenumber(phonenumber);
 	}
 

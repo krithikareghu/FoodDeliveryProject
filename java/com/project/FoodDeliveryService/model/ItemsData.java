@@ -36,7 +36,7 @@ public class ItemsData {
 	@Column(nullable = false)
 	private String itemprice;
 	
-	private Long category_ID;
+//	private Long category_ID;
 
 	
 	 
@@ -50,13 +50,13 @@ public class ItemsData {
 		this.itemprice = itemprice;
 	}
 
-	public Long getCategory_ID() {
-		return category_ID;
-	}
-
-	public void setCategory_ID(Long category_ID) {
-		this.category_ID = category_ID;
-	}
+//	public Long getCategory_ID() {
+//		return category_ID;
+//	}
+//
+//	public void setCategory_ID(Long category_ID) {
+//		this.category_ID = category_ID;
+//	}
 
 	public Long getID() {
 		return ID;
@@ -68,7 +68,7 @@ public class ItemsData {
 	
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "items")	
+	@ManyToMany(mappedBy = "items",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)	
    private Set<RestaurantData>restaurantDatas=new HashSet<>();
 	
 	public Set<RestaurantData> getRestaurantDatas() {
@@ -79,18 +79,6 @@ public void setRestaurantDatas(Set<RestaurantData> restaurantDatas) {
 	this.restaurantDatas = restaurantDatas;
 }
 
-//@JsonIgnore
-//@ManyToOne(fetch = FetchType.EAGER)
-//	private Categorydata categorydata;
-//	
-//	public Categorydata getCategorydata() {
-//	return categorydata;
-//}
-//
-//public void setCategorydata(Categorydata categorydata) {
-//	this.categorydata = categorydata;
-//}
-//
 	public ItemsData() {
 	}
 

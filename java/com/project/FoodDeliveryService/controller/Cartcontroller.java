@@ -39,14 +39,9 @@ public class Cartcontroller {
 	@Autowired
 	CustomUserDetailService customUserDetailService;
 	@PostMapping("additemtocart")
-  	public ResponseEntity<?> addCartwithitem(@RequestBody HashMap<String,String> addCartRequest,@RequestHeader String token) {
+  	public ResponseEntity<?> addCartwithitem(@RequestBody HashMap<String,String> addCartRequest) {
 		try {
-			
-		   UserData userData=customUserDetailService.getuserid(token);
-		   String userid =String.valueOf(userData.getID());
-		   addCartRequest.put("userId", userid);
-		   
-				
+	
 			String keys[] = {"itemID","qty","price","userId"};
 			if(CartConfiguration.validationWithHashMap(keys, addCartRequest)) {
 				
@@ -66,10 +61,7 @@ public class Cartcontroller {
    }
 	
 	@RequestMapping("updateQtyForCart")
-  	public ResponseEntity<?> updateQtyForCart(@RequestBody HashMap<String,String> updateCartRequest,@RequestHeader String token) {
-		 UserData userData=customUserDetailService.getuserid(token);
-		   String userid =String.valueOf(userData.getID());
-		   updateCartRequest.put("userId", userid);
+  	public ResponseEntity<?> updateQtyForCart(@RequestBody HashMap<String,String> updateCartRequest) {
 		
 		try {
 			String keys[] = {"cartId","userId","qty","price"};
@@ -93,10 +85,7 @@ public class Cartcontroller {
 	
 	@DeleteMapping("removeItemFromCart")
   	public ResponseEntity<?> removeCartwithitemId(@RequestParam  HashMap<String,String> removeCartRequest) {
-		
-//		 UserData userData=customUserDetailService.getuserid(token);
-//		   String userid =String.valueOf(userData.getID());
-//		   removeCartRequest.put("userId", userid);
+	
 		System.out.println(removeCartRequest);
 	System.out.println(	removeCartRequest.get("CartId"));
 		try {
@@ -114,21 +103,21 @@ public class Cartcontroller {
 		}		
    }
 	
-	@GetMapping("getCartsByUserId")
-  	public ResponseEntity<?> getCartsByUserId(@RequestHeader String token) {
-			UserData userData=customUserDetailService.getuserid(token);
-			String userid =String.valueOf(userData.getID());
-			
-			 HashMap<String,String> getCartRequest=new HashMap<String, String>();
-			 getCartRequest.put("userId", userid);
+	@GetMapping("getCartsByUserId/{userid}")
+  	public ResponseEntity<?> getCartsByUserId(@PathVariable String userid) {
+	System.out.println(userid);
 		try {
-			String keys[] = {"userId"};
-			if(CartConfiguration.validationWithHashMap(keys, getCartRequest)) {
-			}
-			List<CartData> obj = cartService.getCartByUserId(Long.parseLong(getCartRequest.get("userId")));
+			System.out.println(userid);
+			//String keys[] = {"userId"};
+			//if(CartConfiguration.validationWithHashMap(keys, getCartRequest)) {
+				//			}
+			
+			List<CartData> obj = cartService.getCartByUserId(Long.parseLong(userid));
 			return ResponseEntity.ok(obj);
-		}catch(Exception e) {
-				return ResponseEntity.badRequest().body("error");
+		}catch(Exception e) 
+		{
+			System.out.println("error");
+			return ResponseEntity.badRequest().body("error");
 		}	
    }
 	

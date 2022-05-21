@@ -51,7 +51,7 @@ public class CustomUserDetailService implements UserDetailsService {
 	}
 
 	private Set getauthorities(UserData user) {
-		Set authorities = new HashSet<>();
+		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
 		user.getRoles().forEach(role -> {
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRolename()));
@@ -61,8 +61,6 @@ public class CustomUserDetailService implements UserDetailsService {
 
 	}
 
-	
-	
 	public UserData registeruser(UserDataDto user) {
 
 		UserData newuser = new UserData();
@@ -72,11 +70,8 @@ public class CustomUserDetailService implements UserDetailsService {
 		newuser.setPhonenumber(user.getPhonenumber());
 		newuser.setAddress(user.getAddress());
 
-	//	String admin = new String("Admin");
-
 		if (user.getPhonenumber().equals("8825724096")) {
 			Roledata adminRole = new Roledata();
-			//System.out.println("jdjssdj");
 
 			adminRole.setRolename("Admin");
 
@@ -86,19 +81,15 @@ public class CustomUserDetailService implements UserDetailsService {
 			userroles.add(adminRole);
 
 			newuser.setRoles(userroles);
-			System.out.println("inside");
-		 roleRepository.save(adminRole);
-		
+			roleRepository.save(adminRole);
 
 		} else {
 			System.out.println(user.getPhonenumber());
-			System.out.println("hii");
 
 			Set<Roledata> userroles = new HashSet<>();
 			Roledata userRoledata = roleRepository.findByrolename("user");
 			if (userRoledata == null) {
 
-				System.out.println("no user");
 				userRoledata = new Roledata();
 				userRoledata.setRolename("user");
 				userRoledata.setRoleDescription("Default role");
@@ -111,13 +102,12 @@ public class CustomUserDetailService implements UserDetailsService {
 		userRepo.save(newuser);
 		return null;
 	}
-	
-	public UserData getuserid(String jwttoken)
-	{
-		String phonenumber=jwtUtil.getUsernameFromToken(jwttoken);
+
+	public UserData getuserid(String jwttoken) {
+		String phonenumber = jwtUtil.getUsernameFromToken(jwttoken);
 		UserData userData = this.userRepo.findByPhonenumber(phonenumber);
 		return userData;
-		
+
 	}
 
 }

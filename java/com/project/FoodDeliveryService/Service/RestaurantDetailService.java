@@ -1,5 +1,6 @@
 package com.project.FoodDeliveryService.Service;
 
+import java.io.Console;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,6 +38,7 @@ RoleRepository roleRepository;
 		
 		
 		 RestaurantData restaurant = restaurantRepo.findByRestaurantcontact(restaurantcontact);
+		
 	        if (restaurant == null) {
 	            throw new UsernameNotFoundException("restaurant not found");
 	        }

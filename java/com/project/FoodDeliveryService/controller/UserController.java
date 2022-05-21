@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,14 +50,6 @@ public class UserController {
 	@Autowired
 	JwtUtil jwtUtil;
 
-	@GetMapping("/getuserid")
-	public Long getuserid(@RequestHeader String token)
-	{
-	UserData userData=customUserDetailService.getuserid(token);
-	System.out.println("hii");
-	System.out.println(userData.getID());
-	return userData.getID();
-	}
 	
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -86,11 +80,10 @@ public class UserController {
 
 		if (this.userrepo.existsByUsername(user.getUsername())) {
 			userData.setUsername(user.getUsername());
-			userData.setAddress(user.getAddress());
-			userData.setPassword(brcyptEncoder.encode(user.getPassword()));
+			//userData.setPassword(brcyptEncoder.encode(user.getPassword()));
 			userData.setAddress(user.getAddress());
 			userData.setEmail(user.getEmail());
-			userData.setPhonenumber(user.getPhonenumber());
+//			userData.setPhonenumber(user.getPhonenumber());
 
 			return new ResponseEntity<>(userrepo.save(userData), HttpStatus.OK);
 		} else
@@ -98,13 +91,12 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/getuserdetails", method = RequestMethod.GET)
+	@RequestMapping(value = "/getuserdetails/{id}", method = RequestMethod.GET)
 	// @PreAuthorize("hasRole('user')")
-	public UserData getuserdetails(@RequestHeader String jwttoken) throws Exception {
-		String phonenumber = jwtUtil.getUsernameFromToken(jwttoken);
-		UserData userData = this.userrepo.findByPhonenumber(phonenumber);
-
-		if (this.userrepo.existsByPhonenumber(phonenumber))
+	public UserData getuserdetails(@PathVariable Long id) throws Exception {
+	System.out.println("hii");
+      UserData userData=userrepo.findByID(id);
+		if (userData!=null)
 			{  System.out.println("hoiii");
 			return userData;}
 		else
@@ -134,5 +126,10 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 	}
+//	@GetMapping("/token/refreshtoken")
+//	public void refreshtoken(HttpServletRequest request,HttpServletResponse response)
+//	{
+//		String aut
+//	}
 
 }

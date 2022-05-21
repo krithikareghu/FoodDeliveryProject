@@ -13,14 +13,11 @@ public interface RestaurantRepository  extends JpaRepository<RestaurantData, Lon
 	boolean existsByrestaurantname(String restaurantname);
 
 	RestaurantData findAllByrestaurantname(String restaurantname);
-
-	
 	
 	RestaurantData findByID(Long restaurantid);
 
 	RestaurantData findByRestaurantcontact(String restaurantcontact);
 
-	//RestaurantData findOne(Long itemid);
 
 	
 

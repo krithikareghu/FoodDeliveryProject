@@ -22,6 +22,15 @@ public class Roledata {
 		public Roledata() {
 		
 		}
+		
+		public long getID() {
+			return ID;
+		}
+
+		public void setID(long iD) {
+			ID = iD;
+		}
+
 		public Roledata(String rolename) {
 			this.rolename = rolename;
 		}

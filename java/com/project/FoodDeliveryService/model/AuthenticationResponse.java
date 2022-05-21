@@ -3,6 +3,7 @@ package com.project.FoodDeliveryService.Model;
 import java.io.Serializable;
 
 public class AuthenticationResponse implements Serializable {
+	
 
 	private static final long serialVersionUID = -8091879091924046844L;
 	private final String jwttoken;
@@ -32,4 +33,36 @@ public class AuthenticationResponse implements Serializable {
 	public String getToken() {
 		return this.jwttoken;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+//	private static final long serialVersionUID = -8091879091924046844L;
+//	private final String accesstoken;
+//	private UserData userData;
+//	private String type = "Bearer";
+//	private String refreshToken;
+//
+//
+//	
+//
+//	public AuthenticationResponse(String accesstoken, UserData userData, String refreshToken) {
+//		
+//		this.accesstoken = accesstoken;
+//		this.userData = userData;
+//		this.refreshToken = refreshToken;
+//	}
+//
+//	
+
+	
+	
+	
+	
+	
+	
 }

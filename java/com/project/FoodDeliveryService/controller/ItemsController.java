@@ -113,19 +113,7 @@ public class ItemsController {
 		return items;
 	}
 	
-	//public ItemsData getitempic(@PathVariable String ) 
+
 }
 
-//	@RequestMapping(value = "/addpicture", method = RequestMethod.POST)
-//	public ResponseEntity<?> savepicture(@RequestBody ItemDataDto itempicture) throws Exception {
-//
-//		if (this.itemrepo.existsByitempicture(itempicture.getItempicture()))
-//		  return ResponseEntity
-//				.badRequest()
-//				.body("Error: picture is already included!");
-//		else
-//			itemsdetails.save(itempicture);
-//
-//		return ResponseEntity.ok(itempicture);
-//	}
-//}
+
