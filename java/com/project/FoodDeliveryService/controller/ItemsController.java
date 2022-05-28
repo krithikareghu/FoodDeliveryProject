@@ -31,7 +31,7 @@ import com.project.FoodDeliveryService.repository.ItemsRepository;
 import com.project.FoodDeliveryService.repository.RestaurantRepository;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${frontend.domain}")
 public class ItemsController {
 
 	@Autowired
@@ -46,9 +46,9 @@ public class ItemsController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	@RequestMapping(value = "/additem", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/additem", method = RequestMethod.POST)
 	public ResponseEntity<?> saveitem(@RequestParam("myFile") MultipartFile file, @RequestParam String itemname,
-			@RequestParam String itemprice,@RequestParam String categoryname )throws Exception {
+			@RequestParam String itemprice)throws Exception {
 
 		if (this.itemrepo.existsByitemname(itemname)) {
 
@@ -60,12 +60,6 @@ public class ItemsController {
 			itemsData.setItemprice(itemprice);
 			itemsData.setItempicture(file.getBytes());
 
-			//Categorydata categorydata = categoryRepository.findBycategoryname(categoryname);
-
-			//Set<Categorydata> categorydatas = new HashSet<Categorydata>();
-
-			//categorydatas.add(categorydata);
-			//itemsData.category_items(categorydata);
 
 			final ItemsData newitemData = itemrepo.save(itemsData);
 			return ResponseEntity.ok(newitemData);
@@ -73,7 +67,7 @@ public class ItemsController {
 
 	}
 	
-	@PostMapping("/additemstorestaurant/{itemid}/{restaurantid}")
+	@PostMapping("/category/additemstorestaurant/{itemid}/{restaurantid}")
 	public ResponseEntity<?> additemstocategory(@PathVariable Long itemid, @PathVariable Long restaurantid) {
 
 		RestaurantData restaurantData=restaurantRepository.findByID(restaurantid);

@@ -1,8 +1,8 @@
-package com.project.FoodDeliveryService.Model;
+package com.project.FoodDeliveryService.Request;
 
 import org.springframework.lang.NonNull;
 
-public class RefreshTokenRquest {
+public class RefreshTokenRequest {
 	@NonNull
 	  private String refreshToken;
 	  public String getRefreshToken() {

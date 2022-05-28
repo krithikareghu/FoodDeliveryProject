@@ -1,10 +1,6 @@
 package com.project.FoodDeliveryService.controller;
-
-import java.io.Console;
-import java.lang.reflect.Array;
-import java.net.http.HttpHeaders;
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -34,20 +30,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.FoodDeliveryService.Model.AuthenticationRequest;
-import com.project.FoodDeliveryService.Model.AuthenticationResponse;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
+import com.project.FoodDeliveryService.Request.AuthenticationRequest;
+import com.project.FoodDeliveryService.Response.AuthenticationResponse;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
 import com.project.FoodDeliveryService.Service.RestaurantDetailService;
-import com.project.FoodDeliveryService.dto.UserDataDto;
+import com.project.FoodDeliveryService.jwt.JwtUtil;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
 import io.jsonwebtoken.impl.DefaultClaims;
-import net.bytebuddy.asm.Advice.Return;
+
+
+
+
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${frontend.domain}")
 public class JwtAuthenticationController {
 	@Autowired
 	private AuthenticationManager authenticationManager;

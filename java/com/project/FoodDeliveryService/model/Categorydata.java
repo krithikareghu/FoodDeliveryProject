@@ -36,27 +36,11 @@ public class Categorydata {
 	@Column
 	private byte[] categorypicture;
 	
-//	@OneToMany(fetch = FetchType.EAGER,orphanRemoval = true )
-//	@JoinTable(name="item_category",joinColumns = 
-//			@JoinColumn(name="item_id")
-//	 ,inverseJoinColumns =@JoinColumn(name="category_id") )
-//	private Set<ItemsData>itemsDatas=new HashSet<ItemsData>(); 
-//	
-//
+
 
 	
 	
-//	public void category_items(ItemsData categorydata) {
-//		itemsDatas.add(categorydata);
-//		
-//	}
-//
-//	public Set<ItemsData> getItemsDatas() {
-//		return itemsDatas;
-//	}
-//	public void setItemsDatas(Set<ItemsData> itemsDatas) {
-//		this.itemsDatas = itemsDatas;
-//	}
+
 
 
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.FoodDeliveryService.Model.Categorydata;
@@ -27,9 +28,10 @@ import com.project.FoodDeliveryService.repository.RoleRepository;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+ //@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${frontend.domain}")
 
-//@RequestMapping("/admin")
+
 public class AdminController {
 	@Autowired
 	ItemsRepository itemrepo;
@@ -52,31 +54,27 @@ public class AdminController {
 	@Autowired
 	CategoryRepository categoryRepository;
 
-	@GetMapping("/allusers")
-	//@PreAuthorize("hasRole('Admin')")
+	@GetMapping("/admin/allusers")
 	public java.util.List<UserData> getallusers() {
 		return userrepo.findAll();
 	}
 
-	@GetMapping("/allitems")
-	@PreAuthorize("hasRole('Admin')")
+	@GetMapping("/admin/allitems")
 	public java.util.List<ItemsData> getallitems() {
 		return itemrepo.findAll();
 	}
 
-	@GetMapping("/allcategories")
-	@PreAuthorize("hasRole('Admin')")
+	@GetMapping("/admin/allcategories")
 	public java.util.List<Categorydata> getallcategories() {
 		return categoryRepository.findAll();
 	}
 
-	@GetMapping("/allrestaurantdetails")
-	@PreAuthorize("hasRole('Admin')")
+	@GetMapping("/admin/allrestaurantdetails")
 	public java.util.List<RestaurantData> getallrestaurantdetails() {
 		return restaurantrepo.findAll();
 	}
 
-	@GetMapping("/getrestaurantsfromcategory/{categoryid}")
+	@GetMapping("category/getrestaurantsfromcategory/{categoryid}")
 	public Set<RestaurantData> getrestaurantsbycategory(@PathVariable Long categoryid) {
 
 		Categorydata categorydata = categoryRepository.findAllByID(categoryid);
@@ -85,8 +83,7 @@ public class AdminController {
 
 	}
 
-	@GetMapping("/getitemsfromrestaurants/{restaurantname}")
-
+	@GetMapping("category/getitemsfromrestaurants/{restaurantname}")
 	public Set<ItemsData> getitemsfromrestaurants(@PathVariable String restaurantname) {
 
 		RestaurantData restaurantData = restaurantrepo.findByRestaurantname(restaurantname);
@@ -98,7 +95,7 @@ public class AdminController {
 
 	}
 
-	@GetMapping("/itempic/{restaurantname}")
+	@GetMapping("category/itempic/{restaurantname}")
 	public List categorypics(@PathVariable String restaurantname) {
 		List<String> list = new ArrayList<String>();
 		RestaurantData restaurantData = restaurantrepo.findAllByrestaurantname(restaurantname);
@@ -113,8 +110,8 @@ public class AdminController {
 		return list;
 	}
 
-	@GetMapping("/itempics")
-	@PreAuthorize("hasRole('Admin')")
+	@GetMapping("/admin/itempics")
+	//@PreAuthorize("hasRole('Admin')")
 	public List categorypics() {
 		List<String> list = new ArrayList<String>();
 		List<byte[]> pics = itemrepo.finditempictures();
@@ -128,7 +125,7 @@ public class AdminController {
 		return list;
 	}
 
-	@GetMapping("/allrestaurants")
+	@GetMapping("/admin/allrestaurants")
 	@PreAuthorize("hasRole('Admin')")
 	public List<RestaurantData> getallrestaurants() {
 		List<String> restaurants = new ArrayList<String>();
@@ -140,15 +137,16 @@ public class AdminController {
 
 	}
 
-	@DeleteMapping("/deleterestaurant/{restaurantname}")
+	@DeleteMapping("/admin/deleterestaurant/{restaurantname}")
 	public List<RestaurantData> deleterestaurant(@PathVariable String restaurantname) {
+		
 		RestaurantData restaurant = restaurantrepo.findByRestaurantname(restaurantname);
 		restaurantrepo.delete(restaurant);
 		List<RestaurantData> restaurantData = restaurantrepo.findAll();
 		return restaurantData;
 	}
 
-	@DeleteMapping("/deleteitems/{id}")
+	@DeleteMapping("/admin/deleteitems/{id}")
 	public List<ItemsData> deleteitems(@PathVariable String id) {
 		// ItemsData items=itemrepo.findAllByID(id);
 		cartRepository.deletebyitemId(Long.parseLong(id));
@@ -158,8 +156,19 @@ public class AdminController {
 
 		return itemsDatas;
 	}
+	@DeleteMapping("/admin/deletecategory/{id}")
+	public List<Categorydata> deletecategory(@PathVariable String id) {
+		
+		// ItemsData items=itemrepo.findAllByID(id);
+//		cartRepository.deletebyitemId(Long.parseLong(id));
+//		checkOutRepository.deleteitems(Long.parseLong(id));
+		categoryRepository.deleteById(Long.parseLong(id));
+		List<Categorydata> categorydatas = categoryRepository.findAll();
 
-	@DeleteMapping("/deleteuser/{id}")
+		return categorydatas;
+	}
+
+	@DeleteMapping("/admin/deleteuser/{id}")
 	public List<UserData> deleteuser(@PathVariable String id) {
 
 		UserData user = userrepo.findByID(Long.parseLong(id));

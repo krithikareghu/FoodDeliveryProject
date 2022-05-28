@@ -2,6 +2,7 @@ package com.project.FoodDeliveryService.Service;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +11,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,8 +22,8 @@ import org.springframework.stereotype.Component;
 
 import com.project.FoodDeliveryService.Model.Roledata;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
 import com.project.FoodDeliveryService.dto.UserDataDto;
+import com.project.FoodDeliveryService.jwt.JwtUtil;
 import com.project.FoodDeliveryService.repository.RoleRepository;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
@@ -28,6 +31,7 @@ import com.project.FoodDeliveryService.repository.UserRepository;
 // @Transactional
 public class CustomUserDetailService implements UserDetailsService {
 
+	
 	@Lazy
 	@Autowired
 	PasswordEncoder brcyptEncoder;
@@ -47,21 +51,35 @@ public class CustomUserDetailService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found");
 		}
 		return new org.springframework.security.core.userdetails.User(user.getPhonenumber(), user.getPassword(),
-				getauthorities(user));
+				getAuthorities(user));
+	}
+	public Collection<? extends GrantedAuthority> getAuthorities(UserData user) {
+		//Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+		ArrayList<GrantedAuthority> roles=new ArrayList<GrantedAuthority>();
+				user.getRoles().forEach(role -> {
+					roles.add(new SimpleGrantedAuthority(role.getRolename()));
+					System.out.println(roles);
+				});
+				return roles;
+		
 	}
 
-	private Set getauthorities(UserData user) {
-		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
-		user.getRoles().forEach(role -> {
-			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRolename()));
-			System.out.println(authorities);
-		});
-		return authorities;
-
-	}
+//	private Set<SimpleGrantedAuthority> getauthorities(UserData user) {
+//		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+//
+//		user.getRoles().forEach(role -> {
+//			authorities.add(new SimpleGrantedAuthority(role.getRolename()));
+//			System.out.println(authorities);
+//		});
+//		return authorities;
+//
+//	}
+	
 
 	public UserData registeruser(UserDataDto user) {
+		System.out.println("hii");
+		System.out.println(user.getEmail());
 
 		UserData newuser = new UserData();
 		newuser.setUsername(user.getUsername());
@@ -87,11 +105,11 @@ public class CustomUserDetailService implements UserDetailsService {
 			System.out.println(user.getPhonenumber());
 
 			Set<Roledata> userroles = new HashSet<>();
-			Roledata userRoledata = roleRepository.findByrolename("user");
+			Roledata userRoledata = roleRepository.findByrolename("User");
 			if (userRoledata == null) {
 
 				userRoledata = new Roledata();
-				userRoledata.setRolename("user");
+				userRoledata.setRolename("User");
 				userRoledata.setRoleDescription("Default role");
 				roleRepository.save(userRoledata);
 			}

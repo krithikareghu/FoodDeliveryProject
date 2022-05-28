@@ -25,16 +25,16 @@ import com.project.FoodDeliveryService.Model.Checkout_Cart;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.UserData;
 import com.project.FoodDeliveryService.SecurityConfig.CartConfiguration;
-import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
 import com.project.FoodDeliveryService.Service.CartService;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
+import com.project.FoodDeliveryService.jwt.JwtUtil;
 import com.project.FoodDeliveryService.repository.CartRepository;
 import com.project.FoodDeliveryService.repository.CheckOutRepository;
 
 import com.project.FoodDeliveryService.repository.UserRepository;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${frontend.domain}")
 public class Ordercontroller {
 	
 	@Autowired
@@ -51,11 +51,11 @@ public class Ordercontroller {
 	CheckOutRepository checkOutRepository;
 	
 
-	@RequestMapping("checkout_order")
+	@RequestMapping("user/checkout_order")
   	public ResponseEntity<?> checkout_order(@RequestBody HashMap<String,String> addCartRequest) {
 
 		System.out.println(addCartRequest);
-		System.out.println("inside");
+		
 		try {
 			String keys[] = {"total_price","pay_type","deliveryAddress","userId"};
 			if(CartConfiguration.validationWithHashMap(keys, addCartRequest)) {		
@@ -94,7 +94,7 @@ public class Ordercontroller {
 	    Random r = new Random( System.currentTimeMillis() );
 	    return 10000 + r.nextInt(20000);
 	}
-	@RequestMapping("getOrdersByUserId/{userid}")
+	@RequestMapping("user/getOrdersByUserId/{userid}")
 		public ResponseEntity<?> getOrdersByUserId(@PathVariable String userid) {
 		
 		   long user_id =Long.parseLong(userid);

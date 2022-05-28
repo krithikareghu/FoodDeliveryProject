@@ -42,7 +42,7 @@ public class UserData {
 	@Column()
 	private String address;
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	 
 	@JoinTable(name = "user_role",
 	joinColumns = {

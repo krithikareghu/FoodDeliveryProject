@@ -1,12 +1,12 @@
-package com.project.FoodDeliveryService.Model;
+package com.project.FoodDeliveryService.Request;
 
-import java.io.Serializable;
 
-public class AuthenticationRequest implements Serializable
+public class AuthenticationRequest
 {
 
 	private static final long serialVersionUID = 5926468583005150707L;
 
+	
 	private String password;
 
 	private String phonenumber;

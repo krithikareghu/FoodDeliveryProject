@@ -21,13 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.FoodDeliveryService.Model.CartData;
 import com.project.FoodDeliveryService.Model.UserData;
 import com.project.FoodDeliveryService.SecurityConfig.CartConfiguration;
-import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
 import com.project.FoodDeliveryService.Service.CartService;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
+import com.project.FoodDeliveryService.jwt.JwtUtil;
 import com.project.FoodDeliveryService.repository.UserRepository;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${frontend.domain}")
+//@RequestMapping("/user")
 public class Cartcontroller {
 
 	
@@ -38,7 +39,7 @@ public class Cartcontroller {
 
 	@Autowired
 	CustomUserDetailService customUserDetailService;
-	@PostMapping("additemtocart")
+	@PostMapping("user/additemtocart")
   	public ResponseEntity<?> addCartwithitem(@RequestBody HashMap<String,String> addCartRequest) {
 		try {
 	
@@ -60,7 +61,7 @@ public class Cartcontroller {
 		
    }
 	
-	@RequestMapping("updateQtyForCart")
+	@RequestMapping("/user/updateQtyForCart")
   	public ResponseEntity<?> updateQtyForCart(@RequestBody HashMap<String,String> updateCartRequest) {
 		
 		try {
@@ -83,7 +84,7 @@ public class Cartcontroller {
    }
 	
 	
-	@DeleteMapping("removeItemFromCart")
+	@DeleteMapping("user/removeItemFromCart")
   	public ResponseEntity<?> removeCartwithitemId(@RequestParam  HashMap<String,String> removeCartRequest) {
 	
 		System.out.println(removeCartRequest);
@@ -103,7 +104,7 @@ public class Cartcontroller {
 		}		
    }
 	
-	@GetMapping("getCartsByUserId/{userid}")
+	@GetMapping("/user/getCartsByUserId/{userid}")
   	public ResponseEntity<?> getCartsByUserId(@PathVariable String userid) {
 	System.out.println(userid);
 		try {

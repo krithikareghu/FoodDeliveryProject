@@ -1,9 +1,14 @@
 package com.project.FoodDeliveryService.SecurityConfig;
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import com.project.FoodDeliveryService.Service.CustomUserDetailService;
+import com.project.FoodDeliveryService.jwt.JwtEntryPoint;
+import com.project.FoodDeliveryService.jwt.JwtRequestFilter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -48,20 +53,44 @@ public class FoodAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
  
     	httpSecurity.cors().disable();
-    	httpSecurity.csrf().disable()
-		.authorizeRequests().antMatchers("/authenticate","/allitems","/allcategories","/categorypic","/register","/getitembyid/{itemname}","/addtocart","/deleterestaurant/{name}",
-				"/findAllcategories","/allcategory","/getitem","/addrestaurant","/getuserdetails","/allrestaurants","/checkout_order","/allusers","/getOrdersByUserId",
-				"/addrestaurantstocategory/{categoryid}/{restaurantid}","/getrestaurantsfromcategory/{categoryid}","/findcategorydetails/{categoryid}",
-				"{restaurantname}/iteminrestaurant/{itemid}","/getuserdetails/{phonenumber}","/getcartitems","/additemtocart","/getCartsByUserId","/deleteuser/{id}",
-				"/additemstorestaurant/{itemid}/{restaurantid}","/getitemsfromrestaurants/{restaurantname}","/itempic/{restaurantname}","/addrestaurant","/loginrestaurant")
-		.permitAll().antMatchers(HttpMethod.OPTIONS,"/**")
-		.permitAll(). anyRequest().authenticated()
+    	httpSecurity.csrf().disable();
+    	httpSecurity
+		.authorizeRequests()
+		.antMatchers("/register","/authenticate","/admin/addrestaurant","/category/**","/hello").permitAll()
+		.antMatchers("/admin/**").permitAll()
+		//hasAnyRole("Admin")
+		.antMatchers("/owner/**").permitAll()
+		//hasAnyRole("Admin")
+		.antMatchers("/user/**").permitAll()
+		//hasAnyRole("User")
+		. anyRequest().authenticated()	
 		.and(). exceptionHandling().authenticationEntryPoint(entryPoint)
 		.and()
 		.sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 //    @Override
 //    public void configure(HttpSecurity http) throws Exception {

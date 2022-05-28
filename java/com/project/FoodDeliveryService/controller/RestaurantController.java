@@ -27,19 +27,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.FoodDeliveryService.Model.Authenticaterestaurantresponse;
-import com.project.FoodDeliveryService.Model.AuthenticationRequest;
-import com.project.FoodDeliveryService.Model.AuthenticationResponse;
 import com.project.FoodDeliveryService.Model.Categorydata;
 import com.project.FoodDeliveryService.Model.ItemsData;
 import com.project.FoodDeliveryService.Model.RestaurantData;
 import com.project.FoodDeliveryService.Model.Roledata;
 import com.project.FoodDeliveryService.Model.UserData;
-import com.project.FoodDeliveryService.SecurityConfig.JwtUtil;
+import com.project.FoodDeliveryService.Request.AuthenticationRequest;
+import com.project.FoodDeliveryService.Response.AuthenticationResponse;
 import com.project.FoodDeliveryService.Service.ItemsDetailsService;
 import com.project.FoodDeliveryService.Service.RestaurantDetailService;
 import com.project.FoodDeliveryService.dto.RestaurantDataDto;
 import com.project.FoodDeliveryService.dto.Restaurantdto;
 import com.project.FoodDeliveryService.dto.UserDataDto;
+import com.project.FoodDeliveryService.jwt.JwtUtil;
 import com.project.FoodDeliveryService.repository.CategoryRepository;
 import com.project.FoodDeliveryService.repository.ItemsRepository;
 import com.project.FoodDeliveryService.repository.RestaurantRepository;
@@ -47,7 +47,7 @@ import com.project.FoodDeliveryService.repository.RestaurantRepository;
 import net.bytebuddy.asm.Advice.This;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${frontend.domain}")
 public class RestaurantController {
 	
 	@Autowired
@@ -69,7 +69,7 @@ public class RestaurantController {
 	@Autowired
 	PasswordEncoder brcyptEncoder;
 	
-	@RequestMapping(value = "/addrestaurant", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/addrestaurant", method = RequestMethod.POST)
 	public ResponseEntity<?> saveRestaurant(@RequestBody RestaurantDataDto restaurant) throws Exception {
 	
 		
@@ -86,22 +86,6 @@ public class RestaurantController {
 		return ResponseEntity.ok(restaurant);
 		}
 	}
-	
-	@RequestMapping(value = "/loginrestaurant", method = RequestMethod.POST)
-	public ResponseEntity<?> loginrestaurant(@RequestBody Restaurantdto restaurant) throws Exception {
-
-		//System.out.println(restaurant);
-
-			authenticate(restaurant.getRestaurantcontact(), restaurant.getRestaurantpassword());
-			
-		    final UserDetails userDetails = restaurantDetailService.loadUserByUsername(restaurant.getRestaurantcontact());
-
-			final String token = jwtUtil.generateToken(userDetails);
-			RestaurantData restaurantData=restaurantrepo.findByRestaurantcontact(restaurant.getRestaurantcontact());
-
-			return ResponseEntity.ok(new Authenticaterestaurantresponse(token,restaurantData));
-
-		}
 
 	
 private void authenticate(String phonenumber, String password) throws Exception {
@@ -121,7 +105,7 @@ private void authenticate(String phonenumber, String password) throws Exception 
 	
 	
 	
-	@RequestMapping(value = "/addrestaurantstocategory/{categoryid}/{restaurantid}", method = RequestMethod.PUT)
+	@RequestMapping(value = "owner/addrestaurantstocategory/{categoryid}/{restaurantid}", method = RequestMethod.PUT)
 	public ResponseEntity<?>addrestaurantstocategory(@PathVariable Long categoryid,@PathVariable Long restaurantid){
 		RestaurantData restaurantData=restaurantrepo.findByID(restaurantid);
 		Categorydata categorydata=categoryRepository.findAllByID(categoryid);
@@ -132,7 +116,7 @@ private void authenticate(String phonenumber, String password) throws Exception 
 	}
 	
 	
-	@RequestMapping(value = "/updaterestaurant", method = RequestMethod.PUT)
+	@RequestMapping(value = "/owner/updaterestaurant", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDataDto restaurant) throws Exception {
 	
 		if (this.restaurantrepo.existsByrestaurantname(restaurant.getRestaurantname()))
@@ -153,38 +137,38 @@ private void authenticate(String phonenumber, String password) throws Exception 
 	}
 	
 	
-	@PutMapping("/{restaurantname}/iteminrestaurant/{itemid}")
-	public ResponseEntity<?> itemsinrestaurants(@PathVariable String restaurantname,@PathVariable Long itemid) {
-		RestaurantData restaurantData=restaurantrepo.findAllByrestaurantname(restaurantname);
-		ItemsData itemsData=itemrepo.findAllByID(itemid);
-		if(restaurantData==null)
-		{
-			 return ResponseEntity
-						.badRequest()
-						.body("Restaurant not found");
-		}
-		
-		if(itemsData==null)
-		{
-			 return ResponseEntity
-						.badRequest()
-						.body("item not found");
-			//itemdetails.save(itemdata);
-			//itemrepo.save(itemdata);
-		}
-//		if (this.restaurantrepo.existsById(restaurantid)&&(this.itemrepo.existsById(itemid)))
-//		{			
-//		  return ResponseEntity
-//				.badRequest()
-//				.body("Error: Item is already included in the Restaurant!");
+//	@PutMapping("/{restaurantname}/iteminrestaurant/{itemid}")
+//	public ResponseEntity<?> itemsinrestaurants(@PathVariable String restaurantname,@PathVariable Long itemid) {
+//		RestaurantData restaurantData=restaurantrepo.findAllByrestaurantname(restaurantname);
+//		ItemsData itemsData=itemrepo.findAllByID(itemid);
+//		if(restaurantData==null)
+//		{
+//			 return ResponseEntity
+//						.badRequest()
+//						.body("Restaurant not found");
 //		}
-		//restaurantData.items_restaurant(itemsData);
-		restaurantrepo.save(restaurantData);
-		
-		return ResponseEntity.ok(restaurantData);
-		
-		
-	}
+//		
+//		if(itemsData==null)
+//		{
+//			 return ResponseEntity
+//						.badRequest()
+//						.body("item not found");
+//			//itemdetails.save(itemdata);
+//			//itemrepo.save(itemdata);
+//		}
+////		if (this.restaurantrepo.existsById(restaurantid)&&(this.itemrepo.existsById(itemid)))
+////		{			
+////		  return ResponseEntity
+////				.badRequest()
+////				.body("Error: Item is already included in the Restaurant!");
+////		}
+//		//restaurantData.items_restaurant(itemsData);
+//		restaurantrepo.save(restaurantData);
+//		
+//		return ResponseEntity.ok(restaurantData);
+//		
+//		
+//	}
 
 
 }

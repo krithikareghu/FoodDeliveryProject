@@ -1,6 +1,8 @@
-package com.project.FoodDeliveryService.Model;
+package com.project.FoodDeliveryService.Response;
 
 import java.io.Serializable;
+
+import com.project.FoodDeliveryService.Model.UserData;
 
 public class AuthenticationResponse implements Serializable {
 	

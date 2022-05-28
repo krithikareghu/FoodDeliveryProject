@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,12 +38,13 @@ import com.project.FoodDeliveryService.repository.ItemsRepository;
 import com.project.FoodDeliveryService.repository.RestaurantRepository;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("${frontend.domain}")
+
+
 public class CategoryController {
 	@Autowired
 	private CategoryDetailsService categoryDetailsService;
-	@Autowired
-	private ItemsDetailsService itemsDetailsService;
+	
 	@Autowired
 	private CategoryRepository categoryRepo;
 
@@ -52,7 +54,7 @@ public class CategoryController {
 	@Autowired
 	private RestaurantRepository restaurantRepo;
 
-	@PostMapping("/addcategory")
+	@PostMapping("/admin/addcategory")
 	public ResponseEntity<?>  additems(@RequestParam("myFile") MultipartFile file, @RequestParam String category)
 			throws IOException {
 		if(category==null) {
@@ -106,20 +108,24 @@ public class CategoryController {
 		}
 		return outputStream.toByteArray();
 	}
-	@GetMapping ("/categorypic")
+	@GetMapping ("/category/categorypic")
 	public List categorypics() {
 	List<String> list=new ArrayList<String>();
-	
-		 for(Categorydata category:categoryRepo.findAll())
+	 List<byte[]> pics=categoryRepo.findcategorypictures();
+		 for(byte[] category:pics)
 		 {
-			 byte[] file=category.getCategorypicture();
-			 String encodebase64=null;
-			 encodebase64=Base64.getEncoder().encodeToString(file);
-			 list.add("data:image/jpeg;base64,"+encodebase64);
+			 String encodebase64 = null;
+				encodebase64 = Base64.getEncoder().encodeToString(category);
+				list.add("data:image/jpeg;base64," + encodebase64);
 			 
 		 }
-		 System.out.println("hii");
+	
 		 return list;
+		
+		 
+		 
+		 
+		 
 	}
 
 	
@@ -143,7 +149,7 @@ public class CategoryController {
 	}
 
 
-	@PutMapping("/updatecategory")
+	@PutMapping("/category/updatecategory")
 	public ResponseEntity<?> updatecategory(@RequestBody Categorydto category) {
 		if (this.categoryRepo.existsBycategoryname(category.getCategoryname())) {
 			categoryDetailsService.save(category);
@@ -156,11 +162,15 @@ public class CategoryController {
 
 	}
 
-	@GetMapping("/findAllcategories")
+	@GetMapping("/category/findAllcategories")
 	public List<Categorydata> findallitems() {
+		System.out.println("hii");
 		return categoryRepo.findAll();
 
 	}
+	
+	
+	
 
 //	@GetMapping("/finditemsincategories/{categoryid}")
 //	public Set<ItemsData> findallitemsincategories(@PathVariable Long categoryid) {
@@ -169,7 +179,7 @@ public class CategoryController {
 //
 //	}
 
-	@GetMapping("/allcategory")
+	@GetMapping("/category/allcategory")
 	public List<String> allcategory() {
 		List<Categorydata> categorydata = categoryRepo.findAll();
 		List<String> categoryname = new ArrayList<String>();
@@ -180,7 +190,7 @@ public class CategoryController {
 
 	}
 
-	@DeleteMapping("/deletecategory/{categoryname}")
+	@DeleteMapping("admin/deletecategory/{categoryname}")
 	public String deletecategory(@PathVariable Long categoryname) {
 		if (categoryRepo.existsById(categoryname)) {
 			Categorydata categorydata = categoryRepo.findByID(categoryname);
@@ -204,12 +214,12 @@ public class CategoryController {
 //	}
 
 
-	@GetMapping("/findcategorydetails/{categoryid}")
+	@GetMapping("admin/findcategorydetails/{categoryid}")
 	public Categorydata findcategorydetails(@PathVariable Long categoryid) {
 		return categoryRepo.findAllByID(categoryid);
 
 	}
-	@PutMapping("/additemstocategory")
+	@PutMapping("/admin/additemstocategory")
 	public ResponseEntity<?> additemstocategory(@PathVariable Long categoryid, @PathVariable Long itemid) {
 
 		Categorydata category = categoryRepo.findAllByID(categoryid);

@@ -1,4 +1,4 @@
-package com.project.FoodDeliveryService.SecurityConfig;
+package com.project.FoodDeliveryService.jwt;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,11 +18,7 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+
 @Component
 public class JwtUtil implements Serializable{
 	
@@ -46,15 +42,18 @@ public class JwtUtil implements Serializable{
 	
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
-
-		Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
-
-		if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-			claims.put("isAdmin", true);
-		}
-		if (roles.contains(new SimpleGrantedAuthority("ROLE_USER"))) {
-			claims.put("isUser", true);
-		}
+		claims.put("role",userDetails.getAuthorities());
+//		Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
+//		
+//
+//		if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+//			claims.put("isAdmin", true);
+//			
+//		}
+//		if (roles.contains(new SimpleGrantedAuthority("ROLE_User"))) {
+//			claims.put("isUser", true);
+//		
+//		}
 
 		return createtoken(claims, userDetails.getUsername());
 	}

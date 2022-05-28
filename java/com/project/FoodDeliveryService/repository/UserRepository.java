@@ -14,6 +14,7 @@ import antlr.collections.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserData, Long> {
+	 
 	
 	UserData findByPhonenumber(String Phonenumber);
 	
