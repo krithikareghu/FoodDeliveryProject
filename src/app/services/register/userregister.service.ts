@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { Userregister } from '../../shared/model/userregister';
+import { globalVars } from 'src/app/shared/url.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class UserregisterService {
     }
   )
 
-  private baseurl="http://localhost:8080/register"
+  private baseurl=globalVars.backendAPI+"/register"
   constructor(private http:HttpClient) { }
  
   register(userregister:Userregister):Observable<object>{

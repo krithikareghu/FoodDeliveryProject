@@ -5,11 +5,17 @@ import { RouterModule } from '@angular/router';
 import { CategorydetailsComponent } from './categorydetails/categorydetails.component';
 
 import { SharedModule } from './../../shared/shared.module';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { AllrestaurantsComponent } from './allrestaurants/allrestaurants.component';
+import { ItemsComponent } from './items/items.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    CategorydetailsComponent
+    CategorydetailsComponent,
+    UserdetailsComponent,
+    AllrestaurantsComponent,
+    ItemsComponent
   ],
   imports: [
  

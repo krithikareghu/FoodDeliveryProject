@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HttpclientService } from 'src/app/services/httpclient.service';
 import { Additems } from 'src/app/shared/model/additems';
+import { globalVars } from 'src/app/shared/url.model';
 
 @Component({
   selector: 'app-addmenu',
@@ -10,13 +11,12 @@ import { Additems } from 'src/app/shared/model/additems';
 })
 export class AddmenuComponent implements OnInit {
 
-  
+  baseurl= globalVars.backendAPI
   constructor(private httpClient: HttpClient, private client: HttpclientService,
    ) { }
    additems: Additems = new Additems();
 
   ngOnInit() {
-   // this.client.onlycategoryname().subscribe(response=>this.handlecategoryResponse(response))
     this.client.getallcategories().subscribe(
       response => this.handlecategoryResponse(response),
     );
@@ -58,24 +58,21 @@ export class AddmenuComponent implements OnInit {
     error: (err: any) => console.log('Error Occured during saving: ' + err.value)
 
   }
+
   onUpload() {
     const uploadData = new FormData();
     uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
     const Itemname = this.additems.itemname;
     const Itemprice = this.additems.itemprice;
     const Itemdescription = this.additems.itemdescription;
-    //this.additems.itempicture=uploadData;
-    const Categoryname=this.additems.categoryname;
-    //console.log(Categoryname.length);
+  
     console.log(Itemname)
 
     const params = new HttpParams()
       .append('itemname', Itemname)
       .append('itemprice',Itemprice)
-       .append('categoryname',Categoryname)
-      console.log(Categoryname)
-
-    return this.httpClient.post("http://localhost:8080/additem", uploadData, {
+    
+    return this.httpClient.post(this.baseurl+"/admin/additem", uploadData, {
       params: params
     })
       .subscribe(this.observer)

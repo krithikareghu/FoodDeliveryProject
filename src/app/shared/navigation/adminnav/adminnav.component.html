@@ -1,29 +1,38 @@
 
     <header>
-        <a href="#" class="logo"><img src="assets/images/d logo.jpg" alt="logo"></a>
-        <nav class="navbar navbar-light bg-light">
-          <!-- <div><input type="text" placeholder="Search for the category" [value]="searchFilter" name="" id="">&nbsp;
-            <button>search</button> -->
-          <!-- </div> -->
-        </nav>
-      
+        <a href="#" class="logo"><img src="assets/images/d logo.jpg" alt="logo">Dinner Mate</a>
+        <a class="togglebutton" (click)="bar() " >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
       
         <ul class="navbar">
-          <li ><a routerLink="/addrestaurant">Add Restaurant</a></li>
-          <!-- <li><a routerLink="/">Home</a></li> -->
-          <!-- <li><a routerLink="category">Menu</a></li> -->
-          <!-- <li ><a routerLink="addaddress">Add delivery address</a></li> -->
-      
-          <li ><a routerLink="/allusers">Admin</a></li>
-          <li ><a routerLink="user">user</a></li>
-          <li  id="logout">Cart 
-           <li id="logout"> <a>
-              <button>logout</button></a></li>
-          <li  id="signup"> <a routerLink="signup">Sign up</a></li>
-          <li id="login"> <a routerLink="login">Log in</a></li>
+          <!-- <li ><a routerLink="/addrestaurant">Add Restaurant</a></li> -->
+          <li ><a routerLink="/allusers">Customers</a></li>
+          <li ><a routerLink="/allitems">Items</a></li>
+          <li *ngIf="isloggedin()"><a routerLink="/categorydetails">Category</a></li>
+              <li *ngIf="isloggedin()"><a routerLink="/allrestaurants">Restaurants</a></li>
+          <li  *ngIf="!isloggedin()"id="login"> <a routerLink="/login">Log in</a></li>
+          <li *ngIf="isloggedin()" id="logout"> <a>
+            <button class="logout" (click)="logout()">logout</button></a></li>
       
         </ul>
       
+
+       
+        <ul class="navbar small" id="nav" [ngStyle]="{'display':(value==1)?'flex':'none'}">
+          <!-- <li ><a routerLink="/addrestaurant">Add Restaurant</a></li> -->
+          <li ><a routerLink="/allusers">Customers</a></li>
+          <li ><a routerLink="/allitems">Items</a></li>
+          <li *ngIf="isloggedin()"><a routerLink="/categorydetails">Category</a></li>
+              <li *ngIf="isloggedin()"><a routerLink="/allrestaurants">Restaurants</a></li>
+          <li  *ngIf="!isloggedin()"id="login"> <a routerLink="/login">Log in</a></li>
+          <li *ngIf="isloggedin()" id="logout"> <a>
+            <button class="logout" (click)="logout()">logout</button></a></li>
+      
+        </ul>
       </header> 
+      <router-outlet></router-outlet>
       
       

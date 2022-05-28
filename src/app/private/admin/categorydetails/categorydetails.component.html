@@ -1,9 +1,52 @@
+<app-adminnav></app-adminnav>
+<br><br><br>
+<body >
+    
+ 
+<div class="itemdetails">
+  <button  class="add"  style="float: right;"   (click)="addcategory()">Add category</button>
+    <table>
+     
+        <thead>
+            <tr class="title">
+        <th>Id</th>
+        <th>categoryname</th>
+        <th>
+        </th>
+       
+       
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        
+            <tr class="users" *ngFor="let category of categoriesdetails; let i =index">
+              <td>{{i+1}}</td>
+              <td>{{category.categoryname}}</td>
+              <td><img class="picture" src={{images[i]}} alt=""></td>
+      
+            <!-- <td><button (click)="remove(category.id)" class="remove">Remove</button></td> -->
+          </tr>
+
+
+      
+    </tbody>
+
+    </table>
+
+</div>
+</body>
+
+
+
+
+
+<!-- 
+
 <body>
   <table border="2" bordercolor="green">
     <th style="width:5%">Id</th>
     <th>categoryname</th>
-    <th style="width:30%">Restaurants</th>
-    <th>Itemname</th>
 
     <p>
       {{categoriesdetails}}
@@ -16,7 +59,7 @@
   </table>
   <p>{{restaurants}}</p>
   
-  <!-- <ul  class="items"*ngFor="let items of category.category_ItemsDatas">
+   <ul  class="items"*ngFor="let items of category.category_ItemsDatas">
         <li> {{items.itemname}}</li>
       </ul> -->
 
@@ -42,4 +85,3 @@
         </div>
     </div>
 </div> -->
-</body>

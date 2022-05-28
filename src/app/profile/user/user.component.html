@@ -1,8 +1,55 @@
-<p>{{user}}</p>
+<app-navbar></app-navbar>
+<br><br><br>
 
-<div *ngFor ="let use of result" >
-    <!-- <p>{{use.phonenumber}}</p> -->
-    <!-- <p>{{use}}</p> -->
+<body>
+    <div class="flex-container">
+        <div class="usercontainer">
 
-</div>
+            <form class="userform" *ngFor="let details of user; let i=index">
 
+                <div class="username" *ngIf="i!=4&&i!=5 &&i!=1">
+                    <h2 class="heading">{{heading[i] |titlecase}}</h2>
+                    <input size="30" class="details" type="text" value={{details}} disabled>
+                </div>
+            </form>
+            <br>
+            <!-- <div class="edit">
+                <button class="edit"  >Edit</button>
+
+            </div>
+            <br>
+            <div class="submit">
+ <button class="save" >Save</button>
+            </div> -->
+            <div>
+            </div>
+            </div>
+
+
+                <!-- <div class="orderdetails">
+
+                    <div class="order" *ngFor="let pastorder of orders; let i=index">
+                        <span>order ID</span>
+                        <span>{{pastorder.order_ID}}</span>
+                      <h2>Itemname</h2>
+                        <span>{{pastorder.itemsData.itemname}}</span>
+                        <h2>price</h2>
+                        <span>{{pastorder.itemsData.itemprice}}</span>
+                        <h2>Totalcost</h2>
+                        <span>{{pastorder.price}}</span>
+                        <h2>payment_type</h2>
+                        <span>{{pastorder.payment_type}}</span>
+                        <h2>delivery_address</h2>
+                        <span>{{pastorder.delivery_address}}</span>
+                        <p></p>
+                      
+
+
+                    </div> -->
+                <!-- </div> -->
+
+
+         
+       
+    </div>
+</body>

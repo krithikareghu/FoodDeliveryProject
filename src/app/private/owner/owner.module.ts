@@ -6,6 +6,9 @@ import { AddmenuComponent } from './addmenu/addmenu.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { OwnerRoutingModule } from './owner-routing.module';
+import { AppModule } from 'src/app/app.module';
+import { RouterModule } from '@angular/router';
+import { RestaurantloginComponent } from './restaurantlogin/restaurantlogin.component';
 
 
 
@@ -13,10 +16,12 @@ import { OwnerRoutingModule } from './owner-routing.module';
   declarations: [
     AddcategoriesComponent,
     AddrestaurantComponent,
-    AddmenuComponent
+    AddmenuComponent,
+    RestaurantloginComponent
   ],
   imports: [
-    CommonModule,FormsModule,SharedModule
+
+  CommonModule,FormsModule,SharedModule,RouterModule
   ],
   exports:[
     AddrestaurantComponent,OwnerRoutingModule

@@ -25,12 +25,15 @@ export class MessageService {
   }
 
   invalidEmailPasswordMessage() {
-    this.toast.error({detail:"Success",summary:"Phonenumber or password incorrect",position:"tr",duration:2000})
+    this.toast.error({summary:"Phonenumber or password incorrect",position:"tr",duration:2000})
   }
 
   loginAsAdmin() {
     this.toast.success({detail:"Success",summary:"Logged in as Admin",position:"tr",duration:2000})
    
+  }
+  addadddresstosubmit(){
+    this.toast.warning({summary:"Enter address to submit",position:"tr",duration:1000})
   }
 
   loginAsUser() {
@@ -43,7 +46,7 @@ export class MessageService {
   }
 
   emailExistAlready() {
-    this.toast.error({detail:"Success",summary:"Credentials already exists ",position:"tr",duration:2000})
+    this.toast.error({summary:"Credentials already exists ",position:"tr",duration:2000})
    
   }
   addtocart(){
@@ -54,7 +57,7 @@ export class MessageService {
     this.toast.error({detail:"error",summary: "Try again",position:"tr",duration:2000})
   }
   itemalreadyexists(){
-    this.toast.warning({summary: "Already added to cart",position:"tr",duration:2000})
+    this.toast.warning({summary: "Already added to cart",position:"tr",duration:1000})
 
   }
  cartempty(){
@@ -66,6 +69,9 @@ export class MessageService {
  }
  ordersucess(message:any){
   this.toast.success({summary:message,duration:2000})
+ }
+ addressadded(){
+  this.toast.success({summary:"Address added successfully",duration:2000})
  }
   }
 

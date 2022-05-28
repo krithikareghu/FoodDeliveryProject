@@ -1,11 +1,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- <app-navbar></app-navbar> <header  *ngIf="userlogin.roleMatch(['Admin']) else elseblock">
+    <app-adminnav></app-adminnav>
 
-<app-navbar></app-navbar>
-<br><br><br><br>
+</header> 
+<ng-template #elseblock>
+  
+    <app-navbar></app-navbar>
+
+</ng-template><br>-->
+<br><br><br>
 <div class="heading">
     <span style="color:#ffb411;">Categories</span>
-    <h2>Tasty menu of the week </h2>
+    <h2 style=" font-family: 'Poppins',sans-serif; font-weight:500;">Tasty menu of the week </h2>
 </div>
 
 
@@ -17,7 +24,7 @@
         <span class="rating" style="font-style:italic;"> <span
                 class="fa fa-star checked"></span>&nbsp;{{value[i]}}</span>
         <h3 class="categoryname">{{allcategories[i].categoryname}}</h3>
-        <!-- <h1>{{allcategories}}</h1> -->
+
     </div>
 </div>
 

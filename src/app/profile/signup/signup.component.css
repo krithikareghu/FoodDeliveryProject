@@ -103,6 +103,7 @@ input.ng-touched.ng-invalid{
     transform: scale(0.98);
 }
 .form__text{
+    text-decoration: none;
     text-align: center;
 }
 .form__link{

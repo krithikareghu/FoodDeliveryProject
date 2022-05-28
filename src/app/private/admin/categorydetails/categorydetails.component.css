@@ -1,8 +1,77 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins",sans-serif;
+
+    /* height: 90vh; */
+   
+   
+   }
+   .picture{
+       width:50%;
+       height:5rem;
+   }
+   .add{
+    padding: 8px;
+    border-radius: 20px;
+    background-color: #ffb410;
+    color: #E3F0FF;
+    border-radius: 2px;
+    border:1px solid #ffb410;
+    cursor: pointer;
+    font-size: medium;
+
+   }
+   .add:active{
+    transform: scale(0.98);
+}
+
+   .remove{
+      padding: 8px;
+       border-radius: 20px;
+       background-color: rgb(245, 55, 55);
+       color: #E3F0FF;
+       border-radius: 2px;
+       border:1px solid rgb(245, 55, 55);
+       cursor: pointer;
+   }
+   .remove:active{
+       transform: scale(0.98);
+   }
+   .itemdetails{
+    width: 50rem;
+    background-color: #ffffff;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+    float:left;
+    justify-content: center;
+    padding: 3rem;
+
+   }
+   
+   th,td{
+       padding: 25px;
+   }
+
+
 table{
+    width:60vw;
     border-collapse: collapse;
-    /* width: 50%; */
-}
-.items{
-    list-style: circle;
-}
+ padding: 10rem;
+ border-spacing: 10rem;
+    border-color: aliceblue;
   
+}
+.title{
+padding: 30px;
+}
+.users{
+    padding: 30px;
+    text-align: center;
+}

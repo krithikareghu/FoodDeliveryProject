@@ -1,0 +1,37 @@
+.flex-container{
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35rem;
+   }
+   .usercontainer{
+    padding: 50px;
+    width: 20rem;
+    background-color: #ffffff;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+    float:left;
+   
+   }
+   .heading{
+        font-family: "Poppins",sans-serif;
+        font-weight: 500;
+   }
+   .orderdetails{
+    float:left;
+    width: 50rem;
+    background-color: #ffffff;
+    padding: 80px; 
+    margin: 20px;
+    border-radius: 20px; 
+     box-shadow: 0px 25px 40px #1687d933;
+    
+
+   }
+   .details{
+       padding: 5px;
+   }

@@ -1,101 +1,86 @@
 
-<!-- <header class="header">
-    <a href="#" class="logo"><img src="assets/images/d logo.jpg" alt="logo"></a>
-    
-            <ul class="navbar">
-                <li><a routerLink="/">Home</a></li>
-                <li><a routerLink="category">Menu</a></li>
-                <li id="login"> <a routerLink="login">Log in</a></li>
-                <li id="signup"> <a routerLink="signup">Sign up</a></li>  
-         </ul>          
-        </header>     -->
-    
+
 <body>
 
     <div class="container">
         <form #restaurantregister="ngForm" id="createAccountrestaurant" (ngSubmit)="registerrestaurant()">
 
-            <h1 class="form__title">Register Your Restaurant</h1>
+            <h2 class="form__title" style="  font-family: 'Poppins',sans-serif; font-weight:500"> Restaurant details</h2>
             <div style="float:left">
 
-            <div class="form-group" [class.has-error]="name.invalid &&  name.touched"
-                [class.has-success]="name.valid">
-                <input type="text" class="form-control" id="name" name="restaurantname"
-                    [(ngModel)]="restaurantdetails.restaurantname" #name="ngModel" placeholder="Restaurant name" required>
-                <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
+                <div class="form-group" [class.has-error]="name.invalid &&  name.touched"
+                    [class.has-success]="name.valid">
+                    <input type="text" class="form-control" id="name" name="restaurantname"
+                        [(ngModel)]="restaurantdetails.restaurantname" #name="ngModel" placeholder="Restaurant name"
+                        required>
+                    <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
 
-                    <div *ngIf="name.errors?.['required']">Username required</div>
+                        <div *ngIf="name.errors?.['required']">Username required</div>
 
-                </div>
-            </div>
-
-            <!-- <div class="form-group" [class.has-error]="address.invalid &&  address.touched" [class.has-success]="address.valid">
-                <input class="form-control" [(ngModel)]="restaurantdetails.address" placeholder="Restaurant address" name="address" #address="ngModel" type="text"ngModel required>
-            </div> -->
-
-
-            <div class="form-group" [class.has-error]="email.invalid &&  email.touched"
-                [class.has-success]="email.valid">
-                <input type="text" class="form-control" id="email" email name="restaurantEmail" #email="ngModel"
-                    [(ngModel)]="restaurantdetails.restaurantEmail" placeholder="Email" required>
-                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-                    <div *ngIf="email.errors">Email invalid</div>
+                    </div>
                 </div>
 
-            </div>
+
+
+                <div class="form-group" [class.has-error]="email.invalid &&  email.touched"
+                    [class.has-success]="email.valid">
+                    <input type="text" class="form-control" id="email" email name="restaurantEmail" #email="ngModel"
+                        [(ngModel)]="restaurantdetails.restaurantEmail" placeholder="Email" required>
+                    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                        <div *ngIf="email.errors">Email invalid</div>
+                    </div>
+
+                </div>
             </div>
 
             <div style="float:right">
 
-            <div class="form-group" [class.has-error]="phonenumber.invalid &&  phonenumber.touched"
-                [class.has-success]="phonenumber.valid">
-                <input type="tel" minlength="10" maxlength="10 " class="form-control" id="phonenumber" pattern="[0-9]*"
-                    name="phonenumber" #phonenumber="ngModel" [(ngModel)]="restaurantdetails.restaurantcontact"
-                    placeholder="Contact number" required>
+                <div class="form-group" [class.has-error]="phonenumber.invalid &&  phonenumber.touched"
+                    [class.has-success]="phonenumber.valid">
+                    <input type="tel" minlength="10" maxlength="10 " class="form-control" id="phonenumber"
+                        pattern="[0-9]*" name="phonenumber" #phonenumber="ngModel"
+                        [(ngModel)]="restaurantdetails.restaurantcontact" placeholder="Contact number" required>
 
-                <div  class="alert alert-danger" *ngIf="phonenumber.touched && !phonenumber.valid">
+                    <div class="alert alert-danger" *ngIf="phonenumber.touched && !phonenumber.valid">
 
-                    <div *ngIf="phonenumber.errors?.['pattern']">phonenumber invalid</div>
-                    <div *ngIf="phonenumber.errors?.['minlength']">phonenumber invalid</div>
-                    <div *ngIf="phonenumber.errors?.['required']">Phonenumber required</div>
+                        <div *ngIf="phonenumber.errors?.['pattern']">phonenumber invalid</div>
+                        <div *ngIf="phonenumber.errors?.['minlength']">phonenumber invalid</div>
+                        <div *ngIf="phonenumber.errors?.['required']">Phonenumber required</div>
+
+                    </div>
 
                 </div>
 
-            </div>
+                <div class="form-group" [class.has-error]="password.invalid &&  password.touched"
+                    [class.has-success]="password.valid">
+                    <input type="password" id="password" minlength="7" name="restaurantpassword" class="form-control"
+                        #password="ngModel" [(ngModel)]="restaurantdetails.restaurantpassword" placeholder="Password"
+                        required>
 
-            <div class="form-group" [class.has-error]="password.invalid &&  password.touched"
-                [class.has-success]="password.valid">
-                <input type="password" id="password" minlength="7" name="restaurantpassword" class="form-control"
-                    #password="ngModel" [(ngModel)]="restaurantdetails.restaurantpassword" placeholder="Password" required>
+                    <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+                        <div *ngIf="password.errors?.['required']">password required</div>
+                        <div *ngIf="password.errors?.['minlength']">Password is weak</div>
+                    </div>
 
-                <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
-                    <div *ngIf="password.errors?.['required']">password required</div>
-                    <div *ngIf="password.errors?.['minlength']">Password is weak</div>
+
                 </div>
-
-                
-</div>
             </div>
             <div class="form-group">
-                <textarea  class="form-control"[(ngModel)]="restaurantdetails.restaurantdescription" name="restaurantdescription" #description="ngModel"
-                    type="text" placeholder="Restaurant description"></textarea>
+                <textarea class="form-control" [(ngModel)]="restaurantdetails.restaurantdescription"
+                    name="restaurantdescription" #description="ngModel" type="text"
+                    placeholder="Restaurant description"></textarea>
             </div>
-
-            <!-- <div class="form-group">
-            <input class="form-control" type="file" (change)="onFileChanged($event)"> -->
-            <!-- <img [src]="imgURL" *ngIf="imgURL"> -->
-            <!-- </div> -->
 
 
             <div class="form-groupsubmit">
                 <button class="form__button" [disabled]="restaurantregister.invalid" id="signupsubmit" type="submit">
-                    Register
+                    Add
                 </button>
 
-                <p class="form__text">
-                    <a routerLink="/home/login" class="form__link" id="linkLogin">
+                <!-- <p class="form__text">
+                    <a routerLink="/loginrestaurant" class="form__link" id="linkLogin">
                         Already have an account? Sign in</a>
-                </p>
+                </p> -->
             </div>
 
         </form>

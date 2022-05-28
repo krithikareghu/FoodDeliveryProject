@@ -1,0 +1,35 @@
+<app-adminnav></app-adminnav>
+<br><br><br>
+<body >
+    
+
+<div class="restaurantdetails">
+    <button  class="add"  style="float: right;"   (click)="addrestaurant()">Add Restaurant</button>
+    <table  >
+        
+        <thead>
+            <tr class="title">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact Number</th>
+        
+    </tr>
+    </thead>
+    <tbody>
+        
+            <tr class="users" *ngFor="let restaurants of allrestaurants; let i =index">
+            <td>{{i+1}}</td>
+            <td>{{restaurants.restaurantname}}</td>
+            <td>{{restaurants.restaurantEmail}}</td>
+            <td>{{restaurants.restaurantcontact}}</td>
+            <!-- <td><button (click)="deleterestaurant(restaurants.restaurantname)" class="remove">Remove</button></td> -->
+            </tr>
+
+      
+    </tbody>
+
+    </table>
+
+</div>
+</body>

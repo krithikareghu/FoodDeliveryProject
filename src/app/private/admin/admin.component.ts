@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpclientService } from 'src/app/services/httpclient.service';
 import { UserloginService } from './../../services/login/userlogin.service';
+import { ClientService } from './client.service';
 
 @Component({
   selector: 'app-admin',
@@ -10,31 +11,23 @@ import { UserloginService } from './../../services/login/userlogin.service';
 export class AdminComponent implements OnInit {
 
   message:any;
-  constructor(private client: HttpclientService,private userservice:UserloginService) { }
+  constructor(private client: ClientService,private userservice:UserloginService) { }
   customers!: any[];
  
   ngOnInit() {
-    this.client.getcustomerdetails().subscribe(
+    this.client.getallusers().subscribe(
       response => this.handlecustomerResponse(response),
      
     ); 
-    this.forAdmin();  
+  
   }
   handlecustomerResponse(response: any) {
     this.customers = response;
   }
-  forAdmin(){
-    this.userservice.foradmin().subscribe((response)=>{
-      this.message=response;
-      console.log(response)
-    },
-    (error)=>{
-      console.log(error);
-    }
-    )
+  
   }
  
 
 
-}
+
 

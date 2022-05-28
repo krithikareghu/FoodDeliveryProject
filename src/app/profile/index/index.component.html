@@ -12,53 +12,38 @@
 
 <body>
     <!-- <navbar> -->
-     <header>
-        <app-navbar></app-navbar>
+     <header  *ngIf="userlogin.roleMatch(['Admin']) else elseblock">
+        <app-adminnav></app-adminnav>
    
     </header> 
+    <ng-template #elseblock>
+      
+        <app-navbar></app-navbar>
 
+    </ng-template>
 
+<br><br>
     <!-- Home section -->
-    <section class="home" id="home">
+    <section    class="home" id="home">
         <div class="home-text">
             <h1>Dinner Mate</h1>
             <h2>Discover the best <br>food & drinks</h2><br>
-            <a href="#menu" class="btn">View Menu</a>
+            <a routerLink="/category" class="btn">View Menu</a>
         </div>
         <div class="home-img">
             <img src="assets/images/pizza.jpg" alt="image">
         </div>
 
-    </section>
-    <section class="menu">
-<!-- 
-        <div class="heading">
-            <span style="color:#ffb411;">Categories</span>
-            <h2>Tasty menu of the week </h2>
-        </div> -->
-<!-- <a id="#menu"> -->
-        <!-- <div class="container">
-            <div class="innercontainer" *ngFor="let food of categories;let j=index">
-                <a routerLink="category/{{food.id}}">
-                    <img class="image"  src="{{food.categoryurl}}" alt="categories" >
-                </a>
-        
-                <span class="rating" style="font-style:italic;"> <span
-                        class="fa fa-star checked"></span>&nbsp;{{value[j]}}</span>
-                        <h3>{{food.categoryname}}</h3>
-            </div>
-        </div> -->
-    <!-- </a> -->
-    </section>
+    </section  >
+    <section *ngIf="userlogin.roleMatch(['User'])" class="menu">
+
+   
     <app-menu></app-menu>
+</section>
   
 
     <!-- About -->
-    <section class="about" id="About">
-        <div class="about-img">
-            <!-- <img src="assets\images\side-view-pizza-with-chicken-mushrooms-served-with-sauce-vegetables-salad-wooden-plate.jpg"
-                width="50%" padding="30px" alt="about"> -->
-        </div>
+    <section *ngIf="userlogin.roleMatch(['User'])" class="about" id="About">
         <div class="about-text" id=#About>
             <span>About Us</span>
             <h2>We have different styles of food</h2>

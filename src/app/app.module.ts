@@ -7,7 +7,7 @@ import { IndexComponent } from './profile/index/index.component';
 import { SignupComponent } from './profile/signup/signup.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { FormsModule } from '@angular/forms';
-import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { AddaddressComponent } from './profile/addaddress/addaddress.component';
 import { SharedModule } from './shared/shared.module';
@@ -24,13 +24,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ForbiddenComponent } from './public/forbidden/forbidden/forbidden.component'
 import { AuthGuard } from './core/auth/-auth.guard';
 import { AuthinterceptorInterceptor } from './core/auth/helpers/authinterceptor.interceptor';
-import { SearchpipePipe } from './shared/pipes/searchpipe.pipe';
+
 import { RestaurantsComponent } from './public/restaurants/restaurants.component';
 import { FooditemsComponent } from './public/fooditems/fooditems.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgToastModule } from 'ng-angular-popup';
 import { CheckoutComponent } from './private/checkout/checkout.component';
-import { OrdersucessComponent } from './private/ordersucess/ordersucess.component';
+
 
 
 @NgModule({
@@ -47,30 +47,32 @@ import { OrdersucessComponent } from './private/ordersucess/ordersucess.componen
     ForbiddenComponent,
     RestaurantsComponent,
     FooditemsComponent,
-CheckoutComponent,
-OrdersucessComponent
-  
+    CheckoutComponent,
+
+
 
 
   ],
   imports: [
- 
-  BrowserModule, OwnerRoutingModule,
+
+    BrowserModule, OwnerRoutingModule,
     AdminRoutingModule,
     AppRoutingModule,
     FormsModule, HttpClientModule,
     SharedModule,
     MatToolbarModule,
     NgToastModule,
-  
-    
-  
-  
+
+
+
+
     CoreModule, OwnerModule, BrowserAnimationsModule, MatButtonModule, MatGridListModule
   ],
-  providers: [UserloginService, AuthGuard, 
-    { provide: HTTP_INTERCEPTORS,
-     useClass: AuthinterceptorInterceptor, multi: true }],
+  providers: [UserloginService, AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthinterceptorInterceptor, multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Useraddress } from '../../shared/model/useraddress';
 import { AuthenticationService } from '../auth/authentication.service';
+import { globalVars } from 'src/app/shared/url.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,11 @@ export class UseraddressService {
   constructor(private http:HttpClient,private auth:AuthenticationService) { }
     
 
-  private baseurl="http://localhost:8080/addaddress"
+  private baseurl=globalVars.backendAPI+"/user/addaddress"
+   userid=localStorage.getItem("userID")
   
   addaddress(useraddress:Useraddress):Observable<object>{
-
-    const token=this.auth.getToken();
-  const params=new HttpParams().append('jwttoken',token!)
-    console.log(useraddress);
-    return this.http.put(`${this.baseurl}`,useraddress,{params:params});
+    return this.http.put(`${this.baseurl}/`+this.userid,useraddress);
 
   }
 }

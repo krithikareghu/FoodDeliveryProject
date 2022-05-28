@@ -14,59 +14,48 @@ import { UserloginService } from 'src/app/services/login/userlogin.service';
 })
 export class CartService {
 
-  public cartServiceEvent = new BehaviorSubject({}); 
-   //cart:Cart=new Cart();
-  placeholder: any = [];
-  noofitems = new BehaviorSubject([]);
-  items:any=[];   
-  cartitems!:any;
-  cartarray!:any;
-
+  public cartServiceEvent = new BehaviorSubject({});
  
+  noofitems = new BehaviorSubject([]);
   constructor(private message: MessageService, private auth: AuthenticationService,
     private http:HttpClient,private helper:HttpclientService,private Userlogin:UserloginService) { 
-    const itemholder = JSON.parse(localStorage.getItem('cartitems') || '[]')
-    if (itemholder) {
-      this.noofitems.next(itemholder);
 
-      this.getCartDetailsByUser();
-  
-    }
 
   }
 
   
-  cartQty = 0;
+  cartQty =0;
   cartObj = [];
  public cartTotalPrice :any;
 
 
-   getCartDetailsByUser(){
-   
-     this.helper.getcartsbyuser().subscribe(this.observer)
-     
-    }
+ getCartDetailsByUser(){
+  this.userid=this.auth.getuserid();
 
-    observer={
-    next:(data:any)=>{
+  this.helper.getcartsbyuser(this.userid).subscribe(this.observer)
+  
+ }
 
-    this.cartObj = data;
-      this.cartQty = data.length;
-     this.cartServiceEvent.next({"status":"completed"})
+ observer={
+ next:(data:any)=>{
 
-  },
-  error:()=>{
-    alert("Error while fetching the cart Details");
+ this.cartObj = data;
+   this.cartQty = data.length;
+  this.cartServiceEvent.next({"status":"completed"})
 
-  }
+},
+error:()=>{
+ alert("Error while fetching the cart Details");
+
+}
 }
 
   addCart(item:any){
-    this.cartServiceEvent.next({"status":"completed"})//emitter
-
+    this.cartServiceEvent.next({"status":"completed"})
+   this.userid=this.auth.getuserid();
     if(this.isloggedin())
     {
-    if( this.Userlogin.roleMatch(['user']))
+    if( this.Userlogin.roleMatch(['User']))
     {
 
       var request  = {
@@ -74,6 +63,7 @@ export class CartService {
         "qty":1,
         "itemname":item.itemname,
         "price":item.itemprice,
+        "userId":this.userid,
        
       }
   
@@ -90,6 +80,7 @@ export class CartService {
     }
       addcartobserver={
         next:(data:any)=>{
+          this.message.addtocart();
           this.getCartDetailsByUser();
          
   
@@ -116,42 +107,29 @@ export class CartService {
   getQty(){
     return this.cartQty;
   }
-  token!:any;
-getuserid(){
-  this.helper.getuserid().subscribe(this.getidobserver)
 
-}
-getidobserver={
-  next:(res:any)=>{
-this.userid=res;
-  },error:()=>{
-   console.log("error in getting the id")
-  }
 
-}
-   removeCart(cartId:number){
-     this.getuserid();
-      var request = {         
-          "userId":this.userid,
-          "cartId":cartId,
-      }
-      console.log(request)
-      this.helper.removecartitem(request).subscribe(this.removeCartobserver)
-  }
-  removeCartobserver=(data:any)=>{
-    next:{ this.getCartDetailsByUser();}
-  error:(error:any)=>{
-    alert("Error while fetching the cart Details");
-  }
-  }
+
+
+  //  removeCart(cartId:number){
+  //     var request = {         
+  //         "userId":this.userid,
+  //         "cartId":cartId,
+  //     }
+  //     console.log(request)
+  //     this.helper.removecartitem(request).subscribe(this.removeCartobserver)
+  // }
+  // removeCartobserver=(data:any)=>{
+  //   next:{ this.getCartDetailsByUser();}
+  // error:(error:any)=>{
+  //   alert("Error while fetching the cart Details");
+  // }
+  // }
 
 public isloggedin() {
-
   return this.auth.isUserLoggedIn();
 }
 
-public gettotalcost(){
-  return localStorage.getItem('totalPrice')
-}
+
 }
 

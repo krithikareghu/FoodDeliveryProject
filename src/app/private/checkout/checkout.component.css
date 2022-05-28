@@ -1,3 +1,5 @@
+
+
 body{
     margin: 0;
     padding: 0;
@@ -5,16 +7,28 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 50rem;
    
    }
    .cartcontainer{
- justify-content: center;
-    width: 60vw;
+ /* justify-content: left; */
+    width: 70rem;
     background-color: #ffffff;
     margin: 30px;
     border-radius: 20px;
     box-shadow: 0px 25px 40px #1687d933;
     float:left;
+   }
+   .successcontainer{
+       float:right;
+       width: 40rem;
+       background-color: #ffffff;
+       text-align: center;
+       margin: 20px;
+       border-radius: 20px;
+       box-shadow: 0px 25px 40px #1687d933;
+       
+
    }
 
    .Header{
@@ -33,8 +47,46 @@ body{
    }
    .empty{
        text-align: center;
+       width: 20rem;
+    background-color: #ffffff;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+    float:left;
+    height:5vh;
+   
+
+   }
+
+
+   .delivery_address{
+        
+    border-radius: 10px;
+    background-color: #dddddd;
+    padding: 1em;
+    color: #666666;
+    border: 2px solid transparent ;
+    outline: none;
+    font-family: "Poppins",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+
+    transition: all 0.2s;
    }
   
+   .delivery_address:hover{
+    background-color: #eeeeee;
+    cursor: pointer;
+
+    
+}
+.delivery_address:focus{
+    cursor: text;
+    color:#333333;
+    background-color: white;
+    border-color: #333333;
+}
 
  
 /* .heading{
@@ -88,6 +140,7 @@ body{
     float: left;
   
 }
+
 
    
 
@@ -163,3 +216,28 @@ body{
 .itemname,.price,.quantity,.totalprice,.paymentdetails,.placeorder{
     font-family: "Poppins",sans-serif;
 }
+@media (max-width: 808px) {
+    .cartcontainer{
+        display: block;
+   width: 30rem;
+   
+    
+
+    }
+  
+    .successcontainer{
+        display: inline-block;
+        margin-top:2rem;
+        width:35rem;
+        float: none;
+      
+        background-color: #ffffff;
+        margin: 30px;
+        border-radius: 20px;
+        box-shadow: 0px 25px 40px #1687d933;
+       
+    }
+    body{
+        display: block;
+    }
+  }

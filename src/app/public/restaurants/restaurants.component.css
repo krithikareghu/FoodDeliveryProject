@@ -30,6 +30,7 @@
       column-gap: 50px;
       row-gap: 50px; 
       margin-bottom: -10px;
+      
     
       /* display: grid; */
       /* grid-template-columns: repeat(auto-fit, minmax(220px, auto)); */
@@ -45,6 +46,7 @@
   }
   .innercontainer{
           /* position: relative; */
+         
           margin-top: 2rem;
           justify-content: center;
           align-items: center;
@@ -100,3 +102,17 @@
         color: #f0980a;
         font-family: 'Poppins', sans-serif;
     }
+
+    @media (max-width: 808px) {
+      .container{
+        display:grid;
+        grid-template-columns: auto   ;
+  
+      }
+      .innercontainer  img{
+        width: 55vw;
+    height: 25vh;
+   
+      }
+    }
+  

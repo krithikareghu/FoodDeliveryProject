@@ -17,7 +17,7 @@ import { AddmenuComponent } from './private/owner/addmenu/addmenu.component';
 import { RestaurantsComponent } from './public/restaurants/restaurants.component';
 import { FooditemsComponent } from './public/fooditems/fooditems.component';
 import { CheckoutComponent } from './private/checkout/checkout.component';
-import { OrdersucessComponent } from './private/ordersucess/ordersucess.component';
+
 
 
 
@@ -27,10 +27,9 @@ const routes: Routes = [
   { path: 'home', component: IndexComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: "addaddress", component: AddaddressComponent, canActivate: [AuthGuard], data: { roles: ['user'] } },
+  { path: "addaddress", component: AddaddressComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
   { path: "addrestaurant", component: AddrestaurantComponent },
   { path: "category", component: MenuComponent },
-  { path: "admin/allusers", component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: "home/allcategories", component: CategoryComponent },
   { path: "forbidden", component: ForbiddenComponent },
   { path: "home/user", component: UserComponent },
@@ -40,7 +39,8 @@ const routes: Routes = [
   { path: 'category/:id', component: MenuComponent },
   { path: 'restaurants/:categoryid', component: RestaurantsComponent },
   { path: 'restaurants/:categoryid/items/:restaurantname', component: FooditemsComponent },
-  { path: 'ordersucess', component: OrdersucessComponent },
+  
+
   { path: 'cart', component: CheckoutComponent },
   { path: "admin", loadChildren: () => (import('./private/admin/admin.module')).then(mod => mod.AdminModule) },
   { path: "admin", loadChildren: () => (import('./core/core.module')).then(mod => mod.CoreModule) },

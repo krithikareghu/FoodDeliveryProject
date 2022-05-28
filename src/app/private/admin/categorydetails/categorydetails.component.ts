@@ -6,6 +6,9 @@ import { RestauarntService } from './../../../services/restaurant/restauarnt.ser
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
+import { ClientService } from './../client.service';
+import { Router } from '@angular/router';
+import { globalVars } from 'src/app/shared/url.model';
 
 @Component({
   selector: 'app-categorydetails',
@@ -15,8 +18,9 @@ import { MatSort, Sort } from '@angular/material/sort';
 export class CategorydetailsComponent implements OnInit {
   selectedFile: any;
   imgURL: any;
-
-  constructor(private _liveAnnouncer: LiveAnnouncer, private client: FoodService, private http: HttpClient, private restaurant: RestauarntService,
+baseurl=globalVars.backendAPI
+  constructor(private client: FoodService,
+    private http: HttpClient, private restaurant: RestauarntService, private helper: ClientService,private router:Router,
     private allcategory: HttpclientService) { }
   categoriesdetails!: any[];
   allcategories!: any;
@@ -31,28 +35,20 @@ export class CategorydetailsComponent implements OnInit {
     this.client.getcategorydetails().subscribe(
       response => this.handlecategoryResponse(response),
     );
-    this.allcategory.onlycategoryname().subscribe(
-      response => this.handleallcategoryResponse(response),
-    );
+    this.displaycategorypic();
+
   }
   handlecategoryResponse(response: any) {
     this.categoriesdetails = response;
   }
-  handleallcategoryResponse(response: any) {
-    this.allcategories = response;
-    this.displaycategorypic();
-    this.displayrestaurants();
-  }
+  
 
   displaycategorypic() {
-    this.http.get('http://localhost:8080/categorypic')
+    this.http.get(this.baseurl+'/category/categorypic')
       .subscribe(
         res => {
           this.images = res;
-          // for(let i of  res)
-          // this.retrieveResonse = res;
-          // this.base64Data = this.retrieveResonse.categorypicture
-          //  this.retrievedImage =  'data:image/jpeg;base64,' + this.base64Data;
+         
         });
   }
   displayrestaurants() {
@@ -62,5 +58,19 @@ export class CategorydetailsComponent implements OnInit {
       }
     )
 
+
+  }
+  remove(categoryid: any) {
+    this.helper.removecategory(categoryid).subscribe(this.observer)
+  }
+  observer = {
+    next: (res: any) => {
+      this.categoriesdetails = res;
+    }, error: () => {
+      alert("Something went wrong")
+    }
+  }
+  addcategory(){
+    this.router.navigate(['/owner/addcategory'])
   }
 }

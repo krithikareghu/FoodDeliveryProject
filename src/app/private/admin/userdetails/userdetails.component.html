@@ -1,0 +1,40 @@
+<app-adminnav></app-adminnav>
+<br><br><br>
+<body >
+    
+
+<div class="userdetails">
+    <table  >
+        <thead>
+            <tr class="title">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact Number</th>
+        <th>Address</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        
+            <tr class="users" *ngFor="let user of allusers; let i =index">
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phonenumber}}</td>
+            <td *ngIf="user.address==null else elseblock">
+            Not added</td>
+                <ng-template #elseblock>
+                    {{user.address}}
+                </ng-template>
+                <td><button (click)="removeusers(user.id)" class="remove">Remove</button></td>
+            </tr>
+
+
+      
+    </tbody>
+
+    </table>
+
+</div>
+</body>

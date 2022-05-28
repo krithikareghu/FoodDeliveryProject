@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpclientService } from 'src/app/services/httpclient.service';
 import { Router, ActivatedRoute ,ParamMap} from '@angular/router';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-restaurants',
@@ -10,7 +11,7 @@ import { Router, ActivatedRoute ,ParamMap} from '@angular/router';
 })
 export class RestaurantsComponent implements OnInit {
 
-  constructor(private http:HttpclientService,private route:ActivatedRoute) { }
+  constructor(private http:HttpclientService,private route:ActivatedRoute,private auth:AuthenticationService) { }
   categoryid!:any;
 allrestaurant!:any;
 
@@ -29,4 +30,7 @@ allrestaurant!:any;
     localStorage.setItem('selectedrestaurant',restaurant);
   }
 
+  islogged(){
+    this.auth.isUserLoggedIn();
+  }
 }

@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    font-family: "Poppins", sans-serif;
+
+}
+.add{
+    padding: 8px;
+    border-radius: 20px;
+    background-color: #ffb410;
+    color: #E3F0FF;
+    border-radius: 2px;
+    border:1px solid #ffb410;
+    cursor: pointer;
+    font-size: medium;
+    border-radius: 5px;
+
+   }
+   .add:active{
+    transform: scale(0.98);
+}
+
+.restaurantdetails {
+    /* width: 50vw;
+       height:50vh; */
+    /* position: fixed; */
+   
+
+    justify-content: center;
+    width: 60vw;
+    background-color: #ffffff;
+   
+    margin-top: 5rem;
+    /* margin-bottom: 10rem; */
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+    float: left;
+    padding: 3rem;
+}
+
+th,
+td {
+    padding: 20px;
+}
+
+
+table {
+    width: 60vw;
+    border-collapse: collapse;
+    padding: 10rem;
+    border-spacing: 10rem;
+    border-color: aliceblue;
+
+}
+
+.title {
+    padding: 30px;
+}
+
+.remove {
+    padding: 8px;
+    border-radius: 20px;
+    background-color: rgb(245, 55, 55);
+    color: #E3F0FF;
+    border-radius: 2px;
+    border: 1px solid rgb(245, 55, 55);
+    cursor: pointer;
+}
+
+.remove:active {
+    transform: scale(0.98);
+}
+
+.users {
+    padding: 30px;
+    text-align: center;
+}

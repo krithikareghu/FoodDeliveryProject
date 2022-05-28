@@ -4,13 +4,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Userlogin } from 'src/app/shared/model/userlogin';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
-
+import { globalVars } from 'src/app/shared/url.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserloginService {
-  private baseurl = "http://localhost:8080/authenticate"
+  private baseurl = globalVars.backendAPI+"/authenticate"
+ 
   constructor(private http: HttpClient, private auth: AuthenticationService) { }
 
   requestheader = new HttpHeaders(
@@ -18,6 +19,7 @@ export class UserloginService {
       "No-Auth": "True"
     }
   )
+ 
 
   login(userlogin: Userlogin): Observable<object> {
     return this.http.post(`${this.baseurl}`, userlogin, { headers: this.requestheader });
@@ -45,8 +47,6 @@ export class UserloginService {
 
     return false;
   }
-  public foradmin(){
-   return this.http.get("http://localhost:8080/forAdmin",{responseType:'text'});
-  }
+ 
 }
 

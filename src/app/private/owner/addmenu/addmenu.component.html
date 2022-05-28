@@ -1,13 +1,18 @@
-<form  #categorydata="ngForm" (ngSubmit)="onUpload()">
+<app-adminnav></app-adminnav>
+<br> <br><br><br><br>
 
+<body>
     
 
-    <label for="choose category">Choose category </label>&nbsp;
+<form  #categorydata="ngForm" (ngSubmit)="onUpload()">
+<br><br><br>
+    <div class="itemdetails">
 
+        <h3 style="text-align: center;"class="heading">Add dish</h3><br>
    
-    <select [(ngModel)]="additems.categoryname" name="categoryname" id="categoryname">
+    <!-- <select [(ngModel)]="additems.categoryname" name="categoryname" id="categoryname">
         <option  [value]="category.categoryname"*ngFor="let category of categories">{{category.categoryname}}</option>
-    </select>
+    </select> -->
     <!-- [ngValue]="category" -->
 <br><br>
 <label for="itemname">Itemname </label>&nbsp;
@@ -20,5 +25,8 @@
       
         <br>
         <br>
-        <button type="submit" class="btn btn-primary">submit</button>
+        <button type="submit" class="submit">submit</button> 
+    </div>
 </form>
+
+</body>

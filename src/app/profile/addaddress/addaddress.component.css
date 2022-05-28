@@ -1,10 +1,66 @@
 *{
     text-align: center;
 }
-/* .addressform__button{
-    
-} */
-
+body{
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32rem;
+   
+   }
+   .addresscontainer{
+ /* justify-content: left; */
+    width: 50rem;
+    background-color: #ffffff;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+    float:left;
+   }
 .addressinput{
-    margin-top: 50px;
+    font-family: 'Poppins',sans-serif; font-weight:500;
+    border-radius: 10px;
+    background-color: #dddddd;
+    padding: 1em;
+    color: #888585;
+    border: 2px solid transparent ;
+    outline: none;
+    font-family: "Poppins",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+    width:200px;
+    height: 50px;
+    transition: all 0.2s;
+}
+.addressinput:hover{
+    background-color: #eeeeee;
+    cursor: pointer;
+
+    
+}
+.addressform__button:active{
+    transform: scale(0.98);
+}
+.addressinput:focus{
+    cursor: text;
+    color:#333333;
+    background-color: white;
+    border-color: #333333;
+}
+.addressform__button{
+    background-color: rgb(107, 200, 214);
+    padding: 8px;
+    color: #120a0a;
+    border-radius: 5px;
+    border: 1px solid rgb(61, 168, 152);
+    cursor: pointer;
+    font-family: 'Poppins',sans-serif; font-weight:500
+}
+.addressform__button:hover{
+    background-color: rgb(111, 214, 220);
+
 }

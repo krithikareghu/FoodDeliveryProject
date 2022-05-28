@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Userregister } from 'src/app/shared/model/userregister';
+import { globalVars } from '../shared/url.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,67 +9,70 @@ export class HttpclientService {
 
   requestheader = new HttpHeaders(
     {
-      "No-Auth": "True"
+      "NO-AUTH": "True"
     })
-  baseurl="http://localhost:8080"
+  baseurl= globalVars.backendAPI
 
   constructor(private http:HttpClient) { }
 
-
-  getcustomerdetails(){
-    return this.http.get<Userregister>(this.baseurl+'/allusers');
-  }
- 
   getallcategories(){
-    return this.http.get(this.baseurl+'/findAllcategories',{headers: this.requestheader });
+  
+    return this.http.get(this.baseurl+'/category/findAllcategories',{headers: this.requestheader });
   }
   onlycategoryname(){
-    return this.http.get(this.baseurl+"/allcategory",{headers: this.requestheader});
+    return this.http.get(this.baseurl+"/category/allcategory",{headers: this.requestheader});
   }
   getrestaurants(categoryid:number){
-    return this.http.get(this.baseurl+"/getrestaurantsfromcategory/"+categoryid,{headers: this.requestheader})
+    return this.http.get(this.baseurl+"/category/getrestaurantsfromcategory/"+categoryid,{headers: this.requestheader})
   }
   getcategorypics(){
-    return this.http.get(this.baseurl+'/categorypic',{headers: this.requestheader})
+    return this.http.get(this.baseurl+'/category/categorypic',{headers: this.requestheader})
   }
   getitems(restaurantname:string){
-    return this.http.get(this.baseurl+'/getitemsfromrestaurants/'+restaurantname,{headers: this.requestheader})
+    return this.http.get(this.baseurl+'/category/getitemsfromrestaurants/'+restaurantname,{headers: this.requestheader})
   }
   getitempic(restaurantname:string){
-    return this.http.get(this.baseurl+'/itempic/'+restaurantname,{headers:this.requestheader})
+    return this.http.get(this.baseurl+'/category/itempic/'+restaurantname,{headers:this.requestheader})
   }
 
-  jwttoken=localStorage.getItem("jwtToken");
+  getuserbyid(userid:any){
+   
+    return this.http.get(this.baseurl+'/user/getuserdetails/'+userid)
+  }
 
- jwtheader={
-  "token":""+this.jwttoken
-}
+
   addtocart(request:any){
    
-  return  this.http.post(this.baseurl+"/additemtocart",request,{headers:this.jwtheader})
+  return  this.http.post(this.baseurl+"/user/additemtocart",request)
   }
  
 
   removecartitem(request:any){
  
-    return this.http.delete(this.baseurl+"/removeItemFromCart",{params:request})
+    return this.http.delete(this.baseurl+"/user/removeItemFromCart",{params:request})
   }
   
   updatequantity(request:any){
-    return this.http.put(this.baseurl+"/updateQtyForCart",request,{headers:this.jwtheader})
-  }
-  getcartsbyuser(){
-    return this.http.get(this.baseurl+"/getCartsByUserId",{headers:this.jwtheader})
-  }
-  checkoutorder(request:any){
-    return this.http.post(this.baseurl+"/checkout_order",request,{headers:this.jwtheader})
+    return this.http.put(this.baseurl+"/user/updateQtyForCart",request)
   }
   
-  getuserid(){
-console.log(this.jwttoken)
-    return this.http.get(this.baseurl+"/getuserid",{headers:this.jwtheader})
+  getcartsbyuser(userid:any){
+    return this.http.get(this.baseurl+"/user/getCartsByUserId/"+userid)
   }
-  getOrdersByUserId(){
-    return this.http.get(this.baseurl+"/getOrdersByUserId",{headers:this.jwtheader})
+  checkoutorder(request:any){
+    return this.http.post(this.baseurl+"/user/checkout_order",request)
   }
+  
+  // getuserid(){
+
+  //   return this.http.get(this.baseurl+"/getuserid")
+  // }
+  getOrdersByUserId(userid:any){
+    return this.http.get(this.baseurl+"/user/getOrdersByUserId/"+userid)
+  }
+  updateuserdetails(updateuser:any){
+    return this.http.put(this.baseurl+'/user/updateuser',updateuser);
+  }
+ 
+
 }

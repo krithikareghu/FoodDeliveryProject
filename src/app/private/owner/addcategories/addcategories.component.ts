@@ -4,6 +4,7 @@ import { FoodService } from './../../../services/food/food.service';
 import { Addcategory } from './../../../shared/model/addcategory';
 import { HttpclientService } from 'src/app/services/httpclient.service';
 import { Router } from '@angular/router';
+import { globalVars } from 'src/app/shared/url.model';
 
 @Component({
   selector: 'app-addcategories',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class AddcategoriesComponent implements OnInit {
 
   constructor(private httpClient: HttpClient, private client: HttpclientService,private router:Router,    private categoryservice: FoodService) { }
-
+baseurl=globalVars.backendAPI
   addcategory: Addcategory = new Addcategory();
   ngOnInit() {
    // this.client.onlycategoryname().subscribe((response:any)=>this.handlecategoryResponse(response),)
@@ -60,12 +61,13 @@ export class AddcategoriesComponent implements OnInit {
   }
   onUpload() {
     const uploadData = new FormData();
-    uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+    uploadData.append('myFile', this.selectedFile)
+    // this.selectedFile.name);
     const categoryname = this.addcategory.categoryname;
     const params = new HttpParams()
       .append('category', categoryname)
     console.log(this.addcategory)
-    return this.httpClient.post("http://localhost:8080/addcategory", uploadData, {
+    return this.httpClient.post(this.baseurl+"/admin/addcategory", uploadData, {
       params: params
     })
       .subscribe(this.observer)

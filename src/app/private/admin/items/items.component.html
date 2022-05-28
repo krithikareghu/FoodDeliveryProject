@@ -1,0 +1,39 @@
+
+<app-adminnav></app-adminnav>
+<br><br><br>
+<body >
+    
+
+
+<div class="itemdetails">
+    <button  class="add"  style="float: right;"   (click)="additems()">Add Items</button>
+    <table>
+      
+        <thead>
+            <tr class="title">
+        <th>Id</th>
+        <th>Itemname</th>
+        <th>Price</th>
+       
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        
+            <tr class="users" *ngFor="let item of allitems; let i =index">
+            <td>{{item.id}}</td>
+            <td>{{item.itemname}}</td>
+            <td>${{item.itemprice}}</td>
+            <td><img class="picture" src={{itempic[i]}} alt=""></td>
+            <!-- <td><button (click)="removeitem(item.id)" class="remove">Remove</button></td> -->
+          </tr>
+
+
+      
+    </tbody>
+
+    </table>
+
+</div>
+</body>
+

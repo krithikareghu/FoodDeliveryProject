@@ -14,9 +14,7 @@ export class AppComponent {
   constructor(private auth:AuthenticationService,private router:Router,public userlogin:UserloginService,private route:ActivatedRoute) { }
   public searchFilter: any = '';
   ngOnInit(): void {
-    this.route.params.subscribe((params: { [x: string]: any; })=>{
-      if(params['searchFilter'])
-        this.searchFilter=params['searchFilter']})
+  
   }
 public isloggedin(){
 

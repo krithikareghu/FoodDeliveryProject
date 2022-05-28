@@ -15,6 +15,7 @@ import { HttpclientService } from './../../services/httpclient.service';
 })
 export class LoginComponent implements OnInit {
 
+  
   userlogin: Userlogin = new Userlogin();  
   constructor(
     private userloginservice:UserloginService,
@@ -29,6 +30,7 @@ phonenumber!:string;
 observer = {
   next:(response:any)  =>{
     this.auth.setRoles(response.userData.roles);
+    this.auth.setuserid(response.userData.id);
     this.auth.setToken(response.jwttoken);
    const role= response.userData.roles[0].rolename;
     if(role==='Admin')
@@ -52,17 +54,8 @@ this.message.loginAsAdmin();
 
 };
 
-// getuserobserver={
-//   next:(res:any)=>{
-//     this.phonenumber=res;
-//     localStorage.setItem("phonenumber",this.phonenumber)
-//   },error:()=>{
-// alert("something went wrong")
-//   }
-
 
 login() {
-  //this.auth.authenticate(this.userlogin.phonenumber,this.userlogin.password)
   this.userloginservice.login(this.userlogin)
       .subscribe(this.observer);
 }

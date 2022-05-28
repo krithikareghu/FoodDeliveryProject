@@ -21,11 +21,6 @@
     padding: 20px;
     align-items: center;
 
-    /* border-radius: 40px; */
-    
-    /* margin-left: -15px; */
-
-    /* width: 80%; */
 }
 .innercontainer{
   
@@ -44,6 +39,7 @@
     width: 25vw;
     height: 35vh;
     border-bottom: 1px solid #ffa410;
+    
   }
   .imagelink:active{
     transform: scale(0.98);
@@ -107,4 +103,20 @@ h2{
 }
 .cart:active{
   transform: scale(0.98);
+}
+
+@media (max-width: 808px) {
+  .container{
+    display:grid;
+    grid-template-columns: auto   ;
+  
+  }
+  .innercontainer  img{
+    width: 45vw;
+height: 25vh;
+
+
+
+  }
+  
 }

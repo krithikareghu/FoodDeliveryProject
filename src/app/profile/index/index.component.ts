@@ -20,17 +20,7 @@ value!: any;
 
   console.log(this.auth.getroles()) ;
     this.route.params.subscribe(params=>{
-      
-      // if(params['searchItem']){
-      //   this.categories=this.food.getall().filter
-      //   (category=>category.categoryname.toLowerCase().includes(params['searchItem'].toLowerCase));
-      // // console.log('searchItem')
-      // }
-      // else{
-      // this.categories = this.food.getall();
-      // }
-     
-   //this.categories= this.food.getall();
+  
   })
   this.value = Array.from({ length: 20 }, () => (Math.random() * (9.00 - 2.00 + 2.00) + 1.00).toFixed(1));
 
